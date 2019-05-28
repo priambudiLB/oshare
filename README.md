@@ -1,3 +1,2 @@
-# frontend -> frontend-master
-# backend -> backend-master
+This is frontend-master branch
 
