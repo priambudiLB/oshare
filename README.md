@@ -1,2 +1,3 @@
-# oshare
+# frontend -> frontend-master
+# backend -> backend-master
 
