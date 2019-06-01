@@ -4,8 +4,24 @@ import Carousel from 'nuka-carousel';
 import CardItem from './CardItem';
 import Instagram from './Icons/Instagram';
 import WhatsApp from './Icons/WhatsApp';
+import axios from 'axios';
 
 class LandingPage extends Component {
+  state = {
+    barang: [],
+  };
+
+  componentWillMount() {
+    const url = 'https://demo4294574.mockable.io/items/';
+    axios.get(url).then((res) => {
+      console.log(res.data.items);
+      this.setState({
+        barang: res.data.items,
+      })
+      console.log(this.state.barang[0])
+    })
+  }
+
   render() {
     return (
       <div>
@@ -24,23 +40,17 @@ class LandingPage extends Component {
               <hr/>
             </div>
             <Carousel>
-              <div className="row">
-                <CardItem
-                  title="naomi olive"
-                  image="https://s1.bukalapak.com/img/1650748293/w-1000/sepatu_wakai_original__wakai_shoes_ori_size_40_ready_Good_Pr.jpg"
-                  price="Rp. 350.000"
-                />
-                <CardItem
-                  title="naomi olive"
-                  image="https://s1.bukalapak.com/img/1650748293/w-1000/sepatu_wakai_original__wakai_shoes_ori_size_40_ready_Good_Pr.jpg"
-                  price="Rp. 350.000"
-                />
-                <CardItem
-                  title="naomi olive"
-                  image="https://s1.bukalapak.com/img/1650748293/w-1000/sepatu_wakai_original__wakai_shoes_ori_size_40_ready_Good_Pr.jpg"
-                  price="Rp. 350.000"
-                />
-              </div>
+              {this.state.barang.map((item, i) => (
+                <div className="row" key={i}>
+                  <div className="col-sm-4"/>
+                  <CardItem
+                    title={item.name}
+                    image={item.image}
+                    price={item.price}
+                  />
+                  <div className="col-sm-4"/>
+                </div>
+              ))}
             </Carousel>
           </div>
         </div>
