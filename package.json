@@ -6,6 +6,7 @@
     "axios": "^0.19.0",
     "bulma-carousel": "^4.0.4",
     "less": "^3.9.0",
+    "neo-async": "^2.6.1",
     "nuka-carousel": "^4.5.8",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
