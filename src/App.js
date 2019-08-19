@@ -3,10 +3,11 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import LandingPage from './LandingPage';
 import Women from './Women';
 import ShoppingBag from "./Icons/ShoppingBag";
+import Cart from "./Cart";
 
 function Navbar() {
   return (
-    <nav className="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+    <nav className="navbar navbar-light fixed-top navbar-expand-lg bg-light">
       <a className="navbar-brand" href="/">
         <img src="Images/Logo.png" width="30" height="30" alt="logo"/>
       </a>
@@ -30,7 +31,7 @@ function Navbar() {
           </li>
           <li className="nav-item">
             <div className="row">
-              <a className="nav-link" href="/"><ShoppingBag /> (0)</a>
+              <a className="nav-link" href="/cart"><ShoppingBag /> (0)</a>
             </div>
           </li>
         </ul>
@@ -46,6 +47,7 @@ function App() {
       <Navbar />
         <Switch>
           <Route path="/" exact component={LandingPage} />
+          <Route path="/cart" component={Cart} />
           <Route path="/women" component={Women} />
         </Switch>
       </Router>

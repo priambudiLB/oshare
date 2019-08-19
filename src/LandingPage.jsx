@@ -5,7 +5,6 @@ import CardItem from './CardItem';
 import Instagram from './Icons/Instagram';
 import WhatsApp from './Icons/WhatsApp';
 import axios from 'axios';
-import InstagramCard from "./InstagramCard";
 
 class LandingPage extends Component {
   state = {
@@ -44,7 +43,7 @@ class LandingPage extends Component {
           <div className="container content">
             <div className="text-center">
               <span className="highlights glacial-indifference">Our </span><span
-              className="highlights kollektif">Highlights</span>
+              className="highlights kollektif-bold">Highlights</span>
               <hr/>
             </div>
             <Carousel>
@@ -71,10 +70,10 @@ class LandingPage extends Component {
           <div className="container content">
             <div className="text-center">
               <span className="highlights glacial-indifference">Recent </span><span
-              className="highlights kollektif">Posts</span>
+              className="highlights kollektif-bold">Posts</span>
               <hr/>
             </div>
-            <div className="row">
+            {/* <div className="row">
               {this.state.instagram.map((item, i) => (
                 <InstagramCard
                   key={i}
@@ -82,7 +81,7 @@ class LandingPage extends Component {
                   link={item.link}
                 />
                 )).slice(0,6)}
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
