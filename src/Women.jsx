@@ -43,6 +43,96 @@ class Women extends Component {
         harga: "20.000",
         imageUrl:"images/Logo.png"
       },
+      {
+        nama: "Nama",
+        harga: "20.000",
+        imageUrl:"images/Logo.png"
+      },
+      {
+        nama: "Nama",
+        harga: "20.000",
+        imageUrl:"images/Logo.png"
+      },
+      {
+        nama: "Nama",
+        harga: "20.000",
+        imageUrl:"images/Logo.png"
+      },
+      {
+        nama: "Nama",
+        harga: "20.000",
+        imageUrl:"images/Logo.png"
+      },
+      {
+        nama: "Nama",
+        harga: "20.000",
+        imageUrl:"images/Logo.png"
+      },
+      {
+        nama: "Nama",
+        harga: "20.000",
+        imageUrl:"images/Logo.png"
+      },
+      {
+        nama: "Nama",
+        harga: "20.000",
+        imageUrl:"images/Logo.png"
+      },
+      {
+        nama: "Nama",
+        harga: "20.000",
+        imageUrl:"images/Logo.png"
+      },
+      {
+        nama: "Nama",
+        harga: "20.000",
+        imageUrl:"images/Logo.png"
+      },
+      {
+        nama: "Nama",
+        harga: "20.000",
+        imageUrl:"images/Logo.png"
+      },
+      {
+        nama: "Nama",
+        harga: "20.000",
+        imageUrl:"images/Logo.png"
+      },
+      {
+        nama: "Nama",
+        harga: "20.000",
+        imageUrl:"images/Logo.png"
+      },
+      {
+        nama: "Nama",
+        harga: "20.000",
+        imageUrl:"images/Logo.png"
+      },
+      {
+        nama: "Nama",
+        harga: "20.000",
+        imageUrl:"images/Logo.png"
+      },
+      {
+        nama: "Nama",
+        harga: "20.000",
+        imageUrl:"images/Logo.png"
+      },
+      {
+        nama: "Nama",
+        harga: "20.000",
+        imageUrl:"images/Logo.png"
+      },
+      {
+        nama: "Nama",
+        harga: "20.000",
+        imageUrl:"images/Logo.png"
+      },
+      {
+        nama: "Nama",
+        harga: "20.000",
+        imageUrl:"images/Logo.png"
+      },
   ],
   };
   render() {

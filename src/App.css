@@ -56,6 +56,24 @@ html, body {
   color: black
 }
 
+.navbar-custom {
+  background-color: #ffffff;
+}
+/* change the brand and text color */
+.navbar-custom .navbar-brand,
+.navbar-custom .navbar-text {
+  color: rgba(0,0,0,.8);
+}
+/* change the link color */
+.navbar-custom .navbar-nav .nav-link {
+  color: rgba(0,0,0,.5);
+}
+/* change the color of active or hovered links */
+.navbar-custom .nav-item.active .nav-link,
+.navbar-custom .nav-item:hover .nav-link {
+  color: #000;
+}
+
 @media (min-width: 700px) {
   .section {
     height: 100vh;
@@ -112,12 +130,16 @@ p,.btn {
 }
 
 .btn-primary:hover {
-  background-color: var(--black);
+  background-color: #838383;
   border-color: var(--black);
 }
 
 .btn-primary:focus, .btn-primary.focus {
   box-shadow: 0 0 0 0.2rem rgba(57.0, 57.0, 57.0, 0.5)
+}
+
+.btn-primary:active {
+  background-color: var(--black) !important;
 }
 
 .btn-primary:active:focus {
@@ -145,6 +167,12 @@ p,.btn {
   color: var(--black) !important;
   background-color: var(--white2) !important;
   border-color: var(--gray) !important;
+}
+
+.btn-outline-primary:active {
+  background-color: var(--white) !important; 
+  border-color: var(--black) !important;
+  color: var(--black) !important;
 }
 
 .btn.disabled, .btn:disabled {

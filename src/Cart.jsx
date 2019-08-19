@@ -94,7 +94,9 @@ class Cart extends Component {
               </div>
               <div className='row continue justify-content-between'>
                 <div className='btn btn-outline-primary'>CONTINUE SHOPPING</div>
+                <a href="/checkout">
                 <div className='btn btn-primary'>CHECKOUT</div>
+                </a>
               </div>
             </div>
           </div>
