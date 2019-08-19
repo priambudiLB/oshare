@@ -7,7 +7,11 @@ import ItemCard from './ItemCard';
 
 class Women extends Component {
   state = {
-    barang: [1, 2, 3, 4, 5],
+    barang: [{
+      nama: "Nama",
+      harga: "20.000",
+      imageUrl:"images/Logo.png"
+    }],
   };
   render() {
     return (
@@ -19,8 +23,8 @@ class Women extends Component {
             {
               this.state.barang.map((item, index) => {
                 return (
-                  <div class="p-2">
-                    <ItemCard />
+                  <div class="p-2" key={index}>
+                    <ItemCard cardTitle={item.nama} imageUrl={item.imageUrl} harga={item.harga}/>
                   </div>
 
                 )
