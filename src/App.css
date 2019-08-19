@@ -226,3 +226,21 @@ a:hover {
   height: 20px;
   width: 20px;
 }
+
+#container-1{
+  padding-top: 60px;
+}
+
+#card-1{
+  
+  width: 269px;
+  height: 438px;
+  left: 70px;
+  background-color: #FAFAFA;
+  border-color: transparent;
+  right: 100px;
+}
+
+#cart-button{
+  width: 220px;
+}
