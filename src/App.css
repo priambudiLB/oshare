@@ -249,6 +249,7 @@ a:hover {
 
 #container-1{
   padding-top: 60px;
+  position: relative;
 }
 
 #card-1{
@@ -256,12 +257,10 @@ a:hover {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 220px;
-  height: 338px;
-  left: 70px;
+  /* width: 220px;
+  height: 338px; */
   background-color: white;
   border-color: black;
-  right: 100px;
 }
 
 #card-2{
@@ -272,7 +271,7 @@ a:hover {
 }
 
 #card-images{
-  width: 80%;
+  width: 154px;
 }
 
 .item-card{
