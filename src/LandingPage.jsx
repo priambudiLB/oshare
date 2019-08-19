@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
 import Carousel from 'nuka-carousel';
-import CardItem from './CardItem';
 import Instagram from './Icons/Instagram';
 import WhatsApp from './Icons/WhatsApp';
 import axios from 'axios';
+import ItemCard from './ItemCard';
 
 class LandingPage extends Component {
   state = {
@@ -50,9 +50,9 @@ class LandingPage extends Component {
               {this.state.barang.map((item, i) => (
                 <div className="row" key={i}>
                   <div className="col-sm-4"/>
-                    <CardItem
-                      title={item.name}
-                      image={item.image}
+                    <ItemCard
+                      cardTitle={item.name}
+                      imageUrl={item.image}
                       price={item.price}
                     />
                   <div className="col-sm-4"/>

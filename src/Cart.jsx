@@ -38,7 +38,7 @@ class Cart extends Component {
       return(
         <div className='container'>
           <div className='row'>
-            <img src={require('./Icons/image.png')} width='100vw' height="140vw" />
+            <img alt={'item'} src={require('./Icons/image.png')} width='100vw' height="140vw" />
             <div className='col'>
               <div className="glacial-indifference">{itemName}</div>
               <div className="glacial-indifference-bold">Size {itemSize}</div>
@@ -53,7 +53,7 @@ class Cart extends Component {
         <tr>
           <th scope="row">{item(itemName, itemSize)}</th>
           <td><span className='float-right'>{this.convertToRupiah((price))}</span></td>
-          <td><div className='text-center'><img src={require('./Icons/Vector.png')} width="18" height="21" /></div></td>
+          <td><div className='text-center'><img alt={'cart'} src={require('./Icons/Vector.png')} width="18" height="21" /></div></td>
         </tr>
       )
     }
