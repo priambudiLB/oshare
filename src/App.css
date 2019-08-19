@@ -252,15 +252,33 @@ a:hover {
 }
 
 #card-1{
-  
-  width: 269px;
-  height: 438px;
+  padding-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 220px;
+  height: 338px;
   left: 70px;
-  background-color: #FAFAFA;
-  border-color: transparent;
+  background-color: white;
+  border-color: black;
   right: 100px;
 }
 
+#card-2{
+  flex-shrink: 0;
+}
 #cart-button{
-  width: 220px;
+  width: 178px;
+}
+
+#card-images{
+  width: 80%;
+}
+
+.item-card{
+  font-size: 12px;
+}
+
+.thin{
+  font-weight: 100;
 }

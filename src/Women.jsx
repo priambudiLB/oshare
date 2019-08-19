@@ -7,11 +7,48 @@ import ItemCard from './ItemCard';
 
 class Women extends Component {
   state = {
-    barang: [{
-      nama: "Nama",
-      harga: "20.000",
-      imageUrl:"images/Logo.png"
-    }],
+    barang: [
+      {
+        nama: "Nama",
+        harga: "20.000",
+        imageUrl:"images/Logo.png"
+      },
+      {
+        nama: "Nama",
+        harga: "20.000",
+        imageUrl:"images/Logo.png"
+      },
+      {
+        nama: "Nama",
+        harga: "20.000",
+        imageUrl:"images/Logo.png"
+      },
+      {
+        nama: "Nama",
+        harga: "20.000",
+        imageUrl:"images/Logo.png"
+      },
+      {
+        nama: "Nama",
+        harga: "20.000",
+        imageUrl:"images/Logo.png"
+      },
+      {
+        nama: "Nama",
+        harga: "20.000",
+        imageUrl:"images/Logo.png"
+      },
+      {
+        nama: "Nama",
+        harga: "20.000",
+        imageUrl:"images/Logo.png"
+      },
+      {
+        nama: "Nama",
+        harga: "20.000",
+        imageUrl:"images/Logo.png"
+      },
+  ],
   };
   render() {
     return (
@@ -19,7 +56,7 @@ class Women extends Component {
         <div className="container" id="container-1">
           <span className="highlights kollektif">Women</span>
           <div className="section-1">
-          <div class="d-flex flex-wrap flex-row bd-highlight mb-1">
+          <div class="d-flex flex-sm-wrap flex-row bd-highlight mb-1">
             {
               this.state.barang.map((item, index) => {
                 return (
