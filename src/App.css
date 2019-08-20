@@ -57,7 +57,15 @@ html, body {
 }
 
 .navbar-custom {
-  background-color: #ffffff;
+  background-color: white;
+}
+
+.navbar-toggler {
+  border-color: #000
+}
+
+.navbar-toggler-icon{
+  background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='rgba(0, 0, 0, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 }
 /* change the brand and text color */
 .navbar-custom .navbar-brand,
@@ -99,8 +107,7 @@ html, body {
   }
   /* additional sections */
   #home {
-    background: url(Images/header.jpg) no-repeat center center fixed;
-    background-color: black;
+    padding-top: 100px;
     display: table;
     height: 100vh;
     position: relative;
@@ -110,6 +117,14 @@ html, body {
     -o-background-size: cover;
     background-size: cover;
   }
+}
+
+#hero {
+  background: url(Images/Oshare-Black-1.png) no-repeat center center fixed;
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  background-size: 50vw 50vw;
 }
 
 body {
@@ -219,6 +234,12 @@ p,.btn {
   width: 100%;
   height: 1px;
   background-color: black;
+}
+
+.totals{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 18px;
 }
 
 .info {

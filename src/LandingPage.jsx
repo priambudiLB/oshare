@@ -32,6 +32,7 @@ class LandingPage extends Component {
   render() {
     return (
       <div>
+        <div id="hero" />
         <div id="home" className="home">
           <div className="container text-vcenter">
             <Instagram />

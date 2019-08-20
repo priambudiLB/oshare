@@ -1,58 +1,22 @@
 import React, { Component } from 'react';
 import './App.css';
-import axios from 'axios';
+import {convertToRupiah, ItemCheckout} from "./ItemCheckout";
+import {Link} from "react-router-dom";
 
 class Cart extends Component {
   state = {
     barang: [],
-    instagram: [],
   };
 
   componentDidMount() {
-    const ig = 'https://api.instagram.com/v1/users/self/media/recent/?access_token=261163481.72da9dd.8e4e214dc2c047a9b8482cb8110f4f15';
-    const url = 'https://demo4294574.mockable.io/items/';
-    axios.get(url).then((res) => {
-      this.setState({
-        barang: res.data.items,
-      });
-    });
-    axios.get(ig).then((res) => {
-      console.log(res.data.data);
-      this.setState({
-        instagram: res.data.data,
-      });
-      console.log(this.state.instagram[0].caption.text)
-    })
-  }
-
-  convertToRupiah(angka)
-  {
-    var rupiah = '';
-    var angkarev = angka.toString().split('').reverse().join('');
-    for(var i = 0; i < angkarev.length; i++) if(i%3 === 0) rupiah += angkarev.substr(i,3)+'.';
-    return 'Rp. '+rupiah.split('',rupiah.length-1).reverse().join('');
   }
 
   render() {
-    let item = (itemName, itemSize) => {
-      return(
-        <div className='container'>
-          <div className='row'>
-            <img alt={'item'} src={require('./Icons/image.png')} width='100vw' height="140vw" />
-            <div className='col'>
-              <div className="glacial-indifference">{itemName}</div>
-              <div className="glacial-indifference-bold">Size {itemSize}</div>
-            </div>
-          </div>
-        </div>
-      )
-    }
-
     let tableItem = (itemName, itemSize, price) => {
       return(
         <tr>
-          <th scope="row">{item(itemName, itemSize)}</th>
-          <td><span className='float-right'>{this.convertToRupiah((price))}</span></td>
+          <th scope="row"><ItemCheckout itemName={itemName} itemSize={itemSize} /></th>
+          <td><span className='float-right'>{convertToRupiah((price))}</span></td>
           <td><div className='text-center'><img alt={'cart'} src={require('./Icons/Vector.png')} width="18" height="21" /></div></td>
         </tr>
       )
@@ -73,9 +37,9 @@ class Cart extends Component {
               </tr>
               </thead>
               <tbody>
-              {tableItem('item 1', 36, 120000)}
-              {tableItem('item 1', 36, 120000)}
-              {tableItem('item 1', 36, 120000)}
+              {tableItem('item 1', 36, '120000')}
+              {tableItem('item 1', 36, '120000')}
+              {tableItem('item 1', 36, '120000')}
               </tbody>
             </table>
             <div className='divider' />
@@ -94,9 +58,11 @@ class Cart extends Component {
               </div>
               <div className='row continue justify-content-between'>
                 <div className='btn btn-outline-primary'>CONTINUE SHOPPING</div>
-                <a href="/checkout">
-                <div className='btn btn-primary'>CHECKOUT</div>
-                </a>
+                <Link to="/checkout">
+                  <a href="/checkout">
+                    <div className='btn btn-primary'>CHECKOUT</div>
+                  </a>
+                </Link>
               </div>
             </div>
           </div>
