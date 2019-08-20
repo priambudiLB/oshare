@@ -1,73 +1,30 @@
 import React, { Component } from 'react';
 import './App.css';
-// import logo from 'Images/Logo.png';
-
-// console.log(logo);
+import DetailCard from './DetailCard';
 
 class Detail extends Component {
   state = {
     barang: [
       {
-        nama: "Nama",
-        harga: "20.000",
-        imageUrl:"images/Logo.png"
-      },
-      {
-        nama: "Nama",
-        harga: "20.000",
-        imageUrl:"images/Logo.png"
-      },
-      {
-        nama: "Nama",
-        harga: "20.000",
-        imageUrl:"images/Logo.png"
-      },
-      {
-        nama: "Nama",
-        harga: "20.000",
-        imageUrl:"images/Logo.png"
-      },
-      {
-        nama: "Nama",
-        harga: "20.000",
-        imageUrl:"images/Logo.png"
-      },
-      {
-        nama: "Nama",
-        harga: "20.000",
-        imageUrl:"images/Logo.png"
-      },
-      {
-        nama: "Nama",
-        harga: "20.000",
-        imageUrl:"images/Logo.png"
-      },
-      {
-        nama: "Nama",
-        harga: "20.000",
-        imageUrl:"images/Logo.png"
-      },
-  ],
+        nama: "Item 1",
+        harga: "Rp200.000",
+        deskripsi:"Smooth and finished leather (Available in size 36-40)",
+        image:"./images/sepatu.jpg"
+      }
+    ],
   };
   render() {
     return (
-      <div id="detail">
-          <div className="card" style="width: 18rem;">
-            <img className="card-img-top" src="..." alt="Card image cap">
-            <div class="card-body">
-                <h5 className="card-title">Card title</h5>
-                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </div>
-            <ul className="list-group list-group-flush">
-                <li className="list-group-item">Cras justo odio</li>
-                <li className="list-group-item">Dapibus ac facilisis in</li>
-                <li className="list-group-item">Vestibulum at eros</li>
-            </ul>
-            <div className="card-body">
-                <a href="#" className="card-link">Card link</a>
-                <a href="#" className="card-link">Another link</a>
-            </div>
-        </div>
+      <div className="container" id="container-detail">
+        {
+          this.state.barang.map((item, index) => {
+            return (
+              <div class="p-2" key={index}>
+                <DetailCard nama={item.nama} image={item.image} harga={item.harga} deskripsi={item.deskripsi}/>
+              </div>
+            )
+          })
+        }
       </div>
     );
   }

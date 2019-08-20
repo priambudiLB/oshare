@@ -14,7 +14,7 @@ class ItemCard extends Component {
                     <center><img className="card-img-top" id="card-images" src={this.props.imageUrl} alt="sepatu-1" /></center>
                     <div className="card-body">
                         <p className="card-text">{this.props.harga}</p>
-                        <a href="/" className="btn btn-primary" id="cart-button">
+                        <a href="/detail" className="btn btn-primary" id="cart-button">
                         <span className="glacial-indifference item-card thin" >ADD TO </span>
                         <span className="kollektif-bold item-card">CART</span>
                         </a>

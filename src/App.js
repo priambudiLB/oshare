@@ -4,6 +4,7 @@ import LandingPage from './LandingPage';
 import Women from './Women';
 import ShoppingBag from "./Icons/ShoppingBag";
 import Cart from "./Cart";
+import Detail from "./Detail";
 
 function Navbar() {
   return (
@@ -53,6 +54,7 @@ function App() {
           <Route path="/cart" component={Cart} />
           <Route path="/men" component={Women} />
           <Route path="/women" component={Women} />
+          <Route path="/detail" component={Detail} />
         </Switch>
       </Router>
     </div>
