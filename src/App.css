@@ -386,7 +386,7 @@ a:hover {
   left: 0px;
   width: 327px;
   height: 350px;
-  background-color: brown;
+  /*background-color: brown;*/
 }
 
 #detail-images{
@@ -394,10 +394,10 @@ a:hover {
   height: 100%;;
 }
 
-#row-1{
-  background-color: lightcoral;
-}
+/*#row-1{*/
+/*  background-color: lightcoral;*/
+/*}*/
 
-#row-2{
-  background-color: aquamarine;
-}
+/*#row-2{*/
+/*  background-color: aquamarine;*/
+/*}*/

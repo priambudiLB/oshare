@@ -16,13 +16,13 @@ class DetailCard extends Component {
                     </div>  
                 </div>
                 <div className="row" id="row-2">
-                    <div className="col-sm-2"></div>
-                    <div className="col-sm-4">
+                    <div className="col-xl-2"></div>
+                    <div className="col-xl-4">
                         <div className="container" id="container-img">
                             <img className="card-img-top" id="detail-images" src={this.props.image} alt="detail-item" />
                         </div>
                     </div>
-                    <div className="col-sm-6">
+                    <div className="col-xl-6">
                         <div className="card" id="detail-card">
                             <div className="card-body" id="card-body-title">
                             <h5 className="highlights kollektif"id="product-title">{this.props.nama}</h5>

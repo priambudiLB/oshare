@@ -19,7 +19,7 @@ class Detail extends Component {
         {
           this.state.barang.map((item, index) => {
             return (
-              <div class="p-2" key={index}>
+              <div class="" key={index}>
                 <DetailCard nama={item.nama} image={item.image} harga={item.harga} deskripsi={item.deskripsi}/>
               </div>
             )
