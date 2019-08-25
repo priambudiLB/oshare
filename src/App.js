@@ -4,10 +4,13 @@ import LandingPage from './LandingPage';
 import Women from './Women';
 import Checkout from './Checkout';
 import ShoppingBag from "./Icons/ShoppingBag";
+import WhatsApp from "./Icons/WhatsApp-white";
+import Instagram from './Icons/Instagram-white';
+import Email from "./Icons/Email";
 import Cart from "./Cart";
 import Detail from "./Detail";
 
-function Navbar() {
+  function Navbar() {
   return (
     <nav className="navbar navbar-custom fixed-top navbar-expand-lg">
     <Link to="/">
@@ -49,6 +52,35 @@ function Navbar() {
   )
 }
 
+function Footer(){
+  return(
+    <footer className="page-footer">
+    <div className="footer-copyright text-center py-3">
+        <div className="row">
+          <div className="col-sm-4"></div>
+          <div className="col-sm-4">
+            <div className="row">
+              <div className="col-sm-4"><Instagram /></div>
+              <div className="col-sm-4"><WhatsApp /></div>
+              <div className="col-sm-4"><Email /></div>
+            </div>
+            
+          </div>
+          <div className="col-sm-4"></div>
+        </div>
+      <br></br>
+      <p>
+        <span className="kollektif bold" id="alamat">Alamat</span>
+        <br></br>
+        <span className="glacial-indifference" id="kantor">Alamat kantor Ruang Tenant DIIB</span>
+        <br></br>
+        <span className="glacial-indifference" id="gudang">Alamat Gudang, Jl. Otista 3 Komplek 4 H166 13340 </span>
+      </p>
+    </div>
+  </footer>
+  )
+}
+
 function App() {
   return (
     <div>
@@ -63,6 +95,7 @@ function App() {
           <Route path="/checkout" component={Checkout} />
         </Switch>
       </Router>
+      <Footer />
     </div>
   );
 }

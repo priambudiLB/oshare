@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
 import ItemCard from './ItemCard';
-// import logo from 'Images/Logo.png';
-
-// console.log(logo);
 
 class Women extends Component {
   state = {

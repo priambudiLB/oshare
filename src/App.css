@@ -337,6 +337,7 @@ a:hover {
 
 #container-detail{
   padding-top: 100px;
+  padding-bottom: 100px;
 }
 
 #detail-title{
@@ -394,10 +395,23 @@ a:hover {
   height: 100%;;
 }
 
-/*#row-1{*/
-/*  background-color: lightcoral;*/
-/*}*/
+/* #row-1{
+ background-color: lightcoral;
+}
 
-/*#row-2{*/
-/*  background-color: aquamarine;*/
-/*}*/
+#row-2{
+ background-color: aquamarine;
+} */
+
+.page-footer{
+  background-color: black;
+}
+
+
+#alamat{
+  color: white;
+}
+
+#kantor, #gudang{
+  color: white;
+}

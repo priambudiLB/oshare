@@ -8,7 +8,7 @@ class Detail extends Component {
       {
         nama: "Item 1",
         harga: "Rp200.000",
-        deskripsi:"Smooth and finished leather (Available in size 36-40)",
+        deskripsi:"Smooth and finished leather;(Available in size 36-40)",
         image:"./images/sepatu.jpg"
       }
     ],
