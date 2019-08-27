@@ -1,19 +1,19 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "87808e927a605e68859f5cb0fb8fbbe1",
+    "revision": "46f22fb0d87b845848e8a3a6884bff5e",
     "url": "/index.html"
   },
   {
-    "revision": "9ca012557f7e85f5d125",
-    "url": "/static/css/main.5140d687.chunk.css"
+    "revision": "344545696c8863d966aa",
+    "url": "/static/css/main.38902d8e.chunk.css"
   },
   {
-    "revision": "34f84e6066b7b6d40503",
-    "url": "/static/js/2.e3a61c67.chunk.js"
+    "revision": "6fb118ae3359c3f07737",
+    "url": "/static/js/2.b2528b86.chunk.js"
   },
   {
-    "revision": "9ca012557f7e85f5d125",
-    "url": "/static/js/main.3398e9f3.chunk.js"
+    "revision": "344545696c8863d966aa",
+    "url": "/static/js/main.3b5d3b29.chunk.js"
   },
   {
     "revision": "42ac5946195a7306e2a5",
@@ -36,8 +36,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/media/Kollektif.4d49be6e.ttf"
   },
   {
-    "revision": "ef9ce5329cc47067dafa3e2e75662f37",
-    "url": "/static/media/header.ef9ce532.jpg"
+    "revision": "59df8844491f9d043243b8df2bcfa17c",
+    "url": "/static/media/Oshare-Black-1.59df8844.png"
   },
   {
     "revision": "143c6d8b64f72df3243e32c1194a8617",

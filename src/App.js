@@ -56,26 +56,26 @@ function Footer(){
   return(
     <footer className="page-footer">
     <div className="footer-copyright text-center py-3">
-        <div className="row">
-          <div className="col-sm-4"></div>
-          <div className="col-sm-4">
-            <div className="row">
-              <div className="col-sm-4"><Instagram /></div>
-              <div className="col-sm-4"><WhatsApp /></div>
-              <div className="col-sm-4"><Email /></div>
-            </div>
-            
-          </div>
-          <div className="col-sm-4"></div>
-        </div>
-      <br></br>
       <p>
-        <span className="kollektif bold" id="alamat">Alamat</span>
+        <span className="highlights glacial-indifference text-white">Contact </span><span
+        className="highlights kollektif-bold text-white">Us</span>
         <br></br>
         <span className="glacial-indifference" id="kantor">Alamat kantor Ruang Tenant DIIB</span>
         <br></br>
         <span className="glacial-indifference" id="gudang">Alamat Gudang, Jl. Otista 3 Komplek 4 H166 13340 </span>
       </p>
+      <div className="row">
+        <div className="col-sm-4"></div>
+        <div className="col-sm-4">
+          <div className="row">
+            <div className="col-sm-4"><Instagram /></div>
+            <div className="col-sm-4"><WhatsApp /></div>
+            <div className="col-sm-4"><Email /></div>
+          </div>
+
+        </div>
+        <div className="col-sm-4"></div>
+      </div>
     </div>
   </footer>
   )

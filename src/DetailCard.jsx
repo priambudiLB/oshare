@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 
 class DetailCard extends Component {
-    state = {
-        barang: [],
-    };
+    deskripsi = this.props.deskripsi.split(';');
 
     render() {
         return (
@@ -29,9 +27,15 @@ class DetailCard extends Component {
                             <p className="kollektif" id="detail-price">{this.props.harga}</p>
                             </div>
                             <ul className="list-group list-group-flush">
-                            <li className="list-group-item kollektif" id="description">
-                                {this.props.deskripsi}
-                            </li>
+                                <li className="list-group-item kollektif" id="description">
+                                    {this.deskripsi.map(i=>{
+                                        return(
+                                          <div>
+                                              {i}
+                                          </div>
+                                        )
+                                    })}
+                                </li>
                             <li className="list-group-item">WOMEN's SIZE</li>
                             <li className="list-group-item">
                                 <form>
