@@ -12,7 +12,7 @@ import Detail from "./Detail";
 
   function Navbar() {
   return (
-    <nav className="navbar navbar-custom fixed-top navbar-expand-lg">
+    <nav className="navbar navbar-custom fixed-top navbar-expand-sm">
     <Link to="/">
       <div className="navbar-brand">
         <img src="Images/Logo.png" width="30" height="30" alt="logo"/>
