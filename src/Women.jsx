@@ -8,127 +8,44 @@ class Women extends Component {
       {
         nama: "Nama",
         harga: "20.000",
-        imageUrl:"images/Logo.png"
+        imageUrl:"images/Logo.png",
+        deskripsi: "aaaaa;bbbbbb"
       },
       {
         nama: "Nama",
         harga: "20.000",
-        imageUrl:"images/Logo.png"
+        imageUrl:"images/Logo.png",
+        deskripsi: "aaaaa;bbbbbb"
       },
       {
         nama: "Nama",
         harga: "20.000",
-        imageUrl:"images/Logo.png"
+        imageUrl:"images/Logo.png",
+        deskripsi: "aaaaa;bbbbbb"
       },
       {
         nama: "Nama",
         harga: "20.000",
-        imageUrl:"images/Logo.png"
+        imageUrl:"images/Logo.png",
+        deskripsi: "aaaaa;bbbbbb"
       },
       {
         nama: "Nama",
         harga: "20.000",
-        imageUrl:"images/Logo.png"
+        imageUrl:"images/Logo.png",
+        deskripsi: "aaaaa;bbbbbb"
       },
       {
         nama: "Nama",
         harga: "20.000",
-        imageUrl:"images/Logo.png"
+        imageUrl:"images/Logo.png",
+        deskripsi: "aaaaa;bbbbbb"
       },
       {
         nama: "Nama",
         harga: "20.000",
-        imageUrl:"images/Logo.png"
-      },
-      {
-        nama: "Nama",
-        harga: "20.000",
-        imageUrl:"images/Logo.png"
-      },
-      {
-        nama: "Nama",
-        harga: "20.000",
-        imageUrl:"images/Logo.png"
-      },
-      {
-        nama: "Nama",
-        harga: "20.000",
-        imageUrl:"images/Logo.png"
-      },
-      {
-        nama: "Nama",
-        harga: "20.000",
-        imageUrl:"images/Logo.png"
-      },
-      {
-        nama: "Nama",
-        harga: "20.000",
-        imageUrl:"images/Logo.png"
-      },
-      {
-        nama: "Nama",
-        harga: "20.000",
-        imageUrl:"images/Logo.png"
-      },
-      {
-        nama: "Nama",
-        harga: "20.000",
-        imageUrl:"images/Logo.png"
-      },
-      {
-        nama: "Nama",
-        harga: "20.000",
-        imageUrl:"images/Logo.png"
-      },
-      {
-        nama: "Nama",
-        harga: "20.000",
-        imageUrl:"images/Logo.png"
-      },
-      {
-        nama: "Nama",
-        harga: "20.000",
-        imageUrl:"images/Logo.png"
-      },
-      {
-        nama: "Nama",
-        harga: "20.000",
-        imageUrl:"images/Logo.png"
-      },
-      {
-        nama: "Nama",
-        harga: "20.000",
-        imageUrl:"images/Logo.png"
-      },
-      {
-        nama: "Nama",
-        harga: "20.000",
-        imageUrl:"images/Logo.png"
-      },
-      {
-        nama: "Nama",
-        harga: "20.000",
-        imageUrl:"images/Logo.png"
-      },
-      {
-        nama: "Nama",
-        harga: "20.000",
-        imageUrl:"images/Logo.png"
-      },
-      {
-        nama: "Nama",
-        harga: "20.000",
-        imageUrl:"images/Logo.png"
-      },
-      {
-        nama: "Nama",
-        harga: "20.000",
-        imageUrl:"images/Logo.png"
-      },
-      {
-        nama: "Nama",
-        harga: "20.000",
-        imageUrl:"images/Logo.png"
+        imageUrl:"images/Logo.png",
+        deskripsi: "aaaaa;bbbbbb"
       },
   ],
   };
@@ -143,7 +60,7 @@ class Women extends Component {
               this.state.barang.map((item, index) => {
                 return (
                   <div class="p-2" key={index}>
-                    <ItemCard cardTitle={item.nama} imageUrl={item.imageUrl} harga={item.harga}/>
+                    <ItemCard cardTitle={item.nama} imageUrl={item.imageUrl} harga={item.harga} deskripsi={item.deskripsi}/>
                   </div>
 
                 )

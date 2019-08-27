@@ -1,32 +1,78 @@
 import React, { Component } from 'react';
 import './App.css';
-import Carousel from 'nuka-carousel';
 import Instagram from './Icons/Instagram';
 import WhatsApp from './Icons/WhatsApp';
-import axios from 'axios';
+// import axios from 'axios';
 import ItemCard from './ItemCard';
+import './alice-carousel.css'
+import AliceCarousel from 'react-alice-carousel';
 
+const Gallery = () => {
+  const handleOnDragStart = e => e.preventDefault()
+  return (
+    <AliceCarousel autoPlay autoPlayInterval={5000} mouseDragEnabled responsive={{
+      0: { items: 1 },
+      1024: { items: 3 },
+    }} >
+      <div className="yours-custom-class carousel-card" onDragStart={handleOnDragStart} >
+        <ItemCard
+          cardTitle={"1"}
+          imageUrl={"./images/sepatu.jpg"}
+          price={10000}
+          deskripsi={'deskripsi landing page 1'}
+        />
+      </div>
+      <div className="yours-custom-class carousel-card" onDragStart={handleOnDragStart}>
+        <ItemCard
+          cardTitle={"2"}
+          imageUrl={"./images/sepatu.jpg"}
+          price={10000}
+          deskripsi={'deskripsi landing page 2'}
+        />
+      </div>
+      <div className="yours-custom-class carousel-card" onDragStart={handleOnDragStart}>
+        <ItemCard
+          cardTitle={"3"}
+          imageUrl={"./images/sepatu.jpg"}
+          price={10000}
+          deskripsi={'deskripsi landing page 3'}
+        />
+      </div>
+      <div className="yours-custom-class carousel-card" onDragStart={handleOnDragStart}>
+        <ItemCard
+          cardTitle={"4"}
+          imageUrl={"./images/sepatu.jpg"}
+          price={10000}
+          deskripsi={'deskripsi landing page 4'}
+        />
+      </div>
+      <div className="yours-custom-class carousel-card" onDragStart={handleOnDragStart}>
+        <ItemCard
+          cardTitle={"5"}
+          imageUrl={"./images/sepatu.jpg"}
+          price={10000}
+          deskripsi={'deskripsi landing page 5'}
+        />
+      </div>
+      <div className="yours-custom-class carousel-card" onDragStart={handleOnDragStart}>
+        <ItemCard
+          cardTitle={"6"}
+          imageUrl={"./images/sepatu.jpg"}
+          price={10000}
+          deskripsi={'deskripsi landing page 6'}
+        />
+      </div>
+    </AliceCarousel>
+  )
+}
 class LandingPage extends Component {
   state = {
-    barang: [],
+    barang: ['./images/sepatu.jpg', './images/sepatu.jpg', './images/sepatu.jpg'],
     instagram: [],
   };
 
   componentDidMount() {
-    const ig = 'https://api.instagram.com/v1/users/self/media/recent/?access_token=261163481.72da9dd.8e4e214dc2c047a9b8482cb8110f4f15';
-    const url = 'https://demo4294574.mockable.io/items/';
-    axios.get(url).then((res) => {
-      this.setState({
-        barang: res.data.items,
-      });
-    });
-    axios.get(ig).then((res) => {
-      console.log(res.data.data);
-      this.setState({
-        instagram: res.data.data,
-      });
-      console.log(this.state.instagram[0].caption.text)
-    })
+
   }
 
   render() {
@@ -47,19 +93,7 @@ class LandingPage extends Component {
               className="highlights kollektif-bold">Highlights</span>
               <hr/>
             </div>
-            <Carousel>
-              {this.state.barang.map((item, i) => (
-                <div className="row" key={i}>
-                  <div className="col-sm-4"/>
-                    <ItemCard
-                      cardTitle={item.name}
-                      imageUrl={item.image}
-                      price={item.price}
-                    />
-                  <div className="col-sm-4"/>
-                </div>
-              ))}
-            </Carousel>
+            <Gallery/>
           </div>
         </div>
         <div className="content videoWrapper">
@@ -74,15 +108,6 @@ class LandingPage extends Component {
               className="highlights kollektif-bold">Posts</span>
               <hr/>
             </div>
-            {/* <div className="row">
-              {this.state.instagram.map((item, i) => (
-                <InstagramCard
-                  key={i}
-                  image={item.images.standard_resolution.url}
-                  link={item.link}
-                />
-                )).slice(0,6)}
-            </div> */}
           </div>
         </div>
       </div>

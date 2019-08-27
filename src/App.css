@@ -56,6 +56,11 @@ html, body {
   color: black
 }
 
+.navbar
+{
+  border-bottom:1px solid #aaa;
+}
+
 .navbar-custom {
   background-color: white;
 }
@@ -83,6 +88,11 @@ html, body {
 }
 
 @media (min-width: 700px) {
+  .info {
+    margin-top: 2vw;
+    width: 40%;
+    align-content: flex-start;
+  }
   .section {
     height: 100vh;
   }
@@ -105,18 +115,35 @@ html, body {
     margin: 0;
     padding: 0;
   }
-  /* additional sections */
-  #home {
-    padding-top: 100px;
-    display: table;
-    height: 100vh;
-    position: relative;
-    width: 100%;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+
+  .footer-socmed{
+    width: 20vw;
+    margin: 0 auto;
   }
+}
+
+@media (max-width: 700px) {
+  .footer-socmed{
+    width: 50vw;
+    margin: 0 auto;
+  }
+  .info {
+    margin-top: 2vw;
+    width: 80%;
+    align-content: flex-start;
+  }
+}
+
+#home {
+  padding-top: 100px;
+  display: table;
+  height: 100vh;
+  position: relative;
+  width: 100%;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 #hero {
@@ -242,10 +269,10 @@ p,.btn {
   font-size: 18px;
 }
 
-.info {
-  margin-top: 2vw;
-  width: 30%;
-  align-content: flex-start;
+.carousel-card{
+  width: 80%;
+  /*margin-left: 10%;*/
+  /*margin-right: 10%;*/
 }
 
 .continue {
@@ -283,11 +310,16 @@ svg {
 
 a {
   text-decoration: none;
-  color: var(--white);
+  color: var(--black);
+}
+
+#detail-height{
+  /*margin-bottom: 10vh;*/
 }
 
 a:hover {
   color: black;
+  text-decoration: none;
 }
 
 #shopping-bag {
@@ -297,7 +329,7 @@ a:hover {
 }
 
 #container-1{
-  padding-top: 60px;
+  padding-top: 15vh;
   position: relative;
 }
 
@@ -333,11 +365,6 @@ a:hover {
 
 #title{
   padding-top: 80px;
-}
-
-#container-detail{
-  padding-top: 100px;
-  padding-bottom: 100px;
 }
 
 #detail-title{
@@ -383,15 +410,15 @@ a:hover {
   padding-bottom: 0px;
 }
 
-#container-img{
-  left: 0px;
-  width: 327px;
-  height: 350px;
-  /*background-color: brown;*/
-}
+/*#container-img{*/
+/*  left: 0px;*/
+/*  width: 327px;*/
+/*  height: 350px;*/
+/*  !*background-color: brown;*!*/
+/*}*/
 
 #detail-images{
-  width: 327px;
+  width: 100%;
   height: 100%;;
 }
 
@@ -405,6 +432,8 @@ a:hover {
 
 .page-footer{
   background-color: black;
+  bottom: 0;
+  /*position: absolute;*/
 }
 
 

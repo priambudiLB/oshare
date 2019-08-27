@@ -14,9 +14,9 @@ import Detail from "./Detail";
   return (
     <nav className="navbar navbar-custom fixed-top navbar-expand-lg">
     <Link to="/">
-      <a className="navbar-brand" href="/">
+      <div className="navbar-brand">
         <img src="Images/Logo.png" width="30" height="30" alt="logo"/>
-      </a>
+      </div>
       </Link>
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
               aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,21 +28,21 @@ import Detail from "./Detail";
         <ul className="nav nav-fill">
           <li className="nav-item">
           <Link to="/men">
-            <a className="nav-link" href="/women">MEN</a>
+            <div className="nav-link">MEN</div>
             </Link>
           </li>
           <li className="nav-item">
           <Link to="/women">
-            <a className="nav-link" href="/women">WOMEN</a>
+            <div className="nav-link">WOMEN</div>
             </Link>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="/">FAVORITES</a>
+            <div className="nav-link">FAVORITES</div>
           </li>
           <li className="nav-item">
             <div className="row">
               <Link to="/cart">
-                <a className="nav-link" href="/cart"><ShoppingBag /> (0)</a>
+                <div className="nav-link" ><ShoppingBag /> (0)</div>
               </Link>
             </div>
           </li>
@@ -64,17 +64,10 @@ function Footer(){
         <br></br>
         <span className="glacial-indifference" id="gudang">Alamat Gudang, Jl. Otista 3 Komplek 4 H166 13340 </span>
       </p>
-      <div className="row">
-        <div className="col-sm-4"></div>
-        <div className="col-sm-4">
-          <div className="row">
-            <div className="col-sm-4"><Instagram /></div>
-            <div className="col-sm-4"><WhatsApp /></div>
-            <div className="col-sm-4"><Email /></div>
-          </div>
-
-        </div>
-        <div className="col-sm-4"></div>
+      <div className='text-center footer-socmed'>
+        <div className="float-right"><Email /></div>
+        <div className="float-left"><Instagram /></div>
+        <div><WhatsApp /></div>
       </div>
     </div>
   </footer>

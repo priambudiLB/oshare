@@ -25,7 +25,7 @@ class Cart extends Component {
       <div>
         <h1>test</h1>
         <section>
-          <div className='container'>
+          <div className='container' style={{'margin-top': '5vh'}}>
             <span className="highlights glacial-indifference">Shopping </span><span
             className="highlights kollektif-bold">Cart</span>
             <table className="table">
@@ -67,6 +67,7 @@ class Cart extends Component {
             </div>
           </div>
         </section>
+        <div style={{height: '10vh'}} />
       </div>
     );
   }
