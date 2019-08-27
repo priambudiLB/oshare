@@ -8,43 +8,37 @@ class Women extends Component {
       {
         nama: "Nama",
         harga: "20.000",
-        imageUrl:"images/Logo.png",
+        imageUrl:"./Images/sepatu.jpg",
         deskripsi: "aaaaa;bbbbbb"
       },
       {
         nama: "Nama",
         harga: "20.000",
-        imageUrl:"images/Logo.png",
+        imageUrl:"./Images/sepatu.jpg",
         deskripsi: "aaaaa;bbbbbb"
       },
       {
         nama: "Nama",
         harga: "20.000",
-        imageUrl:"images/Logo.png",
+        imageUrl:"./Images/sepatu.jpg",
         deskripsi: "aaaaa;bbbbbb"
       },
       {
         nama: "Nama",
         harga: "20.000",
-        imageUrl:"images/Logo.png",
+        imageUrl:"./Images/sepatu.jpg",
         deskripsi: "aaaaa;bbbbbb"
       },
       {
         nama: "Nama",
         harga: "20.000",
-        imageUrl:"images/Logo.png",
+        imageUrl:"./Images/sepatu.jpg",
         deskripsi: "aaaaa;bbbbbb"
       },
       {
         nama: "Nama",
         harga: "20.000",
-        imageUrl:"images/Logo.png",
-        deskripsi: "aaaaa;bbbbbb"
-      },
-      {
-        nama: "Nama",
-        harga: "20.000",
-        imageUrl:"images/Logo.png",
+        imageUrl:"./Images/sepatu.jpg",
         deskripsi: "aaaaa;bbbbbb"
       },
   ],

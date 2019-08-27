@@ -12,6 +12,7 @@ const Gallery = () => {
   return (
     <AliceCarousel autoPlay autoPlayInterval={5000} mouseDragEnabled responsive={{
       0: { items: 1 },
+      512: { items: 2 },
       1024: { items: 3 },
     }} >
       <div className="yours-custom-class carousel-card" onDragStart={handleOnDragStart} >
