@@ -444,3 +444,61 @@ a:hover {
 #kantor, #gudang{
   color: white;
 }
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content Link {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content Link:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.nav-item .dropbtn {
+  border: none;
+  outline: none;
+  color: white;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+#login .container{
+  margin-top: 50px;
+  height: 100vh;
+}
+#login .container #login-row #login-column #login-box{
+  margin-top: 50px;
+  max-width: 600px;
+  height: 320px;
+}
+
+#login .container #login-row #login-column #login-box #login-form{
+  padding: 20px;
+}
+
+#login .container #login-row #login-column .login-box #login-form #register-link {
+  margin-top: -85px;
+}
+

@@ -9,6 +9,8 @@ import Instagram from './Icons/Instagram-white';
 import Email from "./Icons/Email";
 import Cart from "./Cart";
 import Detail from "./Detail";
+import Login from "./Login";
+import Signup from "./Signup";
 
   function Navbar() {
   return (
@@ -26,11 +28,19 @@ import Detail from "./Detail";
       </button>
       <div className="collapse navbar-collapse justify-content-center" id="navbarNav">
         <ul className="nav nav-fill">
-          <li className="nav-item">
-          <Link to="/men">
-            <div className="nav-link">MEN</div>
-            </Link>
-          </li>
+          <div className="dropdown">
+            <li className="nav-item dropbtn">
+              <Link to="/men">
+                <div className="nav-link">MEN</div>
+              </Link>
+              <div className="dropdown-content">
+                <Link to="/men"><div className="nav-link">Shoes</div></Link>
+                <Link to="/men"><div className="nav-link">Clothes</div></Link>
+                <Link to="/men"><div className="nav-link">Accesories</div></Link>
+              </div>
+            </li>
+          </div>
+          
           <li className="nav-item">
           <Link to="/women">
             <div className="nav-link">WOMEN</div>
@@ -48,6 +58,19 @@ import Detail from "./Detail";
           </li>
         </ul>
       </div>
+      <ul className="nav nav-fill navbar-right">
+        <li className="nav-item">
+          <Link to="/login">
+            <div className="nav-link">LOGIN</div>
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link to="/signup">
+            <div className="nav-link">SIGN UP</div>
+          </Link>
+        </li> 
+      </ul>
+      
     </nav>    
   )
 }
@@ -86,6 +109,8 @@ function App() {
           <Route path="/women" component={Women} />
           <Route path="/detail" component={Detail} />
           <Route path="/checkout" component={Checkout} />
+          <Route path="/login" component={Login} />
+          <Route path="/signup" component={Signup} />
         </Switch>
       </Router>
       <Footer />
