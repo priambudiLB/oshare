@@ -1,38 +1,77 @@
 import React, { Component } from "react";
 import "./App.css";
-import {ItemCheckout} from "./ItemCheckout";
+import {convertToRupiah, ItemCheckout} from "./ItemCheckout";
 
 class Checkout extends Component {
-  state = {};
-  async componentDidMount() {
-
-    let data = {
-      "origin": "501",
-      "destination": "114",
-      "weight": 1700,
-      "courier": "jne"
+  constructor(props) {
+    super(props);
+    this.state = {
+      province: [],
+      city: [],
+      provinceValue: '',
+      cityValue: '',
+      deliveryFee: 0
     };
-    let t = await fetch('https://api.rajaongkir.com/starter/cost', {
-      method: "POST",
-      mode: 'cors',
+    this.handleChangeProvince = this.handleChangeProvince.bind(this);
+    this.handleChangeCity = this.handleChangeCity.bind(this);
+  }
+  async componentDidMount() {
+    this.getProvinces();
+  }
+
+  handleChangeProvince(event) {
+    this.setState({provinceValue: event.target.value});
+    this.getCity(event.target.value)
+  }
+
+  handleChangeCity(event) {
+    this.setState({cityValue: event.target.value});
+    this.getCost(event.target.value)
+  }
+
+  async getCity(province){
+    let t = await fetch(`https://cors-anywhere.herokuapp.com/https://api.rajaongkir.com/starter/city?province=${province}`, {
+      method: "GET",
       headers: {
         "key": "70748c94fb7d6b17105fc1118412c192",
-        "content-type": "application/x-www-form-urlencoded"
+        "Content-Type": 'application/json'
       },
-      body: JSON.stringify(data)
     });
-    // let t = await fetch({
-    //   "method": "POST",
-    //   "hostname": "api.rajaongkir.com",
-    //   "port": null,
-    //   "path": "/starter/cost",
-    //   "headers": {
-    //     "key": "70748c94fb7d6b17105fc1118412c192",
-    //     "content-type": "application/x-www-form-urlencoded"
-    //   }
-    // });
     let t2 = await t.json();
-    console.log(t2)
+    this.setState({city: t2.rajaongkir.results})
+    console.log(t2.rajaongkir.results)
+  }
+
+  async getProvinces(){
+    let t = await fetch('https://cors-anywhere.herokuapp.com/https://api.rajaongkir.com/starter/province', {
+      method: "GET",
+      headers: {
+        "key": "70748c94fb7d6b17105fc1118412c192",
+        "Content-Type": 'application/json'
+      },
+    });
+    let t2 = await t.json();
+    this.setState({province: t2.rajaongkir.results})
+    console.log(t2.rajaongkir.results)
+  }
+
+  async getCost(destination){
+    let t = await fetch('https://cors-anywhere.herokuapp.com/https://api.rajaongkir.com/starter/cost', {
+      method: "POST",
+      headers: {
+        "key": "70748c94fb7d6b17105fc1118412c192",
+        "Content-Type": 'application/json'
+      },
+      body: JSON.stringify({
+        "origin": "154",
+        "destination": destination,
+        "weight": 1700,
+        "courier": "jne"
+      })
+    });
+    let t2 = await t.json();
+    console.log(t2.rajaongkir.results[0].costs[0].cost[0].value)
+    this.setState({deliveryFee: t2.rajaongkir.results[0].costs[0].cost[0].value})
   }
 
   render() {
@@ -58,6 +97,8 @@ class Checkout extends Component {
               <ItemCheckout itemName={'Item 1'} itemSize={30} itemPrice={'300000'}/>
               <ItemCheckout itemName={'Item 2'} itemSize={40} itemPrice={'125000'}/>
               <div className='divider' />
+              {totals('DELIVERY FEE', convertToRupiah(this.state.deliveryFee))}
+              <div className='divider' />
               {totals('SUBTOTAL', 42)}
               <div className='divider' />
               {totals('ADMIN FEE', 42)}
@@ -73,12 +114,13 @@ class Checkout extends Component {
                   </div>
                   <div className="form-group col-md-6">
                     <label className='kollektif-bold label' htmlFor="inputPassword4">PROVINCE</label>
-                    <select className="form-control" id="inputPassword4">
-                      <option>1</option>
-                      <option>2</option>
-                      <option>3</option>
-                      <option>4</option>
-                      <option>5</option>
+                    <select value={this.state.provinceValue} onChange={this.handleChangeProvince} className="form-control" id="inputPassword4">
+                      <option>Choose...</option>
+                      {this.state.province.map((item, index)=>{
+                        return(
+                          <option key={index} value={item.province_id}>{item.province}</option>
+                        )
+                      })}
                     </select>
                   </div>
                 </div>
@@ -88,8 +130,15 @@ class Checkout extends Component {
                     <input type="text" className="form-control" id="inputEmail4" placeholder="Email Address"/>
                   </div>
                   <div className="form-group col-md-6">
-                    <label className='kollektif-bold label' htmlFor="inputPassword4">CITY</label>
-                    <input type="text" className="form-control" id="inputPassword4" placeholder="City"/>
+                    <label className='kollektif-bold label' htmlFor="inputCity">CITY</label>
+                    <select value={this.state.cityValue} onChange={this.handleChangeCity} className="form-control" id="inputCity">
+                      <option>Choose...</option>
+                      {this.state.city.map((item, index)=>{
+                        return(
+                          <option key={index} value={item.city_id}>{item.city_name}</option>
+                        )
+                      })}
+                    </select>
                   </div>
                 </div>
                 <div className="form-group">
