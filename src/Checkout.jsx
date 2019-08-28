@@ -1,8 +1,40 @@
 import React, { Component } from "react";
 import "./App.css";
 import {ItemCheckout} from "./ItemCheckout";
+
 class Checkout extends Component {
   state = {};
+  async componentDidMount() {
+
+    let data = {
+      "origin": "501",
+      "destination": "114",
+      "weight": 1700,
+      "courier": "jne"
+    };
+    let t = await fetch('https://api.rajaongkir.com/starter/cost', {
+      method: "POST",
+      mode: 'cors',
+      headers: {
+        "key": "70748c94fb7d6b17105fc1118412c192",
+        "content-type": "application/x-www-form-urlencoded"
+      },
+      body: JSON.stringify(data)
+    });
+    // let t = await fetch({
+    //   "method": "POST",
+    //   "hostname": "api.rajaongkir.com",
+    //   "port": null,
+    //   "path": "/starter/cost",
+    //   "headers": {
+    //     "key": "70748c94fb7d6b17105fc1118412c192",
+    //     "content-type": "application/x-www-form-urlencoded"
+    //   }
+    // });
+    let t2 = await t.json();
+    console.log(t2)
+  }
+
   render() {
     let totals = (name, price) => {
       return(
@@ -41,7 +73,13 @@ class Checkout extends Component {
                   </div>
                   <div className="form-group col-md-6">
                     <label className='kollektif-bold label' htmlFor="inputPassword4">PROVINCE</label>
-                    <input type="text" className="form-control" id="inputPassword4" placeholder="Province"/>
+                    <select className="form-control" id="inputPassword4">
+                      <option>1</option>
+                      <option>2</option>
+                      <option>3</option>
+                      <option>4</option>
+                      <option>5</option>
+                    </select>
                   </div>
                 </div>
                 <div className="form-row">
