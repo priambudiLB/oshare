@@ -143,7 +143,7 @@ class Checkout extends Component {
                 </div>
                 <div className="form-group">
                   <label className='kollektif-bold label' htmlFor="inputAddress">Address</label>
-                  <input type="text" className="form-control" id="inputAddress" placeholder="1234 Main St" />
+                  <textarea className="span6 form-control" rows="3" placeholder="Alamat lengkap" required></textarea>
                 </div>
 
                 <div className="form-row">
