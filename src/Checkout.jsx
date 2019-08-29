@@ -145,7 +145,6 @@ class Checkout extends Component {
                   <label className='kollektif-bold label' htmlFor="inputAddress">Address</label>
                   <textarea className="span6 form-control" rows="3" placeholder="Alamat lengkap" required></textarea>
                 </div>
-
                 <div className="form-row">
                   <div className="form-group col-md-6">
                     <label className='kollektif-bold label' htmlFor="inputCity">POSTAL CODE</label>
