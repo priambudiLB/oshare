@@ -502,3 +502,20 @@ a:hover {
   margin-top: -85px;
 }
 
+#signup .container{
+  margin-top: 50px;
+  height: 150vh;
+}
+#signup-box{
+  margin-top: 50px;
+  max-width: 600px;
+  height: 320px;
+}
+
+#signup-form{
+  padding: 20px;
+}
+
+#error{
+  color: red;
+}
