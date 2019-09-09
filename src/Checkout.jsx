@@ -38,7 +38,7 @@ class Checkout extends Component {
       },
     });
     let t2 = await t.json();
-    this.setState({city: t2.rajaongkir.results})
+    // this.setState({city: t2.rajaongkir.results})
     console.log(t2.rajaongkir.results)
   }
 

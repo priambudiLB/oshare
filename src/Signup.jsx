@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import DatePicker from "react-datepicker";
+// import DatePicker from "react-datepicker";
 
-import "react-datepicker/dist/react-datepicker.css";
+// import "react-datepicker/dist/react-datepicker.css";
 import './App.css';
 
 class Signup extends Component {
@@ -46,14 +46,14 @@ class Signup extends Component {
                               {/* <input className="form-control form-control-sm" placeholder="MM/DD/YYYY" type="text">
                               
                               </input> */}
-                              <DatePicker
-                                selected={this.state.startDate}
-                                onChange={this.handleChange}
-                                peekNextMonth
-                                showMonthDropdown
-                                showYearDropdown
-                                dropdownMode="select"
-                              />
+                              {/*<DatePicker*/}
+                              {/*  selected={this.state.startDate}*/}
+                              {/*  onChange={this.handleChange}*/}
+                              {/*  peekNextMonth*/}
+                              {/*  showMonthDropdown*/}
+                              {/*  showYearDropdown*/}
+                              {/*  dropdownMode="select"*/}
+                              {/*/>*/}
                             </div>
                             <div className="form-group">
                               <label className="ol-form-label-sm mr-sm-2" for="gender">Gender</label>
