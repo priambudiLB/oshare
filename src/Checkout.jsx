@@ -10,7 +10,8 @@ class Checkout extends Component {
       city: [],
       provinceValue: '',
       cityValue: '',
-      deliveryFee: 0
+      deliveryFee: 0,
+      address: 'Alamat 1'
     };
     this.handleChangeProvince = this.handleChangeProvince.bind(this);
     this.handleChangeCity = this.handleChangeCity.bind(this);
@@ -143,9 +144,26 @@ class Checkout extends Component {
                 </div>
                 <div className="form-group">
                   <label className='kollektif-bold label' htmlFor="inputAddress">Address</label>
-                  <textarea className="span6 form-control" rows="3" placeholder="Alamat lengkap" required></textarea>
+                  <div className="form-row">
+                    <div className="form-check">
+                      <input className="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked></input>
+                      <label class="form-check-label" htmlFor="gridRadios1">
+                        First radio
+                      </label>
+                    </div>
+                  </div>
+                  <div className="form-row">
+                    <div className="form-check">
+                      <input className="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2"></input>
+                      <label className="form-check-label" htmlFor="gridRadios2">
+                        Second radio
+                      </label>
+                    </div>
+                  </div>
+                  <div className="form-row">
+                  <textarea className="span6 form-control" rows="3" placeholder={this.state.address} required></textarea>
+                  </div>
                 </div>
-
                 <div className="form-row">
                   <div className="form-group col-md-6">
                     <label className='kollektif-bold label' htmlFor="inputCity">POSTAL CODE</label>

@@ -11,11 +11,12 @@ import Cart from "./Cart";
 import Detail from "./Detail";
 import Login from "./Login";
 import Signup from "./Signup";
+import Profile from "./Profile";
 
   function Navbar() {
   return (
     <nav className="navbar navbar-custom fixed-top navbar-expand-sm">
-    <Link to="/">
+      <Link to="/">
       <div className="navbar-brand">
         <img src="Images/Logo.png" width="30" height="30" alt="logo"/>
       </div>
@@ -26,6 +27,9 @@ import Signup from "./Signup";
         {/* <i class="fa fa-navicon"></i> */}
         </span>
       </button>
+      <div className="">
+
+      </div>
       <div className="collapse navbar-collapse justify-content-center" id="navbarNav">
         <ul className="nav nav-fill">
           <div className="dropdown">
@@ -40,7 +44,6 @@ import Signup from "./Signup";
               </div>
             </li>
           </div>
-          
           <li className="nav-item">
           <Link to="/women">
             <div className="nav-link">WOMEN</div>
@@ -58,19 +61,20 @@ import Signup from "./Signup";
           </li>
         </ul>
       </div>
-      <ul className="nav nav-fill navbar-right">
-        <li className="nav-item">
-          <Link to="/login">
-            <div className="nav-link">LOGIN</div>
-          </Link>
-        </li>
-        <li className="nav-item">
-          <Link to="/signup">
-            <div className="nav-link">SIGN UP</div>
-          </Link>
-        </li> 
-      </ul>
-      
+      <div className="collapse navbar-collapse justify-content-right">
+        <ul className="nav nav-fill">
+          <li className="nav-item">
+            <Link to="/login">
+              <div className="nav-link">LOGIN</div>
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/signup">
+              <div className="nav-link">SIGN UP</div>
+            </Link>
+          </li> 
+        </ul>
+      </div>
     </nav>    
   )
 }
@@ -111,6 +115,7 @@ function App() {
           <Route path="/checkout" component={Checkout} />
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
+          <Route path="/profile" component={Profile} />
         </Switch>
       </Router>
       <Footer />

@@ -519,3 +519,19 @@ a:hover {
 #error{
   color: red;
 }
+
+#profile .card{
+  margin-top: 20vh;
+  width: 18rem;
+  margin-bottom: 10vh;
+}
+
+#profile .card-img-top{
+  margin-top: 5vh;
+  width: 8rem;
+  align-content: center;
+}
+
+#profile .card-title{
+  text-align: center;
+}
