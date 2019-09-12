@@ -11,12 +11,6 @@ class Signup extends Component {
     confirmPassword:'',
   };
 
-  handleChange = date => {
-    this.setState({
-      startDate: date
-    });
-  };
-
   handleSUbmit = () =>{
     const{password,confirmPassword} = this.state;
     if(password!==confirmPassword){
@@ -42,26 +36,25 @@ class Signup extends Component {
                               <input type="text" class="form-control form-control-sm" placeholder="Full name"></input>
                             </div>
                             <div className="form-group">
-                              <label className="col-form-label-sm" for="date">Date</label>
-                              {/* <input className="form-control form-control-sm" placeholder="MM/DD/YYYY" type="text">
-                              
-                              </input> */}
-                              {/*<DatePicker*/}
-                              {/*  selected={this.state.startDate}*/}
-                              {/*  onChange={this.handleChange}*/}
-                              {/*  peekNextMonth*/}
-                              {/*  showMonthDropdown*/}
-                              {/*  showYearDropdown*/}
-                              {/*  dropdownMode="select"*/}
-                              {/*/>*/}
+                              <label className="col-form-label-sm" for="date">Date of Birth</label>
+                              <div className="form-row">
+                                <div className="col">
+                                  <input type="number" className="form-control form-control-sm" placeholder="DD" min="1" max="31"></input>
+                                </div>
+                                <div className="col">
+                                  <input type="number" className="form-control form-control-sm" placeholder="MM" min="1" max="12"></input>
+                                </div>
+                                <div className="col">
+                                <input type="number" className="form-control form-control-sm" placeholder="YYYY" min="1900" maxlength = "4"></input>
+                                </div>
+                            </div>
                             </div>
                             <div className="form-group">
-                              <label className="ol-form-label-sm mr-sm-2" for="gender">Gender</label>
+                              <label className="col-form-label-sm mr-sm-2" for="gender">Gender</label>
                               <select className="custom-select mr-sm-2 form-control-sm">
                                 <option selected>Choose...</option>
                                 <option value="1">Male</option>
                                 <option value="2">Female</option>
-                                <option value="3">Other</option>
                               </select>
                             </div>
                             <div className="form-group">

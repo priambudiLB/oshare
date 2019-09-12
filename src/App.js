@@ -11,84 +11,94 @@ import Cart from "./Cart";
 import Detail from "./Detail";
 import Login from "./Login";
 import Signup from "./Signup";
+import Profile from "./Profile";
+import ConfirmPayment from "./ConfirmPayment";
+import "./App.css";
 
 function Navbar() {
+  let item = [
+    {"name": "TECHNOLOGY",
+    "link": "tech"
+    },
+    {"name": "MEN",
+    "link": "men"
+    },
+    {"name": "WOMEN",
+    "link": "women"
+    },
+    {"name": "WISHLIST",
+    "link": "wishlist"
+    },
+  ]
   return (
-    <nav className="navbar navbar-custom fixed-top navbar-expand-sm">
+    <nav className="navbar navbar-custom fixed-top">
       <Link to="/">
         <div className="navbar-brand">
           <img src="Images/Logo.png" width="30" height="30" alt="logo" />
         </div>
       </Link>
       <button
-        className="navbar-toggler"
+        class="navbar-toggler"
         type="button"
         data-toggle="collapse"
-        data-target="#navbarNav"
-        aria-controls="navbarNav"
-        aria-expanded="false"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="true"
         aria-label="Toggle navigation"
       >
-        <span className="navbar-toggler-icon">
-          {/* <i class="fa fa-navicon"></i> */}
-        </span>
+        <span className="navbar-toggler-icon" />
       </button>
-      <div
-        className="collapse navbar-collapse justify-content-center"
-        id="navbarNav"
-      >
-        <ul className="nav nav-fill">
-          <div className="dropdown">
-            <li className="nav-item dropbtn">
-              <Link to="/men">
-                <div className="nav-link">MEN</div>
+      <div className="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul className="navbar-nav mr-auto">
+        {item.map((item, index)=>{
+          return(
+            <li className="nav-item" key={index}>
+              <Link to={`/${item.link}`}>
+                <div className="nav-link">{item.name}</div>
               </Link>
-              <div className="dropdown-content">
-                <Link to="/men">
-                  <div className="nav-link">Shoes</div>
-                </Link>
-                <Link to="/men">
-                  <div className="nav-link">Clothes</div>
-                </Link>
-                <Link to="/men">
-                  <div className="nav-link">Accesories</div>
-                </Link>
-                
-              </div>
             </li>
-          </div>
-
+          )
+        })}
           <li className="nav-item">
-            <Link to="/women">
-              <div className="nav-link">WOMEN</div>
+            <Link to="/cart">
+              <div className="nav-link">
+                <ShoppingBag /> (0)
+              </div>
             </Link>
           </li>
           <li className="nav-item">
-            <div className="nav-link">FAVORITES</div>
+            <Link to="/login">
+              <div className="nav-link">LOGIN</div>
+            </Link>
           </li>
           <li className="nav-item">
-            <div className="row">
-              <Link to="/cart">
-                <div className="nav-link">
-                  <ShoppingBag /> (0)
-                </div>
-              </Link>
+            <Link to="/signup">
+              <div className="nav-link">SIGN UP</div>
+            </Link>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              PROFILE
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">
+                Order Details
+              </a>
+              <a class="dropdown-item" href="#">
+                Personal Information
+              </a>
             </div>
           </li>
         </ul>
       </div>
-      <ul className="nav nav-fill navbar-right">
-        <li className="nav-item">
-          <Link to="/login">
-            <div className="nav-link">LOGIN</div>
-          </Link>
-        </li>
-        <li className="nav-item">
-          <Link to="/signup">
-            <div className="nav-link">SIGN UP</div>
-          </Link>
-        </li>
-      </ul>
     </nav>
   );
 }
@@ -108,7 +118,7 @@ function Footer() {
           </span>
           <br></br>
           <span className="glacial-indifference" id="gudang">
-            Alamat Gudang, Jl. Otista 3 Komplek 4 H166 13340{" "}
+            Jl. Otista 3 Komplek 4 H166 13340{" "}
           </span>
         </p>
         <div className="text-center footer-socmed">
@@ -141,6 +151,8 @@ function App() {
           <Route path="/checkout" component={Checkout} />
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
+          <Route path="/profile" component={Profile} />
+          <Route path="/confirm" component={ConfirmPayment} />
         </Switch>
       </Router>
       <Footer />
