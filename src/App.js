@@ -17,21 +17,13 @@ import "./App.css";
 
 function Navbar() {
   let item = [
-    {"name": "TECHNOLOGY",
-    "link": "tech"
-    },
-    {"name": "MEN",
-    "link": "men"
-    },
-    {"name": "WOMEN",
-    "link": "women"
-    },
-    {"name": "WISHLIST",
-    "link": "wishlist"
-    },
-  ]
+    { name: "TECHNOLOGY", link: "tech" },
+    { name: "MEN", link: "men" },
+    { name: "WOMEN", link: "women" },
+    { name: "WISHLIST", link: "wishlist" }
+  ];
   return (
-    <nav className="navbar navbar-custom fixed-top">
+    <nav className="navbar navbar-custom fixed-top navbar-expand-lg">
       <Link to="/">
         <div className="navbar-brand">
           <img src="Images/Logo.png" width="30" height="30" alt="logo" />
@@ -50,15 +42,15 @@ function Navbar() {
       </button>
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav mr-auto">
-        {item.map((item, index)=>{
-          return(
-            <li className="nav-item" key={index}>
-              <Link to={`/${item.link}`}>
-                <div className="nav-link">{item.name}</div>
-              </Link>
-            </li>
-          )
-        })}
+          {item.map((item, index) => {
+            return (
+              <li className="nav-item" key={index}>
+                <Link to={`/${item.link}`}>
+                  <div className="nav-link">{item.name}</div>
+                </Link>
+              </li>
+            );
+          })}
           <li className="nav-item">
             <Link to="/cart">
               <div className="nav-link">
@@ -76,25 +68,31 @@ function Navbar() {
               <div className="nav-link">SIGN UP</div>
             </Link>
           </li>
-          <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle"
-              href="#"
-              id="navbarDropdown"
-              role="button"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              PROFILE
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">
-                Order Details
-              </a>
-              <a class="dropdown-item" href="#">
-                Personal Information
-              </a>
+          <li className="nav-item">
+            <div class="d-flex">
+              <div class="btn-group">
+                <div
+                  className="nav-link dropdown-toggle dropdown-toggle-split"
+                  id="dropdownMenuReference"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                  data-reference="parent"
+                >
+                  PROFILE{" "}
+                </div>
+                <div
+                  class="dropdown-menu"
+                  aria-labelledby="dropdownMenuReference"
+                >
+                  <a class="dropdown-item" href="#">
+                    Order Details
+                  </a>
+                  <a class="dropdown-item" href="#">
+                    Personal Information
+                  </a>
+                </div>
+              </div>
             </div>
           </li>
         </ul>
