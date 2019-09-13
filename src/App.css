@@ -540,3 +540,7 @@ a:hover {
 #profile .card-title{
   text-align: center;
 }
+
+#links{
+  padding: 50px;
+}

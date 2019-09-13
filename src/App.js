@@ -119,7 +119,9 @@ function Footer() {
             Jl. Otista 3 Komplek 4 H166 13340{" "}
           </span>
         </p>
-        <div className="text-center footer-socmed">
+        
+        
+        <div className="text-center footer-socmed py-3">
           <div className="float-right">
             <Email />
           </div>
@@ -129,6 +131,40 @@ function Footer() {
           <div>
             <WhatsApp />
           </div>
+        </div>
+      </div>
+      
+      <div className="text-center footer-link" >
+        <div className="row justify-content-center">
+          <a href="/women">
+            <span className="kollektif-bold text-white" id="links">Company Profile</span>
+          </a>
+          <a href="/women">
+            <span className="kollektif-bold text-white" id="links">FAQ</span>
+          </a>
+          <a href="/women">
+            <span className="kollektif-bold text-white" id="links">How to Order</span>
+          </a>
+        </div>
+        <div className="row justify-content-center py-3">
+          <a href="/women">
+            <span className="kollektif-bold text-white" id="links">Order Process</span>
+          </a>
+          <a href="/women">
+            <span className="kollektif-bold text-white" id="links">Terms & Condition</span>
+          </a>
+        </div>
+      </div>
+
+      <div className="footer-support">
+        <div className="row justify-content-center">
+          <p>
+            <span className="glacial-indifference text-white">Supported </span>
+            <span className="kollektif-bold text-white">By</span>
+          </p>
+        </div>
+        <div className="row justify-content-center py-3">
+          <a href="https://diib.ui.ac.id/"><img src="Images/diib logo.png" width="40" height="30" alt="logo diib" /></a>
         </div>
       </div>
     </footer>
