@@ -165,7 +165,7 @@ function Footer() {
           </p>
         </div>
         <div className="row justify-content-center py-3">
-          <a href="https://diib.ui.ac.id/"><img src="./Images/DIIB.png"  alt="logo diib" /></a>
+          <a href="https://diib.ui.ac.id/"><img src="https://files.sirclocdn.xyz/blankawear/files/logo%20diib.png"  alt="logo diib" /></a>
         </div>
       </div>
     </footer>
