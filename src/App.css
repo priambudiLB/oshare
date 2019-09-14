@@ -415,6 +415,10 @@ a:hover {
   padding-bottom: 0px;
 }
 
+#high{
+  height: 100vh;
+}
+
 /*#container-img{*/
 /*  left: 0px;*/
 /*  width: 327px;*/

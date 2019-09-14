@@ -1,27 +1,24 @@
-import React, { Component } from 'react';
-import './App.css';
-import ItemCard from './ItemCard';
+import React, { Component } from "react";
+import "./App.css";
+import ItemCard from "./ItemCard";
 
-class Women extends Component {
+class Men extends Component {
   state = {
     barang: [],
-    isLoaded: false,
+    isLoaded: false
   };
 
-  componentDidMount(){
-    this.getData()
+  componentDidMount() {
+    this.getData();
   }
 
   async getData() {
-    let t = await fetch(
-      "http://o-share-backend.herokuapp.com/product/woman",
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json"
-        }
+    let t = await fetch("http://o-share-backend.herokuapp.com/product/men", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
       }
-    );
+    });
     let t2 = await t.json();
     this.setState({ barang: t2, isLoaded: true });
   }
@@ -30,10 +27,10 @@ class Women extends Component {
     return (
       <div id="high">
         <div className="container" id="container-1">
-          <span className="highlights kollektif">Women</span>
+          <span className="highlights kollektif">Men</span>
           <div className="section-1">
-          <div class="d-flex justify-content-start flex-wrap flex-row bd-highlight mb-3">
-          {this.state.isLoaded ? (
+            <div class="d-flex justify-content-start flex-wrap flex-row bd-highlight mb-3">
+              {this.state.isLoaded ? (
                 this.state.barang.length === 0 ? (
                   <span className="glacial-indifference">
                     No item.
@@ -64,13 +61,12 @@ class Women extends Component {
                   </div>
                 </div>
               )}
+            </div>
           </div>
         </div>
-        </div>
-        
       </div>
     );
   }
 }
 
-export default Women;
+export default Men;

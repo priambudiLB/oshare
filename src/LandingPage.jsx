@@ -7,76 +7,56 @@ import ItemCard from './ItemCard';
 import './alice-carousel.css'
 import AliceCarousel from 'react-alice-carousel';
 
-const Gallery = () => {
-  const handleOnDragStart = e => e.preventDefault()
-  return (
-    <AliceCarousel autoPlay autoPlayInterval={5000} mouseDragEnabled responsive={{
-      0: { items: 1 },
-      512: { items: 2 },
-      1024: { items: 3 },
-    }} >
-      <div className="yours-custom-class carousel-card" onDragStart={handleOnDragStart} >
-        <ItemCard
-          cardTitle={"1"}
-          imageUrl={"./images/sepatu.jpg"}
-          price={10000}
-          deskripsi={'deskripsi landing page 1'}
-        />
-      </div>
-      <div className="yours-custom-class carousel-card" onDragStart={handleOnDragStart}>
-        <ItemCard
-          cardTitle={"2"}
-          imageUrl={"./images/sepatu.jpg"}
-          price={10000}
-          deskripsi={'deskripsi landing page 2'}
-        />
-      </div>
-      <div className="yours-custom-class carousel-card" onDragStart={handleOnDragStart}>
-        <ItemCard
-          cardTitle={"3"}
-          imageUrl={"./images/sepatu.jpg"}
-          price={10000}
-          deskripsi={'deskripsi landing page 3'}
-        />
-      </div>
-      <div className="yours-custom-class carousel-card" onDragStart={handleOnDragStart}>
-        <ItemCard
-          cardTitle={"4"}
-          imageUrl={"./images/sepatu.jpg"}
-          price={10000}
-          deskripsi={'deskripsi landing page 4'}
-        />
-      </div>
-      <div className="yours-custom-class carousel-card" onDragStart={handleOnDragStart}>
-        <ItemCard
-          cardTitle={"5"}
-          imageUrl={"./images/sepatu.jpg"}
-          price={10000}
-          deskripsi={'deskripsi landing page 5'}
-        />
-      </div>
-      <div className="yours-custom-class carousel-card" onDragStart={handleOnDragStart}>
-        <ItemCard
-          cardTitle={"6"}
-          imageUrl={"./images/sepatu.jpg"}
-          price={10000}
-          deskripsi={'deskripsi landing page 6'}
-        />
-      </div>
-    </AliceCarousel>
-  )
-}
 class LandingPage extends Component {
   state = {
-    barang: ['./images/sepatu.jpg', './images/sepatu.jpg', './images/sepatu.jpg'],
-    instagram: [],
+    barang: [],
   };
 
-  componentDidMount() {
+  componentDidMount(){
+    this.getData()
+  }
 
+  async getData() {
+    let t = await fetch(
+      "http://o-share-backend.herokuapp.com/product/",
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }
+    );
+    let t2 = await t.json();
+    this.setState({ barang: t2 });
   }
 
   render() {
+    const Gallery = () => {
+      const handleOnDragStart = e => e.preventDefault()
+      return (
+        <AliceCarousel autoPlay autoPlayInterval={5000} mouseDragEnabled responsive={{
+          0: { items: 1 },
+          512: { items: 2 },
+          1024: { items: 3 },
+        }} >
+        {
+          this.state.barang.map((item, index)=>{
+            return(
+              <div className="yours-custom-class carousel-card" onDragStart={handleOnDragStart} key={index}>
+                <ItemCard
+                  cardTitle={item.title} 
+                  imageUrl={item.images[0].image === undefined ? 'https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwjmlMvNrNDkAhWXfCsKHW4pCU8QjRx6BAgBEAQ&url=http%3A%2F%2Fgizi.unida.gontor.ac.id%2F&psig=AOvVaw2KJnu0WuMDRFF0G994bnXM&ust=1568551704739678' : item.images[0].image} 
+                  harga={item.price} 
+                  deskripsi={item.description}
+                  catalogs={item.catalogs}
+                />
+              </div>
+            )
+          })
+        }
+        </AliceCarousel>
+      )
+    }
     return (
       <div>
         <div id="hero" />

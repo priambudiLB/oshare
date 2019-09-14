@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import LandingPage from "./LandingPage";
 import Women from "./Women";
+import Men from "./Men";
 import Checkout from "./Checkout";
 import ShoppingBag from "./Icons/ShoppingBag";
 import WhatsApp from "./Icons/WhatsApp-white";
@@ -164,7 +165,7 @@ function Footer() {
           </p>
         </div>
         <div className="row justify-content-center py-3">
-          <a href="https://diib.ui.ac.id/"><img src="Images/diib logo.png" width="40" height="30" alt="logo diib" /></a>
+          <a href="https://diib.ui.ac.id/"><img src="./Images/DIIB.png"  alt="logo diib" /></a>
         </div>
       </div>
     </footer>
@@ -179,7 +180,7 @@ function App() {
         <Switch>
           <Route path="/" exact component={LandingPage} />
           <Route path="/cart" component={Cart} />
-          <Route path="/men" component={Women} />
+          <Route path="/men" component={Men} />
           <Route path="/women" component={Women} />
           <Route path="/detail" component={Detail} />
           <Route path="/checkout" component={Checkout} />
