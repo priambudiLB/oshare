@@ -47,13 +47,13 @@ class Checkout extends Component {
     console.log("handle 1 " + this.state.radio);
   }
 
-  checkout(isDefault, nama_jalan, kelurahan, kecamatan, kota, provinsi, kodee_pos) {
+  checkout(isDefault, nama_jalan, kelurahan, kecamatan, kota, provinsi, kode_pos) {
     console.log("checkout");
     let headers = { 
       "Content-Type": "application/json", 
       "Authorization":  "Token "+localStorage.getItem("token") 
     };
-    let body = JSON.stringify({ isDefault, nama_jalan, kelurahan, kecamatan, kota, provinsi, kodee_pos });
+    let body = JSON.stringify({ isDefault, nama_jalan, kelurahan, kecamatan, kota, provinsi, kode_pos });
     console.log(body);
     return fetch("http://o-share-backend.herokuapp.com/checkout/finalize", {
       headers,
@@ -76,6 +76,29 @@ class Checkout extends Component {
     });
   }
 
+  handleCheckout(){
+    if(this.state.radio === "1"){
+      this.checkout(
+        'True', 
+        '', 
+        '',
+        '',
+        this.state.cityValue, 
+        this.state.provinceValue.split(',')[1], 
+        ''
+      )
+    } else{
+      this.checkout(
+        "False", 
+        this.state.address, 
+        'kelurahan',
+        'kecamatan',
+        this.state.cityValue, 
+        this.state.provinceValue.split(',')[1], 
+        'kode pos')
+    }
+  }
+
   handleChecked2() {
     this.setState({ radio: "2", address: "" });
     console.log("handle 2 " + this.state.radio);
@@ -83,7 +106,7 @@ class Checkout extends Component {
 
   handleChangeProvince(event) {
     this.setState({ provinceValue: event.target.value });
-    this.getCity(event.target.value);
+    this.getCity(event.target.value.split(',')[0]);
   }
 
   handleChangeCity(event) {
@@ -211,7 +234,7 @@ class Checkout extends Component {
                       <option>Choose...</option>
                       {this.state.province.map((item, index) => {
                         return (
-                          <option key={index} value={item.province_id}>
+                          <option key={index} value={`${item.province_id},${item.province}`}>
                             {item.province}
                           </option>
                         );
@@ -313,7 +336,9 @@ class Checkout extends Component {
                 </div>
                 <div
                   className="btn btn-primary"
-                  onClick={()=>this.checkout(this.state.radio === "1" ? 'True':"False", this.state.address, '','',this.state.cityValue, this.state.provinceValue, '')}
+                  onClick={
+                    ()=>this.handleCheckout()
+                    }
                 >
                   CHECKOUT
                 </div>
