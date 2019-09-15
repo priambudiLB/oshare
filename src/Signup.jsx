@@ -46,7 +46,6 @@ class Signup extends Component {
             // localStorage.setItem("token", data.token);
             window.location.assign("/login");
           });
-
           return { status: res.status, data };
         });
       } else {

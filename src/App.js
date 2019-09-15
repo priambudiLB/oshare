@@ -70,13 +70,17 @@ function Navbar() {
               </li>
             );
           })}
-          <li className="nav-item">
+          {localStorage.getItem("token") != null ? (
+            <li className="nav-item">
             <Link to="/cart">
               <div className="nav-link">
                 <ShoppingBag /> (0)
               </div>
             </Link>
           </li>
+          ) : (
+            <div />
+          )}
           {localStorage.getItem("token") != null ? (
             <div />
           ) : (

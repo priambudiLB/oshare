@@ -47,6 +47,35 @@ class Checkout extends Component {
     console.log("handle 1 " + this.state.radio);
   }
 
+  checkout(isDefault, nama_jalan, kelurahan, kecamatan, kota, provinsi, kodee_pos) {
+    console.log("checkout");
+    let headers = { 
+      "Content-Type": "application/json", 
+      "Authorization":  "Token "+localStorage.getItem("token") 
+    };
+    let body = JSON.stringify({ isDefault, nama_jalan, kelurahan, kecamatan, kota, provinsi, kodee_pos });
+    console.log(body);
+    return fetch("http://o-share-backend.herokuapp.com/checkout/finalize", {
+      headers,
+      body,
+      method: "POST"
+    }).then(res => {
+      if (res.status === 200) {
+        return res.json().then(data => {
+          this.setState({ token: data.token }, () => {
+            // localStorage.setItem("token", data.token);
+            window.location.assign("/");
+          });
+
+          return { status: res.status, data };
+        });
+      } else {
+        console.log("Server Error!");
+        throw res;
+      }
+    });
+  }
+
   handleChecked2() {
     this.setState({ radio: "2", address: "" });
     console.log("handle 2 " + this.state.radio);
@@ -202,7 +231,7 @@ class Checkout extends Component {
                       <option>Choose...</option>
                       {this.state.city.map((item, index) => {
                         return (
-                          <option key={index} value={item.city_id}>
+                          <option key={index} value={item.city_name}>
                             {item.city_name}
                           </option>
                         );
@@ -282,13 +311,12 @@ class Checkout extends Component {
                     />
                   </div>
                 </div>
-                <button
-                  type="submit"
+                <div
                   className="btn btn-primary"
-                  disabled={true}
+                  onClick={()=>this.checkout(this.state.radio === "1" ? 'True':"False", this.state.address, '','',this.state.cityValue, this.state.provinceValue, '')}
                 >
                   CHECKOUT
-                </button>
+                </div>
               </form>
             </div>
           </div>

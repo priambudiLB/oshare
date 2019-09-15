@@ -10,16 +10,28 @@ class DetailCard extends Component {
     super(props);
     this.state = {
       sizeValue: "",
-      quantityValue:'',
+      quantityValue: '',
       maxValue: 0,
+      isLoading: false,
     };
     this.handleSizeValue = this.handleSizeValue.bind(this);
     this.handleQuantityValue = this.handleQuantityValue.bind(this);
   }
 
+  componentDidMount(){
+    // this.addToCart(this.props.id, '39', '1')
+    // console.log(this.props)
+  }
   addToCart(product_id, size, quantity) {
+    if(this.state.isLoading){
+      return true
+    }
+    this.setState({isLoading: true})
     console.log("addtocart" + product_id);
-    let headers = { "Content-Type": "application/x-www-form-urlencoded", "Authorization":  "Token "+localStorage.getItem("token") };
+    let headers = { 
+      "Content-Type": "application/json", 
+      "Authorization":  "Token "+localStorage.getItem("token")
+    };
     let body = JSON.stringify({ product_id, size, quantity });
     console.log(headers);
     console.log(body);
@@ -28,10 +40,11 @@ class DetailCard extends Component {
       body,
       method: "POST"
     }).then(res => {
-      if (res.status === 200) {
+      if (res.status === 201) {
         return res.json().then(data => {
           this.setState({ token: data.token }, () => {
             // localStorage.setItem("token", data.token);
+            this.setState({isLoading: false})
             window.location.assign("/cart");
           });
 
@@ -150,13 +163,15 @@ class DetailCard extends Component {
                       </div>
                       <div className="form-group">
                         <div
-                          onClick={()=>this.addToCart('1', this.state.sizeValue, this.state.quantityValue)}
+                          onClick={()=>this.addToCart(this.props.id, this.state.sizeValue, this.state.quantityValue)}
                           className="btn btn-dark btn-sm btn-lg btn-block"
                         >
-                          <span className="kollektif" id="thin-word">
+                          {this.state.isLoading ? <span className="kollektif" id="thin-word">
+                            Loading...
+                          </span> : <span><span className="kollektif" id="thin-word">
                             ADD TO{" "}
                           </span>
-                          <span className="kollektif">CART</span>
+                          <span className="kollektif">CART</span></span>}
                         </div>
                       </div>
                     </form>
