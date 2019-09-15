@@ -49,6 +49,7 @@ class LandingPage extends Component {
                   harga={item.price} 
                   deskripsi={item.description}
                   catalogs={item.catalogs}
+                  id={item.id}
                 />
               </div>
             )

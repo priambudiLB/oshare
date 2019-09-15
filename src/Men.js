@@ -21,6 +21,7 @@ class Men extends Component {
     });
     let t2 = await t.json();
     this.setState({ barang: t2, isLoaded: true });
+    console.log(t2)
   }
 
   render() {
@@ -49,6 +50,8 @@ class Men extends Component {
                           harga={item.price}
                           deskripsi={item.description}
                           catalogs={item.catalogs}
+                          id={item.id}
+                          size={item.catalogs[0].size}
                         />
                       </div>
                     );

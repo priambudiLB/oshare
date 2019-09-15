@@ -8,13 +8,46 @@ class DetailCard extends Component {
     super(props);
     this.state = {
       sizeValue: "",
+      quantityValue:'',
       maxValue: 0,
     };
     this.handleSizeValue = this.handleSizeValue.bind(this);
+    this.handleQuantityValue = this.handleQuantityValue.bind(this);
+  }
+
+  async addToCart(id, size, quantity) {
+    console.log("addtocart" + id);
+    let headers = { "Content-Type": "application/json", "Authorization":  "Token "+localStorage.getItem("token") };
+    let body = JSON.stringify({ id, size, quantity });
+    console.log(headers);
+    console.log(body);
+    return fetch("http://o-share-backend.herokuapp.com/cart/add", {
+      headers,
+      body,
+      method: "POST"
+    }).then(res => {
+      if (res.status === 200) {
+        return res.json().then(data => {
+          this.setState({ token: data.token }, () => {
+            // localStorage.setItem("token", data.token);
+            window.location.assign("/cart");
+          });
+
+          return { status: res.status, data };
+        });
+      } else {
+        console.log("Server Error!");
+        throw res;
+      }
+    });
   }
 
   handleSizeValue(event) {
     this.setState({ sizeValue: event.target.value, maxValue: this.getMaxValueFromSize(event.target.value) });
+  }
+
+  handleQuantityValue(event) {
+    this.setState({ quantityValue: event.target.value});
   }
 
   getMaxValueFromSize(size){
@@ -34,7 +67,7 @@ class DetailCard extends Component {
             <div className="col-sm-2"></div>
             <div className="col-sm-10">
               <span className="highlights kollektif" id="detail-title">
-                {this.props.nama}
+                {/* {this.props.nama} */}
               </span>
             </div>
           </div>
@@ -93,18 +126,20 @@ class DetailCard extends Component {
                           min="1"
                           max={this.state.maxValue.toString()}
                           id="select-qty"
+                          value={this.state.quantityValue}
+                          onChange={this.handleQuantityValue}
                         />
                       </div>
                       <div className="form-group">
-                        <button
-                          type=""
+                        <div
+                          onClick={()=>this.addToCart('1', this.state.sizeValue, this.state.quantityValue)}
                           className="btn btn-dark btn-sm btn-lg btn-block"
                         >
                           <span className="kollektif" id="thin-word">
                             ADD TO{" "}
                           </span>
                           <span className="kollektif">CART</span>
-                        </button>
+                        </div>
                       </div>
                     </form>
                   </li>
