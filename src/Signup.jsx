@@ -22,6 +22,7 @@ class Signup extends Component {
   }
  
   onChange = date => this.setState({ date })
+  
   render() {
     return (
       <div id="signup">

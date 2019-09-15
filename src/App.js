@@ -1,4 +1,5 @@
 import React from "react";
+import "./App.css";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import LandingPage from "./LandingPage";
 import Women from "./Women";
@@ -14,8 +15,11 @@ import Login from "./Login";
 import Signup from "./Signup";
 import Profile from "./Profile";
 import ConfirmPayment from "./ConfirmPayment";
-import "./App.css";
 
+function signOut() {
+  localStorage.removeItem("token");
+  window.location.assign("/");
+}
 function Navbar() {
   let item = [
     { name: "TECHNOLOGY", link: "tech" },
@@ -31,7 +35,7 @@ function Navbar() {
         </div>
       </Link>
       <button
-        class="navbar-toggler"
+        className="navbar-toggler"
         type="button"
         data-toggle="collapse"
         data-target="#navbarSupportedContent"
@@ -59,43 +63,62 @@ function Navbar() {
               </div>
             </Link>
           </li>
-          <li className="nav-item">
-            <Link to="/login">
-              <div className="nav-link">LOGIN</div>
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/signup">
-              <div className="nav-link">SIGN UP</div>
-            </Link>
-          </li>
-          <li className="nav-item">
-            <div class="d-flex">
-              <div class="btn-group">
-                <div
-                  className="nav-link dropdown-toggle dropdown-toggle-split"
-                  id="dropdownMenuReference"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                  data-reference="parent"
-                >
-                  PROFILE{" "}
-                </div>
-                <div
-                  class="dropdown-menu"
-                  aria-labelledby="dropdownMenuReference"
-                >
-                  <a class="dropdown-item" href="#">
-                    Order Details
-                  </a>
-                  <a class="dropdown-item" href="#">
-                    Personal Information
-                  </a>
+          {localStorage.getItem("token") != null ? (
+            <div />
+          ) : (
+            <li className="nav-item">
+              <Link to="/login">
+                <div className="nav-link">LOGIN</div>
+              </Link>
+            </li>
+          )}
+          {localStorage.getItem("token") != null ? (
+            <div />
+          ) : (
+            <li className="nav-item">
+              <Link to="/signup">
+                <div className="nav-link">SIGN UP</div>
+              </Link>
+            </li>
+          )}
+          {localStorage.getItem("token") != null ? (
+            <li className="nav-item">
+              <div onClick={()=>signOut()} className="nav-link">SIGN OUT</div>
+            </li>
+          ) : (
+            <div />
+          )}
+          {localStorage.getItem("token") != null ? (
+            <li className="nav-item">
+              <div className="d-flex">
+                <div className="btn-group">
+                  <div
+                    className="nav-link dropdown-toggle dropdown-toggle-split"
+                    id="dropdownMenuReference"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    data-reference="parent"
+                  >
+                    PROFILE{" "}
+                  </div>
+                  <div
+                    className="dropdown-menu"
+                    aria-labelledby="dropdownMenuReference"
+                  >
+                    <a className="dropdown-item" href="/">
+                      Order Details
+                    </a>
+                    <a className="dropdown-item" href="/">
+                      Personal Information
+                    </a>
+                  </div>
                 </div>
               </div>
-            </div>
-          </li>
+            </li>
+          ) : (
+            <div />
+          )}
         </ul>
       </div>
     </nav>
@@ -120,8 +143,7 @@ function Footer() {
             Jl. Otista 3 Komplek 4 H166 13340{" "}
           </span>
         </p>
-        
-        
+
         <div className="text-center footer-socmed py-3">
           <div className="float-right">
             <Email />
@@ -134,25 +156,35 @@ function Footer() {
           </div>
         </div>
       </div>
-      
-      <div className="text-center footer-link" >
+
+      <div className="text-center footer-link">
         <div className="row justify-content-center">
           <a href="/women">
-            <span className="kollektif-bold text-white" id="links">Company Profile</span>
+            <span className="kollektif-bold text-white" id="links">
+              Company Profile
+            </span>
           </a>
           <a href="/women">
-            <span className="kollektif-bold text-white" id="links">FAQ</span>
+            <span className="kollektif-bold text-white" id="links">
+              FAQ
+            </span>
           </a>
           <a href="/women">
-            <span className="kollektif-bold text-white" id="links">How to Order</span>
+            <span className="kollektif-bold text-white" id="links">
+              How to Order
+            </span>
           </a>
         </div>
         <div className="row justify-content-center py-3">
           <a href="/women">
-            <span className="kollektif-bold text-white" id="links">Order Process</span>
+            <span className="kollektif-bold text-white" id="links">
+              Order Process
+            </span>
           </a>
           <a href="/women">
-            <span className="kollektif-bold text-white" id="links">Terms & Condition</span>
+            <span className="kollektif-bold text-white" id="links">
+              Terms & Condition
+            </span>
           </a>
         </div>
       </div>
@@ -165,7 +197,12 @@ function Footer() {
           </p>
         </div>
         <div className="row justify-content-center py-3">
-          <a href="https://diib.ui.ac.id/"><img src="https://files.sirclocdn.xyz/blankawear/files/logo%20diib.png"  alt="logo diib" /></a>
+          <a href="https://diib.ui.ac.id/">
+            <img
+              src="https://files.sirclocdn.xyz/blankawear/files/logo%20diib.png"
+              alt="logo diib"
+            />
+          </a>
         </div>
       </div>
     </footer>

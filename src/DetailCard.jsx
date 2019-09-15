@@ -20,8 +20,7 @@ class DetailCard extends Component {
   getMaxValueFromSize(size){
       let temp = 0;
     this.props.catalogs.forEach(element => {
-        console.log(element.size)
-          if(element.size == size){
+          if(element.size === parseInt(size)){
               temp = element.quantity
           }
       });
