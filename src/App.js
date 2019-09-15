@@ -17,8 +17,22 @@ import Profile from "./Profile";
 import ConfirmPayment from "./ConfirmPayment";
 
 function signOut() {
-  localStorage.removeItem("token");
-  window.location.assign("/");
+  let headers = { "Content-Type": "application/json", "Authorization":  "Token "+localStorage.getItem("token")};
+  
+  
+  return fetch("http://o-share-backend.herokuapp.com/api/auth/logout", {
+    headers,
+    
+    method: "POST"
+  }).then(res => {
+    if (res.status === 204) {
+      localStorage.removeItem("token");
+          window.location.assign("/");
+    } else {
+      console.log("Server Error!");
+      throw res;
+    }
+  })
 }
 function Navbar() {
   let item = [
@@ -83,7 +97,9 @@ function Navbar() {
           )}
           {localStorage.getItem("token") != null ? (
             <li className="nav-item">
-              <div onClick={()=>signOut()} className="nav-link">SIGN OUT</div>
+              <div onClick={() => signOut()} className="nav-link">
+                SIGN OUT
+              </div>
             </li>
           ) : (
             <div />
