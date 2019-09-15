@@ -17,10 +17,10 @@ class DetailCard extends Component {
     this.handleQuantityValue = this.handleQuantityValue.bind(this);
   }
 
-  addToCart(id, size, quantity) {
-    console.log("addtocart" + id);
+  addToCart(product_id, size, quantity) {
+    console.log("addtocart" + product_id);
     let headers = { "Content-Type": "application/x-www-form-urlencoded", "Authorization":  "Token "+localStorage.getItem("token") };
-    let body = JSON.stringify({ id, size, quantity });
+    let body = JSON.stringify({ product_id, size, quantity });
     console.log(headers);
     console.log(body);
     return fetch("http://o-share-backend.herokuapp.com/cart/add", {
