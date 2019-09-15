@@ -8,6 +8,7 @@
     "less": "^3.9.0",
     "neo-async": "^2.6.1",
     "nuka-carousel": "^4.5.8",
+    "query-string": "^6.8.3",
     "rajaongkir-nodejs": "^0.2.0",
     "react": "^16.9.0",
     "react-alice-carousel": "^1.15.3",

@@ -11,9 +11,13 @@ class Checkout extends Component {
       provinceValue: "",
       cityValue: "",
       deliveryFee: 0,
-      addressBE: "Fasilkom UI",
-      address: "Fasilkom UI",
-      radio: "1"
+      addressBE: "-",
+      address: "",
+      radio: "1",
+
+      barang:[],
+      total_price:0,
+
     };
     this.handleChangeProvince = this.handleChangeProvince.bind(this);
     this.handleChangeCity = this.handleChangeCity.bind(this);
@@ -21,7 +25,21 @@ class Checkout extends Component {
     this.handleChecked2 = this.handleChecked2.bind(this);
   }
   async componentDidMount() {
+    this.getCart()
     this.getProvinces();
+  }
+
+  async getCart() {
+    let t = await fetch("http://o-share-backend.herokuapp.com/checkout", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization":  "Token "+localStorage.getItem("token")
+      }
+    });
+    let t2 = await t.json();
+    this.setState({ barang: t2[0].items, total_price: t2[0].total_price, addressBE: t2[0].user.default_address.street_name });
+    console.log(t2)
   }
 
   handleChecked1() {
@@ -126,43 +144,29 @@ class Checkout extends Component {
             <div className="col-sm-4">
               <div className="totals glacial-indifference-bold">YOUR CART</div>
               <div className="divider" />
-              <ItemCheckout
-                itemName={"Item 1"}
-                itemSize={30}
-                itemPrice={"300000"}
+              {this.state.barang == null?<div/>:this.state.barang.map((item)=>{
+                return(
+                  <ItemCheckout
+                itemName={item.product.title}
+                itemSize={item.product.size}
+                itemPrice={parseInt(item.subtotal)}
+                itemImage={item.product.images[0].image}
+                itemQuantity={item.quantity}
               />
-              <ItemCheckout
-                itemName={"Item 2"}
-                itemSize={40}
-                itemPrice={"125000"}
-              />
+                  
+                )
+              })}
+              <div className="divider" />
+              {totals("SUBTOTAL", convertToRupiah(this.state.total_price))}
               <div className="divider" />
               {totals("DELIVERY FEE", convertToRupiah(this.state.deliveryFee))}
               <div className="divider" />
-              {totals("SUBTOTAL", 42)}
-              <div className="divider" />
-              {totals("ADMIN FEE", 42)}
-              <div className="divider" />
-              {totals("TOTAL", 42)}
+              {totals("TOTAL", convertToRupiah(this.state.total_price+this.state.deliveryFee))}
             </div>
             <div className="col-sm-8">
               <form>
                 <div className="form-row">
-                  <div className="form-group col-md-6">
-                    <label
-                      className="kollektif-bold label"
-                      htmlFor="inputEmail4"
-                    >
-                      FULL NAME
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="inputEmail4"
-                      placeholder="Full Name"
-                    />
-                  </div>
-                  <div className="form-group col-md-6">
+                <div className="form-group col-md-6">
                     <label
                       className="kollektif-bold label"
                       htmlFor="inputPassword4"
@@ -185,22 +189,6 @@ class Checkout extends Component {
                       })}
                     </select>
                   </div>
-                </div>
-                <div className="form-row">
-                  <div className="form-group col-md-6">
-                    <label
-                      className="kollektif-bold label"
-                      htmlFor="inputEmail4"
-                    >
-                      EMAIL ADDRESS
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="inputEmail4"
-                      placeholder="Email Address"
-                    />
-                  </div>
                   <div className="form-group col-md-6">
                     <label className="kollektif-bold label" htmlFor="inputCity">
                       CITY
@@ -221,6 +209,7 @@ class Checkout extends Component {
                       })}
                     </select>
                   </div>
+                  
                 </div>
                 <div className="form-group">
                   <label
@@ -290,17 +279,6 @@ class Checkout extends Component {
                       className="form-control"
                       id="inputCity"
                       placeholder="Postal Code"
-                    />
-                  </div>
-                  <div className="form-group col-md-6">
-                    <label className="kollektif-bold label" htmlFor="inputCity">
-                      MOBILE PHONE
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="inputCity"
-                      placeholder="Mobile Phone"
                     />
                   </div>
                 </div>

@@ -7,6 +7,7 @@ export function ItemCheckout(props) {
       <div className='col'>
         <div className="glacial-indifference-bold">{props.itemName}</div>
         <div className="glacial-indifference">Size {props.itemSize}</div>
+        <div className="glacial-indifference">Qty {props.itemQuantity}</div>
         {typeof (props.itemPrice) == 'undefined' ? '' : <div className="glacial-indifference">{convertToRupiah(props.itemPrice)}</div>}
       </div>
     </div>

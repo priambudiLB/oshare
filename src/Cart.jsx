@@ -26,14 +26,14 @@ class Cart extends Component {
     });
     let t2 = await t.json();
     this.setState({ barang: t2[0].items, total_price: t2[0].total_price });
-    console.log(t2[0])
+    console.log(t2)
   }
 
   render() {
-    let tableItem = (itemName, itemSize, price, itemImage) => {
+    let tableItem = (itemName, itemSize, price, itemImage, itemQuantity) => {
       return(
         <tr>
-          <th scope="row"><ItemCheckout itemImage={itemImage} itemName={itemName} itemSize={itemSize} /></th>
+          <th scope="row"><ItemCheckout itemQuantity={itemQuantity} itemImage={itemImage} itemName={itemName} itemSize={itemSize} /></th>
           <td><span className='float-right'>{convertToRupiah((price))}</span></td>
           <td><div className='text-center'><img alt={'cart'} src={require('./Icons/Vector.png')} width="18" height="21" /></div></td>
         </tr>
@@ -57,7 +57,7 @@ class Cart extends Component {
               <tbody>
               {this.state.barang == null?<div/>:this.state.barang.map((item)=>{
                 return(
-                  tableItem(item.product.title, item.product.size, parseInt(item.product.price), item.product.images[0].image)
+                  tableItem(item.product.title, item.product.size, parseInt(item.subtotal), item.product.images[0].image, item.quantity)
                 )
               })}
               </tbody>
@@ -66,7 +66,7 @@ class Cart extends Component {
             <div className='container info'>
               <div className='row justify-content-between'>
                 <div>TOTAL</div>
-                <div>{this.state.total_price}</div>
+                <div>{convertToRupiah(this.state.total_price)}</div>
               </div>
               <div className='row continue justify-content-between'>
                 <div className='btn btn-outline-primary'>CONTINUE SHOPPING</div>

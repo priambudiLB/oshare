@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import "./App.css";
 import { convertToRupiah } from "./ItemCheckout";
+// import Axios from 'axios';
+// import qs from "query-string";
 
 class DetailCard extends Component {
   deskripsi = this.props.deskripsi.split(";");
@@ -15,9 +17,9 @@ class DetailCard extends Component {
     this.handleQuantityValue = this.handleQuantityValue.bind(this);
   }
 
-  async addToCart(id, size, quantity) {
+  addToCart(id, size, quantity) {
     console.log("addtocart" + id);
-    let headers = { "Content-Type": "application/json", "Authorization":  "Token "+localStorage.getItem("token") };
+    let headers = { "Content-Type": "application/x-www-form-urlencoded", "Authorization":  "Token "+localStorage.getItem("token") };
     let body = JSON.stringify({ id, size, quantity });
     console.log(headers);
     console.log(body);
@@ -40,6 +42,22 @@ class DetailCard extends Component {
         throw res;
       }
     });
+
+    // let url = "http://o-share-backend.herokuapp.com/cart/add";
+    // let body = {
+    //   id: id,
+    //   size: size,
+    //   quantity: quantity,
+    // };
+    // console.log(body);
+    // let config = {
+    //   headers: {
+    //     "Content-Type": "application/x-www-form-urlencoded"
+    //   }
+    // };
+    // Axios.post(url, qs.stringify(body), config).catch(function(error) {
+    //   console.log(error);
+    // });
   }
 
   handleSizeValue(event) {
@@ -99,7 +117,7 @@ class DetailCard extends Component {
                       return <div key={index}>{i}</div>;
                     })}
                   </li>
-                  <li className="list-group-item">WOMEN's SIZE</li>
+                  {/* <li className="list-group-item">WOMEN's SIZE</li> */}
                   <li className="list-group-item">
                     <form>
                       <div className="form-group row">
