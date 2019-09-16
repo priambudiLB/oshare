@@ -26,6 +26,10 @@ class DetailCard extends Component {
     if(this.state.isLoading){
       return true
     }
+    if(localStorage.getItem("token") === null){
+      window.location.assign("/login");
+      return true
+    }
     this.setState({isLoading: true})
     console.log("addtocart" + product_id);
     let headers = { 

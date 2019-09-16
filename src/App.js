@@ -158,10 +158,6 @@ function Footer() {
           <span className="glacial-indifference" id="kantor">
             Alamat kantor Ruang Tenant DIIB
           </span>
-          <br></br>
-          <span className="glacial-indifference" id="gudang">
-            Jl. Otista 3 Komplek 4 H166 13340{" "}
-          </span>
         </p>
 
         <div className="text-center footer-socmed py-3">
@@ -196,11 +192,11 @@ function Footer() {
           </a>
         </div>
         <div className="row justify-content-center py-3">
-          <a href="/women">
+          {/* <a href="/women">
             <span className="kollektif-bold text-white" id="links">
               Order Process
             </span>
-          </a>
+          </a> */}
           <a href="/women">
             <span className="kollektif-bold text-white" id="links">
               Terms & Condition

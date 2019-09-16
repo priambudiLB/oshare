@@ -7,13 +7,18 @@ class Login extends Component {
     this.state = {
       token: "",
       email: "",
-      password: ""
+      password: "",
+      isLoading: false
     };
     this.handleChangeEmail = this.handleChangeEmail.bind(this);
     this.handleChangePassword = this.handleChangePassword.bind(this);
   }
   login = (email, password) => {
     console.log("login");
+    if (this.state.isLoading){
+      return true;
+    }
+    this.setState({ isLoading: true })
     let headers = { "Content-Type": "application/json" };
     let body = JSON.stringify({ email, password });
     console.log(body);
@@ -22,6 +27,7 @@ class Login extends Component {
       body,
       method: "POST"
     }).then(res => {
+      this.setState({ isLoading: false })
       if (res.status === 200) {
         return res.json().then(data => {
           this.setState({ token: data.token }, () => {
@@ -95,7 +101,7 @@ class Login extends Component {
                       this.login(this.state.email, this.state.password)
                     }
                   >
-                    Login
+                    {this.state.isLoading ? <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> : "Login"}
                   </div>
                 </form>
               </div>
