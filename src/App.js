@@ -15,6 +15,7 @@ import Login from "./Login";
 import Signup from "./Signup";
 import Profile from "./Profile";
 import ConfirmPayment from "./ConfirmPayment";
+import OrderDetails from "./OrderDetails";
 
 function signOut() {
   let headers = { "Content-Type": "application/json", "Authorization":  "Token "+localStorage.getItem("token")};
@@ -126,10 +127,10 @@ function Navbar() {
                     className="dropdown-menu"
                     aria-labelledby="dropdownMenuReference"
                   >
-                    <a className="dropdown-item" href="/">
+                    <a className="dropdown-item" href="/orders">
                       Order Details
                     </a>
-                    <a className="dropdown-item" href="/">
+                    <a className="dropdown-item" href="/profile">
                       Personal Information
                     </a>
                   </div>
@@ -241,6 +242,7 @@ function App() {
           <Route path="/signup" component={Signup} />
           <Route path="/profile" component={Profile} />
           <Route path="/confirm" component={ConfirmPayment} />
+          <Route path="/orders" component={OrderDetails} />
         </Switch>
       </Router>
       <Footer />
