@@ -57,8 +57,10 @@ class Cart extends Component {
       }
     });
     let t2 = await t.json();
-    this.setState({ barang: t2[0].items, total_price: t2[0].total_price });
     console.log(t2);
+    if (!(t2 === undefined || t2.length === 0)) {
+      this.setState({ barang: t2[0].items, total_price: t2[0].total_price });
+  }
   }
 
   render() {
@@ -93,7 +95,7 @@ class Cart extends Component {
       <div>
         <h1>test</h1>
         <section>
-          <div className="container" style={{ "margin-top": "5vh" }}>
+          <div className="container" style={{ "marginTop": "5vh" }}>
             <span className="highlights glacial-indifference">Shopping </span>
             <span className="highlights kollektif-bold">Cart</span>
             <table className="table">
@@ -136,9 +138,9 @@ class Cart extends Component {
               <div className="row continue justify-content-between">
                 <div className="btn btn-outline-primary">CONTINUE SHOPPING</div>
                 <Link to="/checkout">
-                  <a href="/checkout">
+                  
                     <div className="btn btn-primary">CHECKOUT</div>
-                  </a>
+                  
                 </Link>
               </div>
             </div>

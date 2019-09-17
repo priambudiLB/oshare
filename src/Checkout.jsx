@@ -38,7 +38,9 @@ class Checkout extends Component {
       }
     });
     let t2 = await t.json();
-    this.setState({ barang: t2[0].items, total_price: t2[0].total_price, addressBE: t2[0].user.default_address.street_name });
+    if (!(t2 === undefined || t2.length === 0)) {
+      this.setState({ barang: t2[0].items, total_price: t2[0].total_price, addressBE: t2[0].user.default_address.street_name });
+  }
     console.log(t2)
   }
 
