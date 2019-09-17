@@ -120,6 +120,9 @@
       width: 20vw;
       margin: 0 auto;
     }
+    #order{
+      width: 70%;
+    }
   }
   
   @media (max-width: 700px) {
@@ -131,6 +134,9 @@
       margin-top: 2vw;
       width: 80%;
       align-content: flex-start;
+    }
+    #order{
+      width: 100%; 
     }
   }
   
@@ -529,11 +535,14 @@
   #error{
     color: red;
   }
-  
+  #profile{
+    text-align: center;
+  }
   #profile .card{
     margin-top: 20vh;
     width: 18rem;
     margin-bottom: 10vh;
+    display: inline-block;
   }
   
   #profile .card-img-top{
@@ -549,4 +558,12 @@
   #links{
     padding: 50px;
   }
+  
+  #order{
+    margin-top: 100px;
+  }
+  #order h1{
+    margin-bottom: 50px;
+  }
+
   
