@@ -5,7 +5,7 @@ cache:
     - node_modules/
 
 stages:
-    - build
+    # - build
     - performance
     - deploy
 
@@ -24,11 +24,11 @@ Deployment:
     - gem install dpl
     - dpl --provider=heroku --app=$b --api-key=$a
 
-performance:
+Performance:
   stage: performance
   image: docker:git
   variables:
-    URL: https://example.com
+    URL: http://oshare-id.herokuapp.com/
   services:
     - docker:stable-dind
   script:
