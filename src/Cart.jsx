@@ -37,8 +37,10 @@ class Cart extends Component {
 
         //   return { status: res.status, data };
         // });
-      } else {
-        console.log("Server Error!");
+      } else if(res.status === 401){
+        window.location.assign("/login")
+      }else {
+        console.log("Server Error!" + res.status);
         throw res;
       }
     });
@@ -58,8 +60,10 @@ class Cart extends Component {
     });
     let t2 = await t.json();
     console.log(t2);
-    if (!(t2 === undefined || t2.length === 0)) {
-      this.setState({ barang: t2[0].items, total_price: t2[0].total_price });
+    if (t2.detail === "Invalid token."){
+      window.location.assign("/login")
+    }else if (!(t2 === undefined || t2.length === 0)) {
+      this.setState({ barang: t2[0].items, total_price: t2[0].total });
   }
   }
 

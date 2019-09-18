@@ -54,6 +54,8 @@ class DetailCard extends Component {
 
           return { status: res.status, data };
         });
+      } else if(res.status === 401){
+        window.location.assign("/login")
       } else {
         console.log("Server Error!");
         throw res;
