@@ -13,6 +13,10 @@ class Checkout extends Component {
       deliveryFee: 0,
       addressBE: "-",
       address: "",
+      kecamatan: "",
+      kelurahan: "",
+      street: "",
+      postal: "",
       radio: "1",
 
       barang:[],
@@ -21,6 +25,10 @@ class Checkout extends Component {
     };
     this.handleChangeProvince = this.handleChangeProvince.bind(this);
     this.handleChangeCity = this.handleChangeCity.bind(this);
+    this.handleChangeKecamatan = this.handleChangeKecamatan.bind(this);
+    this.handleChangeKelurahan = this.handleChangeKelurahan.bind(this);
+    this.handleChangeStreet = this.handleChangeStreet.bind(this);
+    this.handleChangePostalCode = this.handleChangePostalCode.bind(this);
     this.handleChecked1 = this.handleChecked1.bind(this);
     this.handleChecked2 = this.handleChecked2.bind(this);
   }
@@ -39,7 +47,7 @@ class Checkout extends Component {
     });
     let t2 = await t.json();
     if (!(t2 === undefined || t2.length === 0)) {
-      this.setState({ barang: t2[0].items, total_price: t2[0].total, addressBE: t2[0].user.default_address.street_name });
+      this.setState({ barang: t2[0].items, total_price: t2[0].total, addressBE: t2[0].user.default_address });
   }
     console.log(t2)
   }
@@ -85,19 +93,19 @@ class Checkout extends Component {
         '', 
         '',
         '',
-        this.state.cityValue, 
+        this.state.cityValue.split(',')[1],
         this.state.provinceValue.split(',')[1], 
         ''
       )
     } else{
       this.checkout(
         "False", 
-        this.state.address, 
-        'kelurahan',
-        'kecamatan',
-        this.state.cityValue, 
+        this.state.street, 
+        this.state.kelurahan,
+        this.state.kecamatan,
+        this.state.cityValue.split(',')[1],
         this.state.provinceValue.split(',')[1], 
-        'kode pos')
+        this.state.postal)
     }
   }
 
@@ -113,7 +121,20 @@ class Checkout extends Component {
 
   handleChangeCity(event) {
     this.setState({ cityValue: event.target.value });
-    this.getCost(event.target.value);
+    this.getCost(event.target.value.split(',')[0]);
+  }
+
+  handleChangeKecamatan(event) {
+    this.setState({ kecamatan: event.target.value });
+  }
+  handleChangeKelurahan(event) {
+    this.setState({ kelurahan: event.target.value });
+  }
+  handleChangeStreet(event) {
+    this.setState({ street: event.target.value });
+  }
+  handleChangePostalCode(event) {
+    this.setState({ postal: event.target.value });
   }
 
   clearContents(element) {
@@ -153,6 +174,7 @@ class Checkout extends Component {
   }
 
   async getCost(destination) {
+    console.log("======"+destination)
     let t = await fetch(
       "https://cors-anywhere.herokuapp.com/https://api.rajaongkir.com/starter/cost",
       {
@@ -170,6 +192,8 @@ class Checkout extends Component {
       }
     );
     let t2 = await t.json();
+    console.log(t2)
+    console.log("COST")
     console.log(t2.rajaongkir.results[0].costs[0].cost[0].value);
     this.setState({
       deliveryFee: t2.rajaongkir.results[0].costs[0].cost[0].value
@@ -219,60 +243,7 @@ class Checkout extends Component {
             </div>
             <div className="col-sm-8">
               <form>
-                <div className="form-row">
-                <div className="form-group col-md-6">
-                    <label
-                      className="kollektif-bold label"
-                      htmlFor="inputPassword4"
-                    >
-                      PROVINCE
-                    </label>
-                    <select
-                      value={this.state.provinceValue}
-                      onChange={this.handleChangeProvince}
-                      className="form-control"
-                      id="inputPassword4"
-                    >
-                      <option>Choose...</option>
-                      {this.state.province.map((item, index) => {
-                        return (
-                          <option key={index} value={`${item.province_id},${item.province}`}>
-                            {item.province}
-                          </option>
-                        );
-                      })}
-                    </select>
-                  </div>
-                  <div className="form-group col-md-6">
-                    <label className="kollektif-bold label" htmlFor="inputCity">
-                      CITY
-                    </label>
-                    <select
-                      value={this.state.cityValue}
-                      onChange={this.handleChangeCity}
-                      className="form-control"
-                      id="inputCity"
-                    >
-                      <option>Choose...</option>
-                      {this.state.city.map((item, index) => {
-                        return (
-                          <option key={index} value={item.city_name}>
-                            {item.city_name}
-                          </option>
-                        );
-                      })}
-                    </select>
-                  </div>
-                  
-                </div>
-                <div className="form-group">
-                  <label
-                    className="kollektif-bold label"
-                    htmlFor="inputAddress"
-                  >
-                    Address
-                  </label>
-                  <div className="form-row">
+              <div className="form-row">
                     <div className="form-check">
                       <input
                         onClick={this.handleChecked1}
@@ -282,7 +253,7 @@ class Checkout extends Component {
                         id="gridRadios1"
                         value="option1"
                         onChange={this.handleChecked1}
-                        checked={this.state.radio === "1"}
+                        // checked={this.state.radio === "1"}
                       ></input>
                       <label className="form-check-label" htmlFor="gridRadios1">
                         Use my default address
@@ -297,6 +268,7 @@ class Checkout extends Component {
                         type="radio"
                         name="gridRadios"
                         id="gridRadios2"
+                        checked={this.state.radio === "2"}
                         value="option2"
                       ></input>
                       <label className="form-check-label" htmlFor="gridRadios2">
@@ -304,20 +276,144 @@ class Checkout extends Component {
                       </label>
                     </div>
                   </div>
+                <div className="form-row">
+                <div className="form-group col-md-6">
+                    <label
+                      className="kollektif-bold label"
+                      htmlFor="inputPassword4"
+                    >
+                      PROVINCE
+                    </label>
+                    {this.state.radio === "1" ? (
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="inputCity"
+                        disabled
+                        value={this.state.address.provinsi}
+                      />
+                    ) : (
+                      <select
+                      value={this.state.provinceValue}
+                      onChange={this.handleChangeProvince}
+                      className="form-control"
+                      id="inputPassword4"
+                      required
+                    >
+                      <option>Choose...</option>
+                      {this.state.province.map((item, index) => {
+                        return (
+                          <option key={index} value={`${item.province_id},${item.province}`}>
+                            {item.province}
+                          </option>
+                        );
+                      })}
+                    </select>
+                    )}
+                  </div>
+                  <div className="form-group col-md-6">
+                    <label className="kollektif-bold label" htmlFor="inputCity">
+                      CITY
+                    </label>
+                    {this.state.radio === "1" ? (
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="inputCity"
+                        disabled
+                        value={this.state.address.kota}
+                      />
+                    ) : (
+                      <select
+                      value={this.state.cityValue}
+                      onChange={this.handleChangeCity}
+                      className="form-control"
+                      id="inputCity"
+                    >
+                      <option>Choose...</option>
+                      {this.state.city.map((item, index) => {
+                        return (
+                          <option key={index} value={`${item.city_id},${item.city_name}`}>
+                            {item.city_name}
+                          </option>
+                        );
+                      })}
+                    </select>
+                    )}
+                  </div>
+                  
+                </div>
+                <div className="form-row">
+                  <div className="form-group col-md-6">
+                    <label className="kollektif-bold label" htmlFor="inputCity">
+                      KELURAHAN
+                    </label>
+                    {this.state.radio === "1" ? (
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="inputCity"
+                        disabled
+                        value={this.state.address.kelurahan}
+                      />
+                    ) : (
+                      <input
+                        type="text"
+                        className="form-control"
+                        onChange={this.handleChangeKelurahan}
+                        id="inputCity"
+                        placeholder={"Type..."}
+                        required
+                      />
+                    )}
+                  </div>
+                  <div className="form-group col-md-6">
+                    <label className="kollektif-bold label" htmlFor="inputCity">
+                      KECAMATAN
+                    </label>
+                    {this.state.radio === "1" ? (
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="inputCity"
+                        disabled
+                        value={this.state.address.kecamatan}
+                      />
+                    ) : (
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="inputCity"
+                        required
+                        onChange={this.handleChangeKecamatan}
+                        placeholder={"Type..."}
+                      />
+                    )}
+                  </div>
+                </div>
+                <div className="form-group">
+                  <label
+                    className="kollektif-bold label"
+                    htmlFor="inputAddress"
+                  >
+                    Street Name
+                  </label>
+                  
                   <div className="form-row">
                     {this.state.radio === "1" ? (
                       <textarea
                         className="span6 form-control"
-                        rows="3"
-                        value={this.state.address}
+                        // rows="3"
+                        value={this.state.address.street_name}
                         required
                         disabled
                       ></textarea>
                     ) : (
                       <textarea
                         className="span6 form-control"
-                        rows="3"
-                        placeholder={""}
+                        // rows="3"
+                        placeholder={"Type..."}
+                        onChange={this.handleChangeStreet}
                         required
                       ></textarea>
                     )}
@@ -328,12 +424,24 @@ class Checkout extends Component {
                     <label className="kollektif-bold label" htmlFor="inputCity">
                       POSTAL CODE
                     </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="inputCity"
-                      placeholder="Postal Code"
-                    />
+                    {this.state.radio === "1" ? (
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="inputCity"
+                        disabled
+                        value={this.state.address.postal_code}
+                      />
+                    ) : (
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="inputCity"
+                        onChange={this.handleChangePostalCode}
+                        required
+                        placeholder={"Type..."}
+                      />
+                    )}
                   </div>
                 </div>
                 <div

@@ -4,7 +4,38 @@ import "./App.css";
 class ConfirmPayment extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      id: ''
+    };
+  }
+
+  componentDidMount(){
+    const { id } = this.props.match.params;
+    console.log(id);
+    this.setState({id: id})
+    this.confirm()
+  }
+
+  confirm(id, nama, receipt, amount, payment_to) {
+    console.log("checkout");
+    let headers = { 
+      "Content-Type": "application/json", 
+      "Authorization":  "Token "+localStorage.getItem("token") 
+    };
+    let body = JSON.stringify({ id, nama, receipt, amount, payment_to });
+    console.log(body);
+    return fetch("http://o-share-backend.herokuapp.com/checkout/confirmation", {
+      headers,
+      body,
+      method: "POST"
+    }).then(res => {
+      if (res.status === 200) {
+        console.log(res)
+      } else {
+        console.log("Server Error!");
+        throw res;
+      }
+    });
   }
 
   render() {
@@ -19,17 +50,6 @@ class ConfirmPayment extends Component {
               <div className="form-group col-md-6">
                 <label className="kollektif-bold label" htmlFor="inputEmail4">
                   Order ID
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="inputEmail4"
-                  placeholder="Email Address"
-                />
-              </div>
-              <div className="form-group col-md-6">
-                <label className="kollektif-bold label" htmlFor="inputEmail4">
-                  Transaction Date
                 </label>
                 <input
                   type="text"
@@ -73,17 +93,6 @@ class ConfirmPayment extends Component {
               </div>
               <div className="form-group col-md-6">
                 <label className="kollektif-bold label" htmlFor="inputEmail4">
-                  Email
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="inputEmail4"
-                  placeholder="Email Address"
-                />
-              </div>
-              <div className="form-group col-md-6">
-                <label className="kollektif-bold label" htmlFor="inputEmail4">
                   Receipt File
                 </label>
                 <input type="file" class="form-control-file" id="exampleFormControlFile1" />
@@ -91,9 +100,9 @@ class ConfirmPayment extends Component {
             </div>
             <div className="form-row"></div>
 
-            <button type="submit" className="btn btn-primary" disabled={true}>
+            <div onClick={()=>this.confirm()} className="btn btn-primary" disabled={true}>
               Confirm Payment
-            </button>
+            </div>
           </form>
         </div>
       </div>

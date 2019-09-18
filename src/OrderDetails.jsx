@@ -1,7 +1,33 @@
 import React, { Component } from 'react';
 import './App.css';
+import { convertToRupiah } from "./ItemCheckout";
 
 class OrderDetails extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      order: [],
+    };
+  }
+  componentDidMount(){
+    this.getOrder()
+  }
+  async getOrder() {
+    let t = await fetch("http://o-share-backend.herokuapp.com/checkout/all", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Token " + localStorage.getItem("token")
+      }
+    });
+    let t2 = await t.json();
+    console.log(t2);
+    if (t2.detail === "Invalid token."){
+      window.location.assign("/login")
+    } else {
+      this.setState({order: t2})
+    }
+  }
   render() {
     return (
       <div className="container" id="order">
@@ -21,27 +47,19 @@ class OrderDetails extends Component {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                    <td>Resi 1</td>
-                    <td>02-11-2018</td>
-                    <td>03-11-2018</td>
-                    <td>299000</td>
-                    <td>Completed</td>
+                {this.state.order.map((res, index)=>{
+                  return(
+                    
+                    <tr key={index} onClick={()=>window.location.assign(`/confirm/${res.id}`)}>
+                    <td>{res.no_resi}</td>
+                    <td>{res.order_date}</td>
+                    <td>{res.order_date}</td>
+                    <td>{convertToRupiah(res.total)}</td>
+                    <td>{res.status}</td>
                     </tr>
-                    <tr>
-                    <td>Resi 2</td>
-                    <td>02-11-2018</td>
-                    <td>03-11-2018</td>
-                    <td>190000</td>
-                    <td>On Process</td>
-                    </tr>
-                    <tr>
-                    <td>Resi 3</td>
-                    <td>02-11-2018</td>
-                    <td>03-11-2018</td>
-                    <td>89000</td>
-                    <td>Cancelled</td>
-                    </tr>
+                    
+                  )
+                })}
                 </tbody>
             </table>
           </div>

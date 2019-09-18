@@ -25,14 +25,9 @@ function signOut() {
     headers,
     
     method: "POST"
-  }).then(res => {
-    if (res.status === 204) {
-      localStorage.removeItem("token");
-          window.location.assign("/");
-    } else {
-      console.log("Server Error!");
-      throw res;
-    }
+  }).then(() => {
+    localStorage.removeItem("token");
+      window.location.assign("/");
   })
 }
 function Navbar() {
@@ -46,7 +41,7 @@ function Navbar() {
     <nav className="navbar navbar-custom fixed-top navbar-expand-lg">
       <Link to="/">
         <div className="navbar-brand">
-          <img src="Images/Logo.png" width="30" height="30" alt="logo" />
+          <img src="/Images/Logo.png" width="30" height="30" alt="logo" />
         </div>
       </Link>
       <button
@@ -241,7 +236,7 @@ function App() {
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
           <Route path="/profile" component={Profile} />
-          <Route path="/confirm" component={ConfirmPayment} />
+          <Route path="/confirm/:id" component={ConfirmPayment} />
           <Route path="/orders" component={OrderDetails} />
         </Switch>
       </Router>
