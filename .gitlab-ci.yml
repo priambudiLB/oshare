@@ -5,15 +5,15 @@ cache:
     - node_modules/
 
 stages:
-    # - build
-    - performance
+    - build
     - deploy
+    - performance
 
-# build:
-#   stage: build
-#   script:
-#     - npm install
-#     - CI=false npm run build
+Build:
+  stage: build
+  script:
+    - npm install
+    - CI=false npm run build
 
 Deployment:
   stage: deploy
