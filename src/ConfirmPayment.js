@@ -5,8 +5,16 @@ class ConfirmPayment extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: ''
+      id: '',
+      file: '',
+      name: '',
+      amount: '',
+      to: '',
     };
+    this.handleFile = this.handleFile.bind(this)
+    this.handleName = this.handleName.bind(this)
+    this.handleAmount = this.handleAmount.bind(this)
+    this.handleTo = this.handleTo.bind(this)
   }
 
   componentDidMount(){
@@ -14,6 +22,24 @@ class ConfirmPayment extends Component {
     console.log(id);
     this.setState({id: id})
     this.confirm()
+  }
+
+  handleFile(event){
+    console.log(event.target.files[0])
+    console.log(this.state)
+    this.setState({file: event.target.files[0]})
+  }
+
+  handleName(event){
+    this.setState({name: event.target.value})
+  }
+
+  handleAmount(event){
+    this.setState({amount: event.target.value})
+  }
+
+  handleTo(event){
+    this.setState({to: event.target.value})
   }
 
   confirm(id, nama, receipt, amount, payment_to) {
@@ -55,6 +81,8 @@ class ConfirmPayment extends Component {
                   type="text"
                   className="form-control"
                   id="inputEmail4"
+                  value={this.state.id}
+                  disabled
                   placeholder="Email Address"
                 />
               </div>
@@ -64,9 +92,10 @@ class ConfirmPayment extends Component {
                 </label>
                 <input
                   type="text"
+                  onChange={this.handleName}
                   className="form-control"
                   id="inputEmail4"
-                  placeholder="Email Address"
+                  placeholder="Type..."
                 />
               </div>
               <div className="form-group col-md-6">
@@ -76,8 +105,9 @@ class ConfirmPayment extends Component {
                 <input
                   type="text"
                   className="form-control"
+                  onChange={this.handleAmount}
                   id="inputEmail4"
-                  placeholder="Email Address"
+                  placeholder="Type..."
                 />
               </div>
               <div className="form-group col-md-6">
@@ -87,20 +117,21 @@ class ConfirmPayment extends Component {
                 <input
                   type="text"
                   className="form-control"
+                  onChange={this.handleTo}
                   id="inputEmail4"
-                  placeholder="Email Address"
+                  placeholder="Type..."
                 />
               </div>
               <div className="form-group col-md-6">
                 <label className="kollektif-bold label" htmlFor="inputEmail4">
                   Receipt File
                 </label>
-                <input type="file" class="form-control-file" id="exampleFormControlFile1" />
+                <input onChange={this.handleFile} type="file" class="form-control-file" id="exampleFormControlFile1" />
               </div>
             </div>
             <div className="form-row"></div>
 
-            <div onClick={()=>this.confirm()} className="btn btn-primary" disabled={true}>
+            <div onClick={()=>this.confirm(this.state.id, this.state.name, this.state.file, this.state.amount, this.state.to)} className="btn btn-primary" disabled={true}>
               Confirm Payment
             </div>
           </form>
