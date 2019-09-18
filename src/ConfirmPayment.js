@@ -42,13 +42,13 @@ class ConfirmPayment extends Component {
     this.setState({to: event.target.value})
   }
 
-  confirm(id, nama, receipt, amount, payment_to) {
+  confirm(order_id, nama, receipt, amount, payment_to) {
     console.log("checkout");
     let headers = { 
       "Content-Type": "application/json", 
       "Authorization":  "Token "+localStorage.getItem("token") 
     };
-    let body = JSON.stringify({ id, nama, receipt, amount, payment_to });
+    let body = JSON.stringify({ order_id, nama, receipt, amount, payment_to });
     console.log(body);
     return fetch("http://o-share-backend.herokuapp.com/checkout/confirmation", {
       headers,
@@ -57,6 +57,7 @@ class ConfirmPayment extends Component {
     }).then(res => {
       if (res.status === 200) {
         console.log(res)
+        window.location.assign("/orders")
       } else {
         console.log("Server Error!");
         throw res;
