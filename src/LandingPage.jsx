@@ -69,46 +69,6 @@ class LandingPage extends Component {
     return (
       <div>
         <div id="hero" />
-        <div
-          id="carouselExampleControls"
-          class="carousel slide"
-          data-ride="carousel"
-        >
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <img
-                src="https://img1.cgtrader.com/items/969151/f347a7ad25/white-all-star-shoes-hd-photoscanned-pbr-4k-with-lods-3d-model-low-poly-obj-fbx-ma-mb-mtl.jpg"
-                alt="logo diib"
-                class="d-block w-100"
-              />
-            </div>
-            <div class="carousel-item">
-              <img
-                src="https://img1.cgtrader.com/items/969151/f347a7ad25/white-all-star-shoes-hd-photoscanned-pbr-4k-with-lods-3d-model-low-poly-obj-fbx-ma-mb-mtl.jpg"
-                alt="logo diib"
-                class="d-block w-100"
-              />
-            </div>
-          </div>
-          <a
-            class="carousel-control-prev"
-            href="#carouselExampleControls"
-            role="button"
-            data-slide="prev"
-          >
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-          </a>
-          <a
-            class="carousel-control-next"
-            href="#carouselExampleControls"
-            role="button"
-            data-slide="next"
-          >
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-          </a>
-        </div>
         {/* <div id="home" className="home">
           <div className="container text-vcenter">
             <Instagram />

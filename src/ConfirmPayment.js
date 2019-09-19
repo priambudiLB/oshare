@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
+import axios from 'axios';
 
 class ConfirmPayment extends Component {
   constructor(props) {
@@ -26,7 +27,7 @@ class ConfirmPayment extends Component {
   }
 
   handleFile(event) {
-    console.log(event.target.files[0]);
+    console.log(event.target.files);
     console.log(this.state);
     this.setState({ file: event.target.files[0] });
   }
@@ -46,26 +47,25 @@ class ConfirmPayment extends Component {
   confirm(order_id, nama, receipt, amount, payment_to) {
     console.log("checkout");
     this.setState({uploading: true})
-    let headers = {
-      "Content-Type": "application/json",
-      Authorization: "Token " + localStorage.getItem("token")
-    };
-    let body = JSON.stringify({ order_id, nama, receipt, amount, payment_to });
-    console.log(body);
-    return fetch("http://o-share-backend.herokuapp.com/checkout/confirmation", {
-      headers,
-      body,
-      method: "POST"
-    }).then(res => {
-      this.setState({uploading: false})
-      if (res.status === 200) {
-        console.log(res);
-        window.location.assign("/orders");
-      } else {
-        console.log("Server Error!");
-        throw res;
+    const body2 = new FormData()
+    body2.append("order_id", order_id)
+    body2.append("nama", nama)
+    body2.append("receipt", receipt, receipt.name)
+    body2.append("amount", amount)
+    body2.append("payment_to", payment_to)
+    axios.post("http://o-share-backend.herokuapp.com/checkout/confirmation", body2, {
+      headers: {
+        'content-type': 'multipart/form-data',
+        'Authorization': "Token " + localStorage.getItem("token")
       }
-    });
+    })
+        .then(res => {
+          this.setState({uploading: false})
+          console.log(res.data);
+          window.location.assign("/orders");
+        })
+        .catch(err => {console.log(err)
+          this.setState({uploading: false})})
   }
 
   getConfirm(order_id) {
