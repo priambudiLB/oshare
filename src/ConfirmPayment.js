@@ -5,48 +5,50 @@ class ConfirmPayment extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: '',
-      file: '',
-      name: '',
-      amount: '',
-      to: '',
+      id: "",
+      file: "",
+      name: "",
+      amount: "",
+      to: "",
+      uploading: false
     };
-    this.handleFile = this.handleFile.bind(this)
-    this.handleName = this.handleName.bind(this)
-    this.handleAmount = this.handleAmount.bind(this)
-    this.handleTo = this.handleTo.bind(this)
+    this.handleFile = this.handleFile.bind(this);
+    this.handleName = this.handleName.bind(this);
+    this.handleAmount = this.handleAmount.bind(this);
+    this.handleTo = this.handleTo.bind(this);
   }
 
-  componentDidMount(){
+  componentDidMount() {
     const { id } = this.props.match.params;
     console.log(id);
-    this.setState({id: id})
-    this.confirm()
+    this.setState({ id: id });
+    // this.getConfirm(id)
   }
 
-  handleFile(event){
-    console.log(event.target.files[0])
-    console.log(this.state)
-    this.setState({file: event.target.files[0]})
+  handleFile(event) {
+    console.log(event.target.files[0]);
+    console.log(this.state);
+    this.setState({ file: event.target.files[0] });
   }
 
-  handleName(event){
-    this.setState({name: event.target.value})
+  handleName(event) {
+    this.setState({ name: event.target.value });
   }
 
-  handleAmount(event){
-    this.setState({amount: event.target.value})
+  handleAmount(event) {
+    this.setState({ amount: event.target.value });
   }
 
-  handleTo(event){
-    this.setState({to: event.target.value})
+  handleTo(event) {
+    this.setState({ to: event.target.value });
   }
 
   confirm(order_id, nama, receipt, amount, payment_to) {
     console.log("checkout");
-    let headers = { 
-      "Content-Type": "application/json", 
-      "Authorization":  "Token "+localStorage.getItem("token") 
+    this.setState({uploading: true})
+    let headers = {
+      "Content-Type": "application/json",
+      Authorization: "Token " + localStorage.getItem("token")
     };
     let body = JSON.stringify({ order_id, nama, receipt, amount, payment_to });
     console.log(body);
@@ -55,9 +57,32 @@ class ConfirmPayment extends Component {
       body,
       method: "POST"
     }).then(res => {
+      this.setState({uploading: false})
       if (res.status === 200) {
-        console.log(res)
-        window.location.assign("/orders")
+        console.log(res);
+        window.location.assign("/orders");
+      } else {
+        console.log("Server Error!");
+        throw res;
+      }
+    });
+  }
+
+  getConfirm(order_id) {
+    console.log("checkout");
+    let headers = {
+      "Content-Type": "application/json",
+      Authorization: "Token " + localStorage.getItem("token")
+    };
+    let body = JSON.stringify({ order_id });
+    console.log(body);
+    return fetch("http://o-share-backend.herokuapp.com/checkout/confirmation", {
+      headers,
+      body,
+      method: "GET"
+    }).then(res => {
+      if (res.status === 200) {
+        console.log(res);
       } else {
         console.log("Server Error!");
         throw res;
@@ -70,7 +95,8 @@ class ConfirmPayment extends Component {
       <div id="confirm">
         <div className="container" id="container-1">
           <span className="highlights glacial-indifference thin">
-            PAYMENT <span className="highlights kollektif-bold">CONFIRMATION</span>
+            PAYMENT{" "}
+            <span className="highlights kollektif-bold">CONFIRMATION</span>
           </span>
           <form>
             <div className="form-row">
@@ -127,14 +153,47 @@ class ConfirmPayment extends Component {
                 <label className="kollektif-bold label" htmlFor="inputEmail4">
                   Receipt File
                 </label>
-                <input onChange={this.handleFile} type="file" class="form-control-file" id="exampleFormControlFile1" />
+                <input
+                  onChange={this.handleFile}
+                  type="file"
+                  class="form-control-file"
+                  id="exampleFormControlFile1"
+                />
               </div>
             </div>
             <div className="form-row"></div>
-
-            <div onClick={()=>this.confirm(this.state.id, this.state.name, this.state.file, this.state.amount, this.state.to)} className="btn btn-primary" disabled={true}>
-              Confirm Payment
-            </div>
+            {this.state.uploading ? (
+              <div
+                onClick={() =>
+                  this.confirm(
+                    this.state.id,
+                    this.state.name,
+                    this.state.file,
+                    this.state.amount,
+                    this.state.to
+                  )
+                }
+                className="btn btn-primary"
+                disabled
+              >
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+              </div>
+            ) : (
+              <div
+                onClick={() =>
+                  this.confirm(
+                    this.state.id,
+                    this.state.name,
+                    this.state.file,
+                    this.state.amount,
+                    this.state.to
+                  )
+                }
+                className="btn btn-primary"
+              >
+                Confirm Payment
+              </div>
+            )}
           </form>
         </div>
       </div>
