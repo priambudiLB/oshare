@@ -170,6 +170,7 @@ function Footer() {
       </div>
 
       <div className="text-center footer-link">
+        <div className="container">
         <div className="row justify-content-center">
           <a href="/women">
             <span className="kollektif-bold text-white" id="links">
@@ -199,9 +200,11 @@ function Footer() {
             </span>
           </a>
         </div>
+        </div>
       </div>
 
       <div className="footer-support">
+        <div className="container">
         <div className="row justify-content-center">
           <p>
             <span className="glacial-indifference text-white">Supported </span>
@@ -215,6 +218,7 @@ function Footer() {
               alt="logo diib"
             />
           </a>
+        </div>
         </div>
       </div>
     </footer>

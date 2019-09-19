@@ -141,11 +141,13 @@
   }
   
   #home {
-    padding-top: 100px;
+    /* padding-top: 100px; */
     display: table;
     height: 100vh;
-    position: relative;
+    position: absolute;
     width: 100%;
+    top: 0;
+    right: 0;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -354,6 +356,10 @@
   #card-2{
     flex-shrink: 0;
   }
+
+  #cart{
+    min-height: 60vh;
+  }
   #cart-button{
     width: 178px;
   }
@@ -561,6 +567,7 @@
   
   #order{
     margin-top: 100px;
+    min-height: 60vh;
   }
   #order h1{
     margin-bottom: 50px;

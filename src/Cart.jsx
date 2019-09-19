@@ -8,11 +8,13 @@ class Cart extends Component {
     super(props);
     this.state = {
       barang: [],
-      total_price: 0
+      total_price: 0,
+      deleting: false,
     };
   }
 
   deleteCartItem(product_id, size) {
+    this.setState({deleting: true})
     console.log("addtocart" + product_id);
     let headers = {
       "Content-Type": "application/json",
@@ -26,6 +28,7 @@ class Cart extends Component {
       body,
       method: "POST"
     }).then(res => {
+      this.setState({deleting: false})
       if (res.status < 300) {
         console.log(res)
         window.location.assign("/cart")
@@ -84,19 +87,21 @@ class Cart extends Component {
           </td>
           <td>
             <div onClick={()=>this.deleteCartItem(itemId, itemSize)} className="text-center">
+              {this.state.deleting ? <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> : 
               <img
                 alt={"cart"}
                 src={require("./Icons/Vector.png")}
                 width="18"
                 height="21"
               />
+              }
             </div>
           </td>
         </tr>
       );
     };
     return (
-      <div>
+      <div id="cart">
         <h1>test</h1>
         <section>
           <div className="container" style={{ "marginTop": "5vh" }}>
