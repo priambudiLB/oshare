@@ -528,7 +528,7 @@ class Checkout extends Component {
                           className="form-check-label"
                           htmlFor={"gridRadio0"}
                         >
-                          Hubungi WhatsApp
+                          Tidak terdapat metode pengiriman. Hubungi WhatsApp 087779729477.
                         </label>
                       </div> : <div/>}
                   </div>
