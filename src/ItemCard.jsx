@@ -56,12 +56,12 @@ class ItemCard extends Component {
                     <div className="card-body">
                         <p className="card-text">{convertToRupiah(this.props.harga)}</p>
                       
-                        <div 
+                        {/* <div 
                         // onClick={()=>this.addToCart(this.props.id, this.props.sizes, 1)} s
                         className="btn btn-primary" id="cart-button">
                           <span className="glacial-indifference item-card thin" >ADD TO </span>
                           <span className="kollektif-bold item-card">CART</span>
-                        </div>
+                        </div> */}
                       
                     </div>
                 </div>

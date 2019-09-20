@@ -144,14 +144,16 @@ class Cart extends Component {
                 <div>TOTAL</div>
                 <div>{convertToRupiah(this.state.total_price)}</div>
               </div>
-              <div className="row continue justify-content-between">
-                <div className="btn btn-outline-primary">CONTINUE SHOPPING</div>
+              
+              {this.state.barang.length === 0 ? <div/>:<div className="row continue justify-content-between">
+                {/* <div className="btn btn-outline-primary">CONTINUE SHOPPING</div> */}
                 <Link to="/checkout">
                   
-                    <div className="btn btn-primary">CHECKOUT</div>
-                  
-                </Link>
-              </div>
+                  <div className="btn btn-primary">CHECKOUT</div>
+                
+              </Link>
+                
+              </div>}
             </div>
           </div>
         </section>

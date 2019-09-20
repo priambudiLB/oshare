@@ -20,7 +20,7 @@ class Checkout extends Component {
       radio: "1",
       options: [],
       optionsLoaded: false,
-      method: '',
+      method: "",
       barang: [],
       total_price: 0
     };
@@ -60,7 +60,7 @@ class Checkout extends Component {
 
   handleChecked1() {
     this.setState({ radio: "1", address: this.state.addressBE });
-    console.log("handle 1 " + this.state.radio);
+    //TODO update cost
   }
 
   checkout(
@@ -134,16 +134,15 @@ class Checkout extends Component {
 
   handleChecked2() {
     this.setState({ radio: "2", address: "" });
-    console.log("handle 2 " + this.state.radio);
   }
 
   handleChecked3(event) {
-    console.log(event.target)
-    this.setState({ 
-      method: event.target.value.split(',')[0] ,
-      deliveryFee: parseInt(event.target.value.split(',')[1]),
+    console.log(event.target);
+    this.setState({
+      method: event.target.value.split(",")[0],
+      deliveryFee: parseInt(event.target.value.split(",")[1])
     });
-    console.log(event.target.value)
+    console.log(event.target.value);
   }
 
   handleChangeProvince(event) {
@@ -227,13 +226,14 @@ class Checkout extends Component {
     // console.log(t2);
     // console.log("COST");
     // console.log(t2.rajaongkir.results[0].costs[0].cost[0].value);
-    if(t2.rajaongkir.results[0].costs.length!==0){
+    if (t2.rajaongkir.results[0].costs.length !== 0) {
       this.setState({
         options: t2.rajaongkir.results[0].costs
       });
-    } this.setState({
+    }
+    this.setState({
       optionsLoaded: true,
-      deliveryFee: 0,
+      deliveryFee: 0
     });
   }
 
@@ -262,8 +262,9 @@ class Checkout extends Component {
               {this.state.barang == null ? (
                 <div />
               ) : (
-                this.state.barang.map(item => {
+                this.state.barang.map((item, index) => {
                   return (
+                    <div key={index}>
                     <ItemCheckout
                       itemName={item.product.title}
                       itemSize={item.product.size}
@@ -271,6 +272,7 @@ class Checkout extends Component {
                       itemImage={item.product.images[0].image}
                       itemQuantity={item.quantity}
                     />
+                    </div>
                   );
                 })
               )}
@@ -306,7 +308,7 @@ class Checkout extends Component {
                 <div className="form-row">
                   <div className="form-check">
                     <input
-                      onClick={this.handleChecked2}
+                      onChange={this.handleChecked2}
                       className="form-check-input"
                       type="radio"
                       name="gridRadios"
@@ -492,29 +494,36 @@ class Checkout extends Component {
                     )}
                   </div>
                   <div className="form-row">
-                  {this.state.options.length !== 0 ? this.state.options.map((item, index) => {
-                    return (
-                      
+                    {this.state.options.length !== 0 ? (
+                      this.state.options.map((item, index) => {
+                        return (
+                          <div className="form-check">
+                            <input
+                              onClick={this.handleChecked3}
+                              className="form-check-input"
+                              type="radio"
+                              name="method"
+                              id={"gridRadio" + index}
+                              checked={this.state.method === item.description}
+                              value={
+                                item.description + "," + item.cost[0].value
+                              }
+                            ></input>
+                            <label
+                              className="form-check-label"
+                              htmlFor={"gridRadio" + index}
+                            >
+                              {item.description +
+                                " / " +
+                                item.cost[0].etd +
+                                " hari / " +
+                                convertToRupiah(item.cost[0].value)}
+                            </label>
+                          </div>
+                        );
+                      })
+                    ) : this.state.optionsLoaded ? (
                       <div className="form-check">
-                        <input
-                          onClick={this.handleChecked3}
-                          className="form-check-input"
-                          type="radio"
-                          name="method"
-                          id={"gridRadio"+index}
-                          checked={this.state.method === item.description}
-                          value={item.description+','+item.cost[0].value}
-                        ></input>
-                        <label
-                          className="form-check-label"
-                          htmlFor={"gridRadio"+index}
-                        >
-                          {item.description+' / '+item.cost[0].etd+' hari / '+convertToRupiah(item.cost[0].value)}
-                        </label>
-                      </div>
-                      
-                    );
-                  }) : this.state.optionsLoaded ? <div className="form-check">
                         <input
                           onClick={this.handleChecked3}
                           className="form-check-input"
@@ -522,15 +531,19 @@ class Checkout extends Component {
                           name="method"
                           id={"gridRadio0"}
                           checked
-                          value={'WA'}
+                          value={"WA"}
                         ></input>
                         <label
                           className="form-check-label"
                           htmlFor={"gridRadio0"}
                         >
-                          Tidak terdapat metode pengiriman. Hubungi WhatsApp 087779729477.
+                          Tidak terdapat metode pengiriman. Hubungi WhatsApp
+                          087779729477.
                         </label>
-                      </div> : <div/>}
+                      </div>
+                    ) : (
+                      <div />
+                    )}
                   </div>
                 </div>
                 <div
