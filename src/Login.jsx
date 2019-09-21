@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
+import { getBaseUrl } from "./Utils";
 
 class Login extends Component {
   constructor(props) {
@@ -22,7 +23,7 @@ class Login extends Component {
     let headers = { "Content-Type": "application/json" };
     let body = JSON.stringify({ email, password });
     console.log(body);
-    return fetch("http://o-share-backend.herokuapp.com/api/auth/login", {
+    return fetch(`http://${getBaseUrl}/api/auth/login`, {
       headers,
       body,
       method: "POST"

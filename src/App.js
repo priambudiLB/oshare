@@ -16,12 +16,11 @@ import Signup from "./Signup";
 import Profile from "./Profile";
 import ConfirmPayment from "./ConfirmPayment";
 import OrderDetails from "./OrderDetails";
+import { getBaseUrl } from "./Utils";
 
 function signOut() {
   let headers = { "Content-Type": "application/json", "Authorization":  "Token "+localStorage.getItem("token")};
-  
-  
-  return fetch("http://o-share-backend.herokuapp.com/api/auth/logout", {
+  return fetch(`http://${getBaseUrl}/api/auth/logout`, {
     headers,
     
     method: "POST"

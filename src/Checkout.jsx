@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import { convertToRupiah, ItemCheckout } from "./ItemCheckout";
+import { getBaseUrl } from "./Utils";
 
 class Checkout extends Component {
   constructor(props) {
@@ -40,7 +41,7 @@ class Checkout extends Component {
   }
 
   async getCart() {
-    let t = await fetch("http://o-share-backend.herokuapp.com/checkout", {
+    let t = await fetch(`http://${getBaseUrl}/checkout`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -87,7 +88,7 @@ class Checkout extends Component {
       kode_pos
     });
     console.log(body);
-    return fetch("http://o-share-backend.herokuapp.com/checkout/finalize", {
+    return fetch(`http://${getBaseUrl}/checkout/finalize`, {
       headers,
       body,
       method: "POST"

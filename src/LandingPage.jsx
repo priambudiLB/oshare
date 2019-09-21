@@ -6,6 +6,7 @@ import "./App.css";
 import ItemCard from "./ItemCard";
 import "./alice-carousel.css";
 import AliceCarousel from "react-alice-carousel";
+import { getBaseUrl } from "./Utils";
 
 class LandingPage extends Component {
   state = {
@@ -17,7 +18,7 @@ class LandingPage extends Component {
   }
 
   async getData() {
-    let t = await fetch("http://o-share-backend.herokuapp.com/product/", {
+    let t = await fetch(`http://${getBaseUrl}/product/`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json"

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 import { convertToRupiah, ItemCheckout } from "./ItemCheckout";
 import { Link } from "react-router-dom";
+import { getBaseUrl } from "./Utils";
 
 class Cart extends Component {
   constructor(props) {
@@ -23,7 +24,7 @@ class Cart extends Component {
     let body = JSON.stringify({ product_id, size });
     console.log(headers);
     console.log(body);
-    return fetch("http://o-share-backend.herokuapp.com/cart/delete", {
+    return fetch(`http://${getBaseUrl}/cart/delete`, {
       headers,
       body,
       method: "POST"
@@ -54,7 +55,7 @@ class Cart extends Component {
   }
 
   async getCart() {
-    let t = await fetch("http://o-share-backend.herokuapp.com/checkout", {
+    let t = await fetch(`http://${getBaseUrl}/checkout`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

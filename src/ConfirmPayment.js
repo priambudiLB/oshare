@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import axios from 'axios';
+import { getBaseUrl } from "./Utils";
 
 class ConfirmPayment extends Component {
   constructor(props) {
@@ -53,7 +54,7 @@ class ConfirmPayment extends Component {
     body2.append("receipt", receipt, receipt.name)
     body2.append("amount", amount)
     body2.append("payment_to", payment_to)
-    axios.post("http://o-share-backend.herokuapp.com/checkout/confirmation", body2, {
+    axios.post(`http://${getBaseUrl}/checkout/confirmation`, body2, {
       headers: {
         'content-type': 'multipart/form-data',
         'Authorization': "Token " + localStorage.getItem("token")

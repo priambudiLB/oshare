@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 
 // import "react-datepicker/dist/react-datepicker.css";
 import './App.css';
+import { getBaseUrl } from "./Utils";
 
 class Signup extends Component {
   constructor(props) {
@@ -35,7 +36,7 @@ class Signup extends Component {
     let headers = { "Content-Type": "application/json" };
     let body = JSON.stringify({ full_name, email, gender, phone_number, date_of_birth, password });
     console.log(body);
-    return fetch("http://o-share-backend.herokuapp.com/api/auth/register", {
+    return fetch(`http://${getBaseUrl}/api/auth/register`, {
       headers,
       body,
       method: "POST"
