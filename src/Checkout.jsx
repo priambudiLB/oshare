@@ -62,6 +62,7 @@ class Checkout extends Component {
   handleChecked1() {
     this.setState({ radio: "1", address: this.state.addressBE });
     //TODO update cost
+    this.getCost(this.state.addressBE.cityid);
   }
 
   checkout(
@@ -71,7 +72,9 @@ class Checkout extends Component {
     kecamatan,
     kota,
     provinsi,
-    kode_pos
+    kode_pos,
+    ongkir,
+    jasa_pengiriman
   ) {
     console.log("checkout");
     let headers = {
@@ -85,7 +88,9 @@ class Checkout extends Component {
       kecamatan,
       kota,
       provinsi,
-      kode_pos
+      kode_pos,
+      ongkir,
+      jasa_pengiriman
     });
     console.log(body);
     return fetch(`http://${getBaseUrl}/checkout/finalize`, {
@@ -118,7 +123,9 @@ class Checkout extends Component {
         "",
         this.state.cityValue.split(",")[1],
         this.state.provinceValue.split(",")[1],
-        ""
+        "",
+        this.state.deliveryFee,
+        this.state.method,
       );
     } else {
       this.checkout(
@@ -128,7 +135,9 @@ class Checkout extends Component {
         this.state.kecamatan,
         this.state.cityValue.split(",")[1],
         this.state.provinceValue.split(",")[1],
-        this.state.postal
+        this.state.postal,
+        this.state.deliveryFee,
+        this.state.method,
       );
     }
   }
@@ -495,6 +504,8 @@ class Checkout extends Component {
                     )}
                   </div>
                   <div className="form-row">
+                  {console.log(this.state.options)}
+                  {console.log(this.state.method)}
                     {this.state.options.length !== 0 ? (
                       this.state.options.map((item, index) => {
                         return (
@@ -503,9 +514,9 @@ class Checkout extends Component {
                               onClick={this.handleChecked3}
                               className="form-check-input"
                               type="radio"
-                              name="method"
+                              name={"method"}
                               id={"gridRadio" + index}
-                              checked={this.state.method === item.description}
+                              // checked={this.state.method === item.description}
                               value={
                                 item.description + "," + item.cost[0].value
                               }

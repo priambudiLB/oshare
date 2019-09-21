@@ -26,7 +26,7 @@ class Profile extends Component {
     if (t2.detail === "Invalid token."){
       window.location.assign("/login")
     } else {
-      this.setState({profile: t2, jalan: t2.default_address.street_name})
+      this.setState({profile: t2, })
     }
   }
   render() {
