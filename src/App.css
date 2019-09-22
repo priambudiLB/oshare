@@ -545,7 +545,6 @@
     color: red;
   }
   #profile{
-    text-align: center;
   }
   #profile .card{
     margin-top: 20vh;
@@ -553,11 +552,15 @@
     margin-bottom: 10vh;
     display: inline-block;
   }
+
+  #profile .card .card-body{
+    padding:0px;
+  }
   
   #profile .card-img-top{
-    margin-top: 5vh;
     width: 8rem;
     align-content: center;
+    margin: 5vh;
   }
   
   #profile .card-title{
@@ -576,4 +579,26 @@
     margin-bottom: 50px;
   }
 
-  
+  .card .card-header{
+    font-size: 15px;
+  }
+
+  .card .card-body .kollektif card-title{
+    padding: 0px;
+  }
+  #card-alamat{
+    margin-top: 5vh;
+    margin: 3vh;
+  }
+
+#radio-label{
+  font-size: 13px;
+}
+
+#alamat-label{
+  font-size: 13px;
+}
+#address-submit-button{
+  font-size: 15px;
+  font-weight: 100;
+}
