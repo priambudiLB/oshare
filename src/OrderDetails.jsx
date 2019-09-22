@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import { convertToRupiah } from "./ItemCheckout";
+import { getBaseUrl } from "./Utils";
 
 class OrderDetails extends Component {
   constructor(props) {
@@ -13,7 +14,7 @@ class OrderDetails extends Component {
     this.getOrder()
   }
   async getOrder() {
-    let t = await fetch("http://o-share-backend.herokuapp.com/checkout/all", {
+    let t = await fetch(`http://${getBaseUrl}/checkout/all`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -31,9 +32,11 @@ class OrderDetails extends Component {
   render() {
     return (
       <div className="container" id="order">
-          <div className="row justify-content-center">
+          <div className="col text-center">
               <h1 className="highlights kollektif">Orders</h1>
+              <p>Click to submit Payment Details</p>
           </div>
+          
           <div className="row">
             
             <table class="table table-hover">

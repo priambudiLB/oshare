@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import { getBaseUrl } from "./Utils";
 
 class Profile extends Component {
   constructor(props) {
@@ -13,7 +14,7 @@ class Profile extends Component {
     this.getProfile()
   }
   async getProfile() {
-    let t = await fetch("http://o-share-backend.herokuapp.com/api/auth/detail", {
+    let t = await fetch(`http://${getBaseUrl}/api/auth/detail`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -25,7 +26,7 @@ class Profile extends Component {
     if (t2.detail === "Invalid token."){
       window.location.assign("/login")
     } else {
-      this.setState({profile: t2, jalan: t2.default_address.street_name})
+      this.setState({profile: t2, })
     }
   }
   render() {

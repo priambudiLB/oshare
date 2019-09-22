@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import ItemCard from "./ItemCard";
+import { getBaseUrl } from "./Utils";
 
 class Men extends Component {
   state = {
@@ -13,15 +14,15 @@ class Men extends Component {
   }
 
   async getData() {
-    let t = await fetch("http://o-share-backend.herokuapp.com/product/men", {
+    let t = await fetch(`http://${getBaseUrl}/product/men`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json"
       }
     });
     let t2 = await t.json();
-    this.setState({ barang: t2, isLoaded: true });
     console.log(t2)
+    this.setState({ barang: t2, isLoaded: true });
   }
 
   render() {
@@ -43,7 +44,7 @@ class Men extends Component {
                         <ItemCard
                           cardTitle={item.title}
                           imageUrl={
-                            item.images[0].image === ""
+                            item.images.length === 0
                               ? "https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwjmlMvNrNDkAhWXfCsKHW4pCU8QjRx6BAgBEAQ&url=http%3A%2F%2Fgizi.unida.gontor.ac.id%2F&psig=AOvVaw2KJnu0WuMDRFF0G994bnXM&ust=1568551704739678"
                               : item.images[0].image
                           }
@@ -51,7 +52,7 @@ class Men extends Component {
                           deskripsi={item.description}
                           catalogs={item.catalogs}
                           id={item.id}
-                          size={item.catalogs[0].size}
+                          size={item.catalogs.length === 0 ? 0 : item.catalogs[0].size}
                         />
                       </div>
                     );

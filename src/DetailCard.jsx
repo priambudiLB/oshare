@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import { convertToRupiah } from "./ItemCheckout";
+import { getBaseUrl } from "./Utils";
 // import Axios from 'axios';
 // import qs from "query-string";
 
@@ -39,7 +40,7 @@ class DetailCard extends Component {
     let body = JSON.stringify({ product_id, size, quantity });
     console.log(headers);
     console.log(body);
-    return fetch("http://o-share-backend.herokuapp.com/cart/add", {
+    return fetch(`http://${getBaseUrl}/cart/add`, {
       headers,
       body,
       method: "POST"
@@ -140,9 +141,9 @@ class DetailCard extends Component {
                   <li className="list-group-item">
                     <form>
                       <div className="form-group row">
-                        <label className="col-sm-2 col-form-label">SIZE</label>
+                        <label className="col-sm-3 col-form-label">SIZE</label>
                         <select
-                          className="custom-select"
+                          className="form-control"
                           id="select-size"
                           value={this.state.sizeValue}
                           onChange={this.handleSizeValue}

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import { convertToRupiah, ItemCheckout } from "./ItemCheckout";
+import { getBaseUrl } from "./Utils";
 
 class Checkout extends Component {
   constructor(props) {
@@ -11,17 +12,19 @@ class Checkout extends Component {
       provinceValue: "",
       cityValue: "",
       deliveryFee: 0,
-      addressBE: "-",
+      addressBE: null,
       address: "",
       kecamatan: "",
       kelurahan: "",
       street: "",
       postal: "",
       radio: "1",
-
-      barang:[],
-      total_price:0,
-
+      options: [],
+      optionsLoaded: false,
+      method: "",
+      barang: [],
+      total_price: 0,
+      loading: false,
     };
     this.handleChangeProvince = this.handleChangeProvince.bind(this);
     this.handleChangeCity = this.handleChangeCity.bind(this);
@@ -31,50 +34,76 @@ class Checkout extends Component {
     this.handleChangePostalCode = this.handleChangePostalCode.bind(this);
     this.handleChecked1 = this.handleChecked1.bind(this);
     this.handleChecked2 = this.handleChecked2.bind(this);
+    this.handleChecked3 = this.handleChecked3.bind(this);
   }
   async componentDidMount() {
-    this.getCart()
+    
+    this.getCart();
     this.getProvinces();
   }
 
   async getCart() {
-    let t = await fetch("http://o-share-backend.herokuapp.com/checkout", {
+    let t = await fetch(`http://${getBaseUrl}/checkout`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        "Authorization":  "Token "+localStorage.getItem("token")
+        Authorization: "Token " + localStorage.getItem("token")
       }
     });
     let t2 = await t.json();
     if (!(t2 === undefined || t2.length === 0)) {
-      this.setState({ barang: t2[0].items, total_price: t2[0].total, addressBE: t2[0].user.default_address });
-  }
-    console.log(t2)
+      this.setState({
+        barang: t2[0].items,
+        total_price: t2[0].total,
+        addressBE: t2[0].user.default_address
+      });
+    }
+    console.log(t2);
   }
 
   handleChecked1() {
     this.setState({ radio: "1", address: this.state.addressBE });
-    console.log("handle 1 " + this.state.radio);
+    //TODO update cost
+    this.getCost(this.state.addressBE.cityid);
   }
 
-  checkout(isDefault, nama_jalan, kelurahan, kecamatan, kota, provinsi, kode_pos) {
-    console.log("checkout");
-    let headers = { 
-      "Content-Type": "application/json", 
-      "Authorization":  "Token "+localStorage.getItem("token") 
+  checkout(
+    isDefault,
+    nama_jalan,
+    kelurahan,
+    kecamatan,
+    kota,
+    provinsi,
+    kode_pos,
+    ongkir,
+    jasa_pengiriman
+  ) {
+    let headers = {
+      "Content-Type": "application/json",
+      Authorization: "Token " + localStorage.getItem("token")
     };
-    let body = JSON.stringify({ isDefault, nama_jalan, kelurahan, kecamatan, kota, provinsi, kode_pos });
+    let body = JSON.stringify({
+      isDefault,
+      nama_jalan,
+      kelurahan,
+      kecamatan,
+      kota,
+      provinsi,
+      kode_pos,
+      ongkir,
+      jasa_pengiriman
+    });
     console.log(body);
-    return fetch("http://o-share-backend.herokuapp.com/checkout/finalize", {
+    return fetch(`http://${getBaseUrl}/checkout/finalize`, {
       headers,
       body,
       method: "POST"
     }).then(res => {
-      if (res.status === 200) {
+      if (res.status < 300) {
         return res.json().then(data => {
           this.setState({ token: data.token }, () => {
             // localStorage.setItem("token", data.token);
-            window.location.assign("/");
+            window.location.assign("/orders");
           });
 
           return { status: res.status, data };
@@ -86,42 +115,53 @@ class Checkout extends Component {
     });
   }
 
-  handleCheckout(){
-    if(this.state.radio === "1"){
+  handleCheckout() {
+    if (this.state.radio === "1") {
       this.checkout(
-        'True', 
-        '', 
-        '',
-        '',
-        this.state.cityValue.split(',')[1],
-        this.state.provinceValue.split(',')[1], 
-        ''
-      )
-    } else{
+        "True",
+        "",
+        "",
+        "",
+        this.state.cityValue.split(",")[1],
+        this.state.provinceValue.split(",")[1],
+        "",
+        this.state.deliveryFee,
+        this.state.method,
+      );
+    } else {
       this.checkout(
-        "False", 
-        this.state.street, 
+        "False",
+        this.state.street,
         this.state.kelurahan,
         this.state.kecamatan,
-        this.state.cityValue.split(',')[1],
-        this.state.provinceValue.split(',')[1], 
-        this.state.postal)
+        this.state.cityValue.split(",")[1],
+        this.state.provinceValue.split(",")[1],
+        this.state.postal,
+        this.state.deliveryFee,
+        this.state.method,
+      );
     }
   }
 
   handleChecked2() {
     this.setState({ radio: "2", address: "" });
-    console.log("handle 2 " + this.state.radio);
+  }
+
+  handleChecked3(event) {
+    this.setState({
+      method: event.target.value.split(",")[0]+' '+event.target.value.split(",")[2],
+      deliveryFee: parseInt(event.target.value.split(",")[1])
+    });
   }
 
   handleChangeProvince(event) {
     this.setState({ provinceValue: event.target.value });
-    this.getCity(event.target.value.split(',')[0]);
+    this.getCity(event.target.value.split(",")[0]);
   }
 
   handleChangeCity(event) {
     this.setState({ cityValue: event.target.value });
-    this.getCost(event.target.value.split(',')[0]);
+    this.getCost(event.target.value.split(",")[0]);
   }
 
   handleChangeKecamatan(event) {
@@ -138,7 +178,7 @@ class Checkout extends Component {
   }
 
   clearContents(element) {
-    element.value = '';
+    element.value = "";
   }
 
   async getCity(province) {
@@ -154,7 +194,6 @@ class Checkout extends Component {
     );
     let t2 = await t.json();
     this.setState({ city: t2.rajaongkir.results });
-    console.log(t2.rajaongkir.results);
   }
 
   async getProvinces() {
@@ -174,7 +213,6 @@ class Checkout extends Component {
   }
 
   async getCost(destination) {
-    console.log("======"+destination)
     let t = await fetch(
       "https://cors-anywhere.herokuapp.com/https://api.rajaongkir.com/starter/cost",
       {
@@ -192,11 +230,14 @@ class Checkout extends Component {
       }
     );
     let t2 = await t.json();
-    console.log(t2)
-    console.log("COST")
-    console.log(t2.rajaongkir.results[0].costs[0].cost[0].value);
+    if (t2.rajaongkir.results[0].costs.length !== 0) {
+      this.setState({
+        options: t2.rajaongkir.results[0].costs
+      });
+    }
     this.setState({
-      deliveryFee: t2.rajaongkir.results[0].costs[0].cost[0].value
+      optionsLoaded: true,
+      deliveryFee: 0
     });
   }
 
@@ -222,62 +263,71 @@ class Checkout extends Component {
             <div className="col-sm-4">
               <div className="totals glacial-indifference-bold">YOUR CART</div>
               <div className="divider" />
-              {this.state.barang == null?<div/>:this.state.barang.map((item)=>{
-                return(
-                  <ItemCheckout
-                itemName={item.product.title}
-                itemSize={item.product.size}
-                itemPrice={parseInt(item.subtotal)}
-                itemImage={item.product.images[0].image}
-                itemQuantity={item.quantity}
-              />
-                  
-                )
-              })}
+              {this.state.barang == null ? (
+                <div />
+              ) : (
+                this.state.barang.map((item, index) => {
+                  return (
+                    <div key={index}>
+                    <ItemCheckout
+                      itemName={item.product.title}
+                      itemSize={item.product.size}
+                      itemPrice={parseInt(item.subtotal)}
+                      itemImage={item.product.images[0].image}
+                      itemQuantity={item.quantity}
+                    />
+                    </div>
+                  );
+                })
+              )}
               <div className="divider" />
               {totals("SUBTOTAL", convertToRupiah(this.state.total_price))}
               <div className="divider" />
               {totals("DELIVERY FEE", convertToRupiah(this.state.deliveryFee))}
               <div className="divider" />
-              {totals("TOTAL", convertToRupiah(this.state.total_price+this.state.deliveryFee))}
+              {totals(
+                "TOTAL",
+                convertToRupiah(this.state.total_price + this.state.deliveryFee)
+              )}
             </div>
             <div className="col-sm-8">
               <form>
-              <div className="form-row">
-                    <div className="form-check">
-                      <input
-                        onClick={this.handleChecked1}
-                        className="form-check-input"
-                        type="radio"
-                        name="gridRadios"
-                        id="gridRadios1"
-                        value="option1"
-                        onChange={this.handleChecked1}
-                        // checked={this.state.radio === "1"}
-                      ></input>
-                      <label className="form-check-label" htmlFor="gridRadios1">
-                        Use my default address
-                      </label>
-                    </div>
+              {this.state.addressBE === null ? <div/>:<div className="form-row">
+                  <div className="form-check">
+                    <input
+                      onClick={this.handleChecked1}
+                      className="form-check-input"
+                      type="radio"
+                      name="gridRadios"
+                      id="gridRadios1"
+                      value="option1"
+                      onChange={this.handleChecked1}
+                      // checked={this.state.radio === "1"}
+                    ></input>
+                    <label className="form-check-label" htmlFor="gridRadios1">
+                      Use my default address
+                    </label>
                   </div>
-                  <div className="form-row">
-                    <div className="form-check">
-                      <input
-                        onClick={this.handleChecked2}
-                        className="form-check-input"
-                        type="radio"
-                        name="gridRadios"
-                        id="gridRadios2"
-                        checked={this.state.radio === "2"}
-                        value="option2"
-                      ></input>
-                      <label className="form-check-label" htmlFor="gridRadios2">
-                        Use new address
-                      </label>
-                    </div>
-                  </div>
+                </div>}
+                
                 <div className="form-row">
-                <div className="form-group col-md-6">
+                  <div className="form-check">
+                    <input
+                      onChange={this.handleChecked2}
+                      className="form-check-input"
+                      type="radio"
+                      name="gridRadios"
+                      id="gridRadios2"
+                      checked={this.state.radio === "2"}
+                      value="option2"
+                    ></input>
+                    <label className="form-check-label" htmlFor="gridRadios2">
+                      Use new address
+                    </label>
+                  </div>
+                </div>
+                <div className="form-row">
+                  <div className="form-group col-md-6">
                     <label
                       className="kollektif-bold label"
                       htmlFor="inputPassword4"
@@ -294,21 +344,24 @@ class Checkout extends Component {
                       />
                     ) : (
                       <select
-                      value={this.state.provinceValue}
-                      onChange={this.handleChangeProvince}
-                      className="form-control"
-                      id="inputPassword4"
-                      required
-                    >
-                      <option>Choose...</option>
-                      {this.state.province.map((item, index) => {
-                        return (
-                          <option key={index} value={`${item.province_id},${item.province}`}>
-                            {item.province}
-                          </option>
-                        );
-                      })}
-                    </select>
+                        value={this.state.provinceValue}
+                        onChange={this.handleChangeProvince}
+                        className="form-control"
+                        id="inputPassword4"
+                        required
+                      >
+                        <option>Choose...</option>
+                        {this.state.province.map((item, index) => {
+                          return (
+                            <option
+                              key={index}
+                              value={`${item.province_id},${item.province}`}
+                            >
+                              {item.province}
+                            </option>
+                          );
+                        })}
+                      </select>
                     )}
                   </div>
                   <div className="form-group col-md-6">
@@ -325,23 +378,25 @@ class Checkout extends Component {
                       />
                     ) : (
                       <select
-                      value={this.state.cityValue}
-                      onChange={this.handleChangeCity}
-                      className="form-control"
-                      id="inputCity"
-                    >
-                      <option>Choose...</option>
-                      {this.state.city.map((item, index) => {
-                        return (
-                          <option key={index} value={`${item.city_id},${item.city_name}`}>
-                            {item.city_name}
-                          </option>
-                        );
-                      })}
-                    </select>
+                        value={this.state.cityValue}
+                        onChange={this.handleChangeCity}
+                        className="form-control"
+                        id="inputCity"
+                      >
+                        <option>Choose...</option>
+                        {this.state.city.map((item, index) => {
+                          return (
+                            <option
+                              key={index}
+                              value={`${item.city_id},${item.city_name}`}
+                            >
+                              {item.city_name}
+                            </option>
+                          );
+                        })}
+                      </select>
                     )}
                   </div>
-                  
                 </div>
                 <div className="form-row">
                   <div className="form-group col-md-6">
@@ -398,7 +453,7 @@ class Checkout extends Component {
                   >
                     Street Name
                   </label>
-                  
+
                   <div className="form-row">
                     {this.state.radio === "1" ? (
                       <textarea
@@ -443,14 +498,64 @@ class Checkout extends Component {
                       />
                     )}
                   </div>
+                  <div className="form-row">
+                    {this.state.options.length !== 0 ? (
+                      this.state.options.map((item, index) => {
+                        return (
+                          <div className="form-check">
+                            <input
+                              onClick={this.handleChecked3}
+                              className="form-check-input"
+                              type="radio"
+                              name={"method"}
+                              id={"gridRadio" + index}
+                              // checked={this.state.method === item.description}
+                              value={
+                                item.description + "," + item.cost[0].value + "," + item.cost[0].etd
+                              }
+                            ></input>
+                            <label
+                              className="form-check-label"
+                              htmlFor={"gridRadio" + index}
+                            >
+                              {item.description +
+                                " / " +
+                                item.cost[0].etd +
+                                " hari / " +
+                                convertToRupiah(item.cost[0].value)}
+                            </label>
+                          </div>
+                        );
+                      })
+                    ) : this.state.optionsLoaded ? (
+                      <div className="form-check">
+                        <input
+                          onClick={this.handleChecked3}
+                          className="form-check-input"
+                          type="radio"
+                          name="method"
+                          id={"gridRadio0"}
+                          checked
+                          value={"WA"}
+                        ></input>
+                        <label
+                          className="form-check-label"
+                          htmlFor={"gridRadio0"}
+                        >
+                          Tidak terdapat metode pengiriman. Hubungi WhatsApp
+                          087779729477.
+                        </label>
+                      </div>
+                    ) : (
+                      <div />
+                    )}
+                  </div>
                 </div>
                 <div
                   className="btn btn-primary"
-                  onClick={
-                    ()=>this.handleCheckout()
-                    }
+                  onClick={() => this.handleCheckout()}
                 >
-                  CHECKOUT
+                  {this.state.isLoading ? <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> : "CHECKOUT"}
                 </div>
               </form>
             </div>

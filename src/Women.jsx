@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import ItemCard from './ItemCard';
+import { getBaseUrl } from "./Utils";
 
 class Women extends Component {
   state = {
@@ -14,7 +15,7 @@ class Women extends Component {
 
   async getData() {
     let t = await fetch(
-      "http://o-share-backend.herokuapp.com/product/woman",
+      `http://${getBaseUrl}/product/woman`,
       {
         method: "GET",
         headers: {
@@ -52,6 +53,8 @@ class Women extends Component {
                           harga={item.price}
                           deskripsi={item.description}
                           catalogs={item.catalogs}
+                          id={item.id}
+                          size={item.catalogs.length === 0 ? 0 : item.catalogs[0].size}
                         />
                       </div>
                     );

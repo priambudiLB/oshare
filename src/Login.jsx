@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
+import { getBaseUrl } from "./Utils";
 
 class Login extends Component {
   constructor(props) {
@@ -14,15 +15,13 @@ class Login extends Component {
     this.handleChangePassword = this.handleChangePassword.bind(this);
   }
   login = (email, password) => {
-    console.log("login");
     if (this.state.isLoading){
       return true;
     }
     this.setState({ isLoading: true })
     let headers = { "Content-Type": "application/json" };
     let body = JSON.stringify({ email, password });
-    console.log(body);
-    return fetch("http://o-share-backend.herokuapp.com/api/auth/login", {
+    return fetch(`http://${getBaseUrl}/api/auth/login`, {
       headers,
       body,
       method: "POST"
@@ -49,12 +48,10 @@ class Login extends Component {
 
   handleChangeEmail(event) {
     this.setState({ email: event.target.value });
-    console.log(this.state.email);
   }
 
   handleChangePassword(event) {
     this.setState({ password: event.target.value });
-    console.log(this.state.password);
   }
 
   render() {

@@ -8,31 +8,31 @@ class ItemCard extends Component {
     
   }
 
-  async addToCart(id, size, quantity) {
-    console.log("addtocart");
-    let headers = { "Content-Type": "application/json", "Authorization":  "Token "+localStorage.getItem("token") };
-    let body = JSON.stringify({ id, size, quantity });
-    console.log(body);
-    return fetch("http://o-share-backend.herokuapp.com/cart/increment", {
-      headers,
-      body,
-      method: "POST"
-    }).then(res => {
-      if (res.status === 200) {
-        return res.json().then(data => {
-          this.setState({ token: data.token }, () => {
-            // localStorage.setItem("token", data.token);
-            window.location.assign("/cart");
-          });
+  // async addToCart(id, size, quantity) {
+  //   console.log("addtocart");
+  //   let headers = { "Content-Type": "application/json", "Authorization":  "Token "+localStorage.getItem("token") };
+  //   let body = JSON.stringify({ id, size, quantity });
+  //   console.log(body);
+  //   return fetch("http://o-share-backend.herokuapp.com/cart/increment", {
+  //     headers,
+  //     body,
+  //     method: "POST"
+  //   }).then(res => {
+  //     if (res.status === 200) {
+  //       return res.json().then(data => {
+  //         this.setState({ token: data.token }, () => {
+  //           // localStorage.setItem("token", data.token);
+  //           window.location.assign("/cart");
+  //         });
 
-          return { status: res.status, data };
-        });
-      } else {
-        console.log("Server Error!");
-        throw res;
-      }
-    });
-  }
+  //         return { status: res.status, data };
+  //       });
+  //     } else {
+  //       console.log("Server Error!");
+  //       throw res;
+  //     }
+  //   });
+  // }
 
   render() {
         return (
@@ -56,12 +56,12 @@ class ItemCard extends Component {
                     <div className="card-body">
                         <p className="card-text">{convertToRupiah(this.props.harga)}</p>
                       
-                        <div 
+                        {/* <div 
                         // onClick={()=>this.addToCart(this.props.id, this.props.sizes, 1)} s
                         className="btn btn-primary" id="cart-button">
                           <span className="glacial-indifference item-card thin" >ADD TO </span>
                           <span className="kollektif-bold item-card">CART</span>
-                        </div>
+                        </div> */}
                       
                     </div>
                 </div>

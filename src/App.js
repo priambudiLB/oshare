@@ -16,12 +16,11 @@ import Signup from "./Signup";
 import Profile from "./Profile";
 import ConfirmPayment from "./ConfirmPayment";
 import OrderDetails from "./OrderDetails";
+import { getBaseUrl } from "./Utils";
 
 function signOut() {
   let headers = { "Content-Type": "application/json", "Authorization":  "Token "+localStorage.getItem("token")};
-  
-  
-  return fetch("http://o-share-backend.herokuapp.com/api/auth/logout", {
+  return fetch(`http://${getBaseUrl}/api/auth/logout`, {
     headers,
     
     method: "POST"
@@ -170,6 +169,7 @@ function Footer() {
       </div>
 
       <div className="text-center footer-link">
+        <div className="container">
         <div className="row justify-content-center">
           <a href="/women">
             <span className="kollektif-bold text-white" id="links">
@@ -199,9 +199,11 @@ function Footer() {
             </span>
           </a>
         </div>
+        </div>
       </div>
 
       <div className="footer-support">
+        <div className="container">
         <div className="row justify-content-center">
           <p>
             <span className="glacial-indifference text-white">Supported </span>
@@ -215,6 +217,7 @@ function Footer() {
               alt="logo diib"
             />
           </a>
+        </div>
         </div>
       </div>
     </footer>
