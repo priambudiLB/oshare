@@ -116,7 +116,7 @@ class ConfirmPayment extends Component {
               </div>
               <div className="form-group col-md-6">
                 <label className="kollektif-bold label" htmlFor="inputEmail4">
-                  Sender Name
+                  Name on Bank Account
                 </label>
                 <input
                   type="text"

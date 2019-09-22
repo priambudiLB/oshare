@@ -32,9 +32,11 @@ class OrderDetails extends Component {
   render() {
     return (
       <div className="container" id="order">
-          <div className="row justify-content-center">
+          <div className="col text-center">
               <h1 className="highlights kollektif">Orders</h1>
+              <p>Click to submit Payment Details</p>
           </div>
+          
           <div className="row">
             
             <table class="table table-hover">
