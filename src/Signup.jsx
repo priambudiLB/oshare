@@ -19,6 +19,7 @@ class Signup extends Component {
       email: '',
       password: '',
       confirmPassword:'',
+      loading: false,
     };
     this.handleChangeName = this.handleChangeName.bind(this);
     this.handleChangeDay = this.handleChangeDay.bind(this);
@@ -33,6 +34,7 @@ class Signup extends Component {
 
   signUp = (full_name, email, gender, phone_number, date_of_birth, password) => {
     console.log("signup");
+    this.setState({loading: true})
     let headers = { "Content-Type": "application/json" };
     let body = JSON.stringify({ full_name, email, gender, phone_number, date_of_birth, password });
     console.log(body);
@@ -41,6 +43,7 @@ class Signup extends Component {
       body,
       method: "POST"
     }).then(res => {
+      this.setState({loading: false})
       if (res.status === 200) {
         return res.json().then(data => {
           this.setState({ token: data.token }, () => {
@@ -102,7 +105,6 @@ class Signup extends Component {
   }
 
   handleSUbmit = () =>{
-    console.log(this.state)
     const{password,confirmPassword} = this.state;
     if(password!==confirmPassword){
       alert("Password don't match");
@@ -117,6 +119,7 @@ class Signup extends Component {
         this.state.password
         )
     }
+    
   }
 
   parseDate(day, month, year){
@@ -199,7 +202,10 @@ class Signup extends Component {
                             <div className="form-group">
 							                <span className="error" id="error"></span><br/>
 						                </div>
-                            <div onClick={this.handleSUbmit} className="btn btn-dark btn-md">Register</div>
+                            {this.state.loading ? 
+                            <div className="btn btn-dark btn-md"><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></div>
+                            :<div onClick={this.handleSUbmit} className="btn btn-dark btn-md">Register</div>
+                            }
                         </form>
                     </div>
                 </div>

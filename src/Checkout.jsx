@@ -12,7 +12,7 @@ class Checkout extends Component {
       provinceValue: "",
       cityValue: "",
       deliveryFee: 0,
-      addressBE: "-",
+      addressBE: null,
       address: "",
       kecamatan: "",
       kelurahan: "",
@@ -23,7 +23,8 @@ class Checkout extends Component {
       optionsLoaded: false,
       method: "",
       barang: [],
-      total_price: 0
+      total_price: 0,
+      loading: false,
     };
     this.handleChangeProvince = this.handleChangeProvince.bind(this);
     this.handleChangeCity = this.handleChangeCity.bind(this);
@@ -36,6 +37,7 @@ class Checkout extends Component {
     this.handleChecked3 = this.handleChecked3.bind(this);
   }
   async componentDidMount() {
+    
     this.getCart();
     this.getProvinces();
   }
@@ -76,7 +78,6 @@ class Checkout extends Component {
     ongkir,
     jasa_pengiriman
   ) {
-    console.log("checkout");
     let headers = {
       "Content-Type": "application/json",
       Authorization: "Token " + localStorage.getItem("token")
@@ -98,11 +99,11 @@ class Checkout extends Component {
       body,
       method: "POST"
     }).then(res => {
-      if (res.status === 200) {
+      if (res.status < 300) {
         return res.json().then(data => {
           this.setState({ token: data.token }, () => {
             // localStorage.setItem("token", data.token);
-            window.location.assign("/");
+            window.location.assign("/orders");
           });
 
           return { status: res.status, data };
@@ -147,12 +148,10 @@ class Checkout extends Component {
   }
 
   handleChecked3(event) {
-    console.log(event.target);
     this.setState({
       method: event.target.value.split(",")[0]+' '+event.target.value.split(",")[2],
       deliveryFee: parseInt(event.target.value.split(",")[1])
     });
-    console.log(event.target.value);
   }
 
   handleChangeProvince(event) {
@@ -195,7 +194,6 @@ class Checkout extends Component {
     );
     let t2 = await t.json();
     this.setState({ city: t2.rajaongkir.results });
-    console.log(t2.rajaongkir.results);
   }
 
   async getProvinces() {
@@ -215,7 +213,6 @@ class Checkout extends Component {
   }
 
   async getCost(destination) {
-    console.log("======" + destination);
     let t = await fetch(
       "https://cors-anywhere.herokuapp.com/https://api.rajaongkir.com/starter/cost",
       {
@@ -233,9 +230,6 @@ class Checkout extends Component {
       }
     );
     let t2 = await t.json();
-    // console.log(t2);
-    // console.log("COST");
-    // console.log(t2.rajaongkir.results[0].costs[0].cost[0].value);
     if (t2.rajaongkir.results[0].costs.length !== 0) {
       this.setState({
         options: t2.rajaongkir.results[0].costs
@@ -298,7 +292,7 @@ class Checkout extends Component {
             </div>
             <div className="col-sm-8">
               <form>
-                <div className="form-row">
+              {this.state.addressBE === null ? <div/>:<div className="form-row">
                   <div className="form-check">
                     <input
                       onClick={this.handleChecked1}
@@ -314,7 +308,8 @@ class Checkout extends Component {
                       Use my default address
                     </label>
                   </div>
-                </div>
+                </div>}
+                
                 <div className="form-row">
                   <div className="form-check">
                     <input
@@ -504,8 +499,6 @@ class Checkout extends Component {
                     )}
                   </div>
                   <div className="form-row">
-                  {console.log(this.state.options)}
-                  {console.log(this.state.method)}
                     {this.state.options.length !== 0 ? (
                       this.state.options.map((item, index) => {
                         return (
@@ -562,7 +555,7 @@ class Checkout extends Component {
                   className="btn btn-primary"
                   onClick={() => this.handleCheckout()}
                 >
-                  CHECKOUT
+                  {this.state.isLoading ? <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> : "CHECKOUT"}
                 </div>
               </form>
             </div>
