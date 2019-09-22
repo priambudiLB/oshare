@@ -149,7 +149,7 @@ class Checkout extends Component {
   handleChecked3(event) {
     console.log(event.target);
     this.setState({
-      method: event.target.value.split(",")[0],
+      method: event.target.value.split(",")[0]+' '+event.target.value.split(",")[2],
       deliveryFee: parseInt(event.target.value.split(",")[1])
     });
     console.log(event.target.value);
@@ -518,7 +518,7 @@ class Checkout extends Component {
                               id={"gridRadio" + index}
                               // checked={this.state.method === item.description}
                               value={
-                                item.description + "," + item.cost[0].value
+                                item.description + "," + item.cost[0].value + "," + item.cost[0].etd
                               }
                             ></input>
                             <label

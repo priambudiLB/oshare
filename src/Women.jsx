@@ -53,6 +53,8 @@ class Women extends Component {
                           harga={item.price}
                           deskripsi={item.description}
                           catalogs={item.catalogs}
+                          id={item.id}
+                          size={item.catalogs.length === 0 ? 0 : item.catalogs[0].size}
                         />
                       </div>
                     );

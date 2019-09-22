@@ -141,9 +141,9 @@ class DetailCard extends Component {
                   <li className="list-group-item">
                     <form>
                       <div className="form-group row">
-                        <label className="col-sm-2 col-form-label">SIZE</label>
+                        <label className="col-sm-3 col-form-label">SIZE</label>
                         <select
-                          className="custom-select"
+                          className="form-control"
                           id="select-size"
                           value={this.state.sizeValue}
                           onChange={this.handleSizeValue}
