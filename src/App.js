@@ -209,8 +209,16 @@ function Footer() {
         <div className="row justify-content-center py-3">
           <a href="https://diib.ui.ac.id/">
             <img
+            style={{width:'100px', marginLeft: '20px'}}
               src="https://files.sirclocdn.xyz/blankawear/files/logo%20diib.png"
               alt="logo diib"
+            />
+          </a>
+          <a href="https://play.google.com/store/apps/details?id=com.socourt.beehive2&hl=en_US">
+            <img
+            style={{width:'100px', marginLeft: '20px'}}
+              src="https://samcis.com/wp-content/uploads/2019/02/BEEHIVE-logo-1-1.png"
+              alt="logo beehive"
             />
           </a>
         </div>
