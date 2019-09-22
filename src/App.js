@@ -17,6 +17,7 @@ import Profile from "./Profile";
 import ConfirmPayment from "./ConfirmPayment";
 import OrderDetails from "./OrderDetails";
 import { getBaseUrl } from "./Utils";
+import Technology from "./Technology";
 
 function signOut() {
   let headers = { "Content-Type": "application/json", "Authorization":  "Token "+localStorage.getItem("token")};
@@ -34,7 +35,7 @@ function Navbar() {
     { name: "TECHNOLOGY", link: "tech" },
     { name: "MEN", link: "men" },
     { name: "WOMEN", link: "women" },
-    { name: "WISHLIST", link: "wishlist" }
+    // { name: "WISHLIST", link: "wishlist" }
   ];
   return (
     <nav className="navbar navbar-custom fixed-top navbar-expand-lg">
@@ -171,29 +172,24 @@ function Footer() {
       <div className="text-center footer-link">
         <div className="container">
         <div className="row justify-content-center">
-          <a href="/women">
+          <a href="/">
             <span className="kollektif-bold text-white" id="links">
               Company Profile
             </span>
           </a>
-          <a href="/women">
+          <a href="/">
             <span className="kollektif-bold text-white" id="links">
               FAQ
             </span>
           </a>
-          <a href="/women">
+          <a href="/">
             <span className="kollektif-bold text-white" id="links">
               How to Order
             </span>
           </a>
         </div>
         <div className="row justify-content-center py-3">
-          {/* <a href="/women">
-            <span className="kollektif-bold text-white" id="links">
-              Order Process
-            </span>
-          </a> */}
-          <a href="/women">
+          <a href="/">
             <span className="kollektif-bold text-white" id="links">
               Terms & Condition
             </span>
@@ -238,6 +234,7 @@ function App() {
           <Route path="/checkout" component={Checkout} />
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
+          <Route path="/tech" component={Technology} />
           <Route path="/profile" component={Profile} />
           <Route path="/confirm/:id" component={ConfirmPayment} />
           <Route path="/orders" component={OrderDetails} />
