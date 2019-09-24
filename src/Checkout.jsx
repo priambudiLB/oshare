@@ -224,7 +224,7 @@ class Checkout extends Component {
         body: JSON.stringify({
           origin: "154",
           destination: destination,
-          weight: 1700,
+          weight: 1000,
           courier: "jne"
         })
       }

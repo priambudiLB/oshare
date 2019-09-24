@@ -16,7 +16,9 @@ class Profile extends Component {
       street: "",
       postal: "",
       cityLoading: false,
-      defaultAddress: []
+      defaultAddress: [],
+      provinceFlag: false,
+      cityFlag: false,
     };
     this.handleChangeProvince = this.handleChangeProvince.bind(this);
     this.handleChangeCity = this.handleChangeCity.bind(this);
@@ -31,12 +33,12 @@ class Profile extends Component {
   }
 
   handleChangeProvince(event) {
-    this.setState({ provinceValue: event.target.value.split(",")[1], cityLoading: true });
+    this.setState({ provinceValue: event.target.value.split(",")[1], cityLoading: true, provinceFlag: true });
     this.getCity(event.target.value.split(",")[0]);
   }
 
   handleChangeCity(event) {
-    this.setState({ cityValue: event.target.value.split(",")[1] });
+    this.setState({ cityValue: event.target.value.split(",")[1], cityFlag: true });
   }
 
   handleChangeKecamatan(event) {
@@ -208,7 +210,7 @@ class Profile extends Component {
                   id="inputPassword4"
                   required
                 >
-                  <option>{this.state.profile.default_address === null?"Choose...":this.state.provinceValue}</option>
+                  <option>{this.state.profile.default_address === null && !this.state.provinceFlag ?"Choose...":this.state.provinceValue}</option>
                   {this.state.province.map((item, index) => {
                     return (
                       <option
@@ -237,7 +239,7 @@ class Profile extends Component {
                   disabled={this.state.cityLoading}
                 >
                   <option>
-                    {this.state.cityLoading ? "Loading..." : this.state.profile.default_address === null?"Choose...":this.state.cityValue}
+                    {this.state.cityLoading ? "Loading..." : this.state.profile.default_address === null  && !this.state.provinceFlag ? "Choose...":this.state.cityValue}
                   </option>
                   {this.state.city.map((item, index) => {
                     return (
