@@ -25,6 +25,8 @@ class Checkout extends Component {
       barang: [],
       total_price: 0,
       loading: false,
+      provinceLoad: false,
+      cityLoad: false,
     };
     this.handleChangeProvince = this.handleChangeProvince.bind(this);
     this.handleChangeCity = this.handleChangeCity.bind(this);
@@ -37,7 +39,6 @@ class Checkout extends Component {
     this.handleChecked3 = this.handleChecked3.bind(this);
   }
   async componentDidMount() {
-    
     this.getCart();
     this.getProvinces();
   }
@@ -55,15 +56,21 @@ class Checkout extends Component {
       this.setState({
         barang: t2[0].items,
         total_price: t2[0].total,
-        addressBE: t2[0].user.default_address
+        addressBE: t2[0].user.default_address,
+        totalWeight: this.countWeight(t2[0].items)
       });
     }
-    console.log(t2);
   }
 
+  countWeight(list){
+    let total = 0;
+    for (let i = 0; i < list.length; i++) {
+      total += list[i].quantity;
+    }
+    return total;
+  }
   handleChecked1() {
     this.setState({ radio: "1", address: this.state.addressBE });
-    //TODO update cost
     this.getCost(this.state.addressBE.cityid);
   }
 
@@ -93,7 +100,6 @@ class Checkout extends Component {
       ongkir,
       jasa_pengiriman
     });
-    console.log(body);
     return fetch(`http://${getBaseUrl}/checkout/finalize`, {
       headers,
       body,
@@ -102,7 +108,6 @@ class Checkout extends Component {
       if (res.status < 300) {
         return res.json().then(data => {
           this.setState({ token: data.token }, () => {
-            // localStorage.setItem("token", data.token);
             window.location.assign("/orders");
           });
 
@@ -193,10 +198,11 @@ class Checkout extends Component {
       }
     );
     let t2 = await t.json();
-    this.setState({ city: t2.rajaongkir.results });
+    this.setState({ city: t2.rajaongkir.results, cityLoad: true });
   }
 
   async getProvinces() {
+    this.setState({ provinceLoad: true})
     let t = await fetch(
       "https://cors-anywhere.herokuapp.com/https://api.rajaongkir.com/starter/province",
       {
@@ -208,8 +214,7 @@ class Checkout extends Component {
       }
     );
     let t2 = await t.json();
-    this.setState({ province: t2.rajaongkir.results });
-    // console.log(t2.rajaongkir.results);
+    this.setState({ province: t2.rajaongkir.results, provinceLoad: false });
   }
 
   async getCost(destination) {
@@ -224,7 +229,7 @@ class Checkout extends Component {
         body: JSON.stringify({
           origin: "154",
           destination: destination,
-          weight: 1000,
+          weight: this.state.totalWeight * 1000,
           courier: "jne"
         })
       }
@@ -301,11 +306,11 @@ class Checkout extends Component {
                       name="gridRadios"
                       id="gridRadios1"
                       value="option1"
+                      disabled
                       onChange={this.handleChecked1}
-                      // checked={this.state.radio === "1"}
                     ></input>
                     <label className="form-check-label" htmlFor="gridRadios1">
-                      Use my default address
+                      Use my default address (Coming soon)
                     </label>
                   </div>
                 </div>}
@@ -349,8 +354,9 @@ class Checkout extends Component {
                         className="form-control"
                         id="inputPassword4"
                         required
+                        disabled={this.state.provinceLoad}
                       >
-                        <option>Choose...</option>
+                        <option>{this.state.provinceLoad ? "Getting provinces...": "Choose..."}</option>
                         {this.state.province.map((item, index) => {
                           return (
                             <option
@@ -382,8 +388,9 @@ class Checkout extends Component {
                         onChange={this.handleChangeCity}
                         className="form-control"
                         id="inputCity"
+                        disabled={!(this.state.provinceValue !== "" && this.state.cityLoad)}
                       >
-                        <option>Choose...</option>
+                        <option>{this.state.provinceValue !== "" ? "Getting cities...": "Choose..."}</option>
                         {this.state.city.map((item, index) => {
                           return (
                             <option
@@ -458,7 +465,6 @@ class Checkout extends Component {
                     {this.state.radio === "1" ? (
                       <textarea
                         className="span6 form-control"
-                        // rows="3"
                         value={this.state.address.street_name}
                         required
                         disabled
@@ -466,7 +472,6 @@ class Checkout extends Component {
                     ) : (
                       <textarea
                         className="span6 form-control"
-                        // rows="3"
                         placeholder={"Type..."}
                         onChange={this.handleChangeStreet}
                         required

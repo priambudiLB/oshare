@@ -16,7 +16,6 @@ class Cart extends Component {
 
   deleteCartItem(product_id, size) {
     this.setState({deleting: true})
-    console.log("addtocart" + product_id);
     let headers = {
       "Content-Type": "application/json",
       Authorization: "Token " + localStorage.getItem("token")
@@ -33,14 +32,6 @@ class Cart extends Component {
       if (res.status < 300) {
         console.log(res)
         window.location.assign("/cart")
-        // return res.json().then(data => {
-        //   this.setState({ token: data.token }, () => {
-        //     // localStorage.setItem("token", data.token);
-        //     window.location.assign("/cart");
-        //   });
-
-        //   return { status: res.status, data };
-        // });
       } else if(res.status === 401){
         window.location.assign("/login")
       }else {
@@ -92,7 +83,7 @@ class Cart extends Component {
               <img
                 alt={"cart"}
                 src={require("./Icons/Vector.png")}
-                width="18"
+                width="21"
                 height="21"
               />
               }

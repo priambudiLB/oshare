@@ -3,7 +3,7 @@ import React  from 'react';
 export function ItemCheckout(props) {
   return(<div className='container'>
     <div className='row'>
-      <img alt={"item"} src={props.itemImage} width='100vw' height="140vw"/>
+      <img alt={"item"} src={props.itemImage} width='100vw' height="100vw"/>
       <div className='col'>
         <div className="glacial-indifference-bold">{props.itemName}</div>
         <div className="glacial-indifference">Size {props.itemSize}</div>

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
-import axios from 'axios';
+import axios from "axios";
 import { getBaseUrl } from "./Utils";
 
 class ConfirmPayment extends Component {
@@ -12,7 +12,8 @@ class ConfirmPayment extends Component {
       name: "",
       amount: "",
       to: "",
-      uploading: false
+      uploading: false,
+      bankAccounts: []
     };
     this.handleFile = this.handleFile.bind(this);
     this.handleName = this.handleName.bind(this);
@@ -24,12 +25,10 @@ class ConfirmPayment extends Component {
     const { id } = this.props.match.params;
     console.log(id);
     this.setState({ id: id });
-    // this.getConfirm(id)
+    this.getBank();
   }
 
   handleFile(event) {
-    console.log(event.target.files);
-    console.log(this.state);
     this.setState({ file: event.target.files[0] });
   }
 
@@ -47,48 +46,46 @@ class ConfirmPayment extends Component {
 
   confirm(order_id, nama, receipt, amount, payment_to) {
     console.log("checkout");
-    this.setState({uploading: true})
-    const body2 = new FormData()
-    body2.append("order_id", order_id)
-    body2.append("nama", nama)
-    body2.append("receipt", receipt, receipt.name)
-    body2.append("amount", amount)
-    body2.append("payment_to", payment_to)
-    axios.post(`http://${getBaseUrl}/checkout/confirmation`, body2, {
-      headers: {
-        'content-type': 'multipart/form-data',
-        'Authorization': "Token " + localStorage.getItem("token")
-      }
-    })
-        .then(res => {
-          this.setState({uploading: false})
-          console.log(res.data);
-          window.location.assign("/orders");
-        })
-        .catch(err => {console.log(err)
-          this.setState({uploading: false})})
+    this.setState({ uploading: true });
+    const body2 = new FormData();
+    body2.append("order_id", order_id);
+    body2.append("nama", nama);
+    body2.append("receipt", receipt, receipt.name);
+    body2.append("amount", amount);
+    body2.append("payment_to", payment_to);
+    axios
+      .post(`http://${getBaseUrl}/checkout/confirmation`, body2, {
+        headers: {
+          "content-type": "multipart/form-data",
+          Authorization: "Token " + localStorage.getItem("token")
+        }
+      })
+      .then(res => {
+        this.setState({ uploading: false });
+        console.log(res.data);
+        window.location.assign("/orders");
+      })
+      .catch(err => {
+        console.log(err);
+        this.setState({ uploading: false });
+      });
   }
 
-  getConfirm(order_id) {
-    console.log("checkout");
-    let headers = {
-      "Content-Type": "application/json",
-      Authorization: "Token " + localStorage.getItem("token")
-    };
-    let body = JSON.stringify({ order_id });
-    console.log(body);
-    return fetch("http://o-share-backend.herokuapp.com/checkout/confirmation", {
-      headers,
-      body,
-      method: "GET"
-    }).then(res => {
-      if (res.status === 200) {
-        console.log(res);
-      } else {
-        console.log("Server Error!");
-        throw res;
+  async getBank() {
+    let t = await fetch(`http://${getBaseUrl}/api/auth/bank`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Token " + localStorage.getItem("token")
       }
     });
+    let t2 = await t.json();
+    console.log(t2);
+    if (t2.detail === "Invalid token.") {
+      window.location.assign("/login");
+    } else if (!(t2 === undefined || t2.length === 0)) {
+      this.setState({ bankAccounts: t2 });
+    }
   }
 
   render() {
@@ -142,13 +139,24 @@ class ConfirmPayment extends Component {
                 <label className="kollektif-bold label" htmlFor="inputEmail4">
                   Payment to
                 </label>
-                <input
-                  type="text"
-                  className="form-control"
+                <select
+                  value={this.state.to}
                   onChange={this.handleTo}
-                  id="inputEmail4"
-                  placeholder="Type..."
-                />
+                  className="form-control"
+                  id="inputCity"
+                >
+                  <option>Choose...</option>
+                  {this.state.bankAccounts.map((item, index) => {
+                    return (
+                      <option
+                        key={index}
+                        value={`${item.bank} / ${item.nomor_rekening} / ${item.pemilik_nomor_rekening}`}
+                      >
+                        {`${item.bank} / ${item.nomor_rekening} / ${item.pemilik_nomor_rekening}`}
+                      </option>
+                    );
+                  })}
+                </select>
               </div>
               <div className="form-group col-md-6">
                 <label className="kollektif-bold label" htmlFor="inputEmail4">
@@ -177,7 +185,11 @@ class ConfirmPayment extends Component {
                 className="btn btn-primary"
                 disabled
               >
-                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <span
+                  class="spinner-border spinner-border-sm"
+                  role="status"
+                  aria-hidden="true"
+                ></span>
               </div>
             ) : (
               <div
