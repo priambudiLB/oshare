@@ -37,9 +37,7 @@ class LandingPage extends Component {
           autoPlayInterval={5000}
           mouseDragEnabled
           responsive={{
-            0: { items: 1 },
-            512: { items: 2 },
-            1024: { items: 3 }
+            1: { items: 1 },
           }}
         >
           {this.state.barang.map((item, index) => {
@@ -101,8 +99,8 @@ class LandingPage extends Component {
         <div className="section">
           <div className="container content">
             <div className="text-center">
-              <span className="highlights glacial-indifference">Recent </span>
-              <span className="highlights kollektif-bold">Posts</span>
+              <span className="highlights glacial-indifference">Other </span>
+              <span className="highlights kollektif-bold">Information</span>
               <hr />
             </div>
           </div>

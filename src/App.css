@@ -353,8 +353,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    /* width: 220px;
-    height: 338px; */
+    width: 220px;
+    height: 338px;
     background-color: white;
     border-color: black;
   }
@@ -446,6 +446,11 @@
   /*  !*background-color: brown;*!*/
   /*}*/
   
+
+  .detail-item {
+    padding-top: 10vh;
+  }
+
   #detail-images{
     width: 100%;
     height: 100%;;

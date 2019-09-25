@@ -306,11 +306,10 @@ class Checkout extends Component {
                       name="gridRadios"
                       id="gridRadios1"
                       value="option1"
-                      disabled
                       onChange={this.handleChecked1}
                     ></input>
                     <label className="form-check-label" htmlFor="gridRadios1">
-                      Use my default address (Coming soon)
+                      Use my default address
                     </label>
                   </div>
                 </div>}
