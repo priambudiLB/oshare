@@ -14,7 +14,7 @@ class OrderDetails extends Component {
     this.getOrder()
   }
   async getOrder() {
-    let t = await fetch(`http://${getBaseUrl}/checkout/all`, {
+    let t = await fetch(`//${getBaseUrl}/checkout/all`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

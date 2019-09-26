@@ -21,7 +21,7 @@ import Technology from "./Technology";
 
 function signOut() {
   let headers = { "Content-Type": "application/json", "Authorization":  "Token "+localStorage.getItem("token")};
-  return fetch(`http://${getBaseUrl}/api/auth/logout`, {
+  return fetch(`//${getBaseUrl}/api/auth/logout`, {
     headers,
     
     method: "POST"
@@ -30,6 +30,7 @@ function signOut() {
       window.location.assign("/");
   })
 }
+
 function Navbar() {
   let item = [
     { name: "TECHNOLOGY", link: "tech" },
@@ -70,7 +71,7 @@ function Navbar() {
             <li className="nav-item">
             <Link to="/cart">
               <div className="nav-link">
-                <ShoppingBag /> (0)
+                <ShoppingBag />
               </div>
             </Link>
           </li>

@@ -18,7 +18,7 @@ class LandingPage extends Component {
   }
 
   async getData() {
-    let t = await fetch(`http://${getBaseUrl}/product/`, {
+    let t = await fetch(`//${getBaseUrl}/product/`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json"

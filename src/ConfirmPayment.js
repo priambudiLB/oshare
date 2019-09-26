@@ -54,7 +54,7 @@ class ConfirmPayment extends Component {
     body2.append("amount", amount);
     body2.append("payment_to", payment_to);
     axios
-      .post(`http://${getBaseUrl}/checkout/confirmation`, body2, {
+      .post(`//${getBaseUrl}/checkout/confirmation`, body2, {
         headers: {
           "content-type": "multipart/form-data",
           Authorization: "Token " + localStorage.getItem("token")
