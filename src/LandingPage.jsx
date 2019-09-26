@@ -85,7 +85,7 @@ class LandingPage extends Component {
             <Gallery />
           </div>
         </div>
-        <div className="content videoWrapper">
+        {/* <div className="content videoWrapper">
           <iframe
             title="Business Model Oshare"
             width="560"
@@ -95,7 +95,7 @@ class LandingPage extends Component {
             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
           />
-        </div>
+        </div> */}
         <div className="section">
           <div className="container content">
             <div className="text-center">

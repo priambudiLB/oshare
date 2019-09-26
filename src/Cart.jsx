@@ -10,12 +10,12 @@ class Cart extends Component {
     this.state = {
       barang: [],
       total_price: 0,
-      deleting: false,
+      deleting: false
     };
   }
 
   deleteCartItem(product_id, size) {
-    this.setState({deleting: true})
+    this.setState({ deleting: true });
     let headers = {
       "Content-Type": "application/json",
       Authorization: "Token " + localStorage.getItem("token")
@@ -28,13 +28,13 @@ class Cart extends Component {
       body,
       method: "POST"
     }).then(res => {
-      this.setState({deleting: false})
+      this.setState({ deleting: false });
       if (res.status < 300) {
-        console.log(res)
-        window.location.assign("/cart")
-      } else if(res.status === 401){
-        window.location.assign("/login")
-      }else {
+        console.log(res);
+        window.location.assign("/cart");
+      } else if (res.status === 401) {
+        window.location.assign("/login");
+      } else {
         console.log("Server Error!" + res.status);
         throw res;
       }
@@ -55,15 +55,22 @@ class Cart extends Component {
     });
     let t2 = await t.json();
     console.log(t2);
-    if (t2.detail === "Invalid token."){
-      window.location.assign("/login")
-    }else if (!(t2 === undefined || t2.length === 0)) {
+    if (t2.detail === "Invalid token.") {
+      window.location.assign("/login");
+    } else if (!(t2 === undefined || t2.length === 0)) {
       this.setState({ barang: t2[0].items, total_price: t2[0].total });
-  }
+    }
   }
 
   render() {
-    let tableItem = (itemName, itemSize, price, itemImage, itemQuantity, itemId) => {
+    let tableItem = (
+      itemName,
+      itemSize,
+      price,
+      itemImage,
+      itemQuantity,
+      itemId
+    ) => {
       return (
         <tr>
           <th scope="row">
@@ -78,15 +85,24 @@ class Cart extends Component {
             <span className="float-right">{convertToRupiah(price)}</span>
           </td>
           <td>
-            <div onClick={()=>this.deleteCartItem(itemId, itemSize)} className="text-center">
-              {this.state.deleting ? <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> : 
-              <img
-                alt={"cart"}
-                src={require("./Icons/Vector.png")}
-                width="21"
-                height="21"
-              />
-              }
+            <div
+              onClick={() => this.deleteCartItem(itemId, itemSize)}
+              className="text-center"
+            >
+              {this.state.deleting ? (
+                <span
+                  class="spinner-border spinner-border-sm"
+                  role="status"
+                  aria-hidden="true"
+                ></span>
+              ) : (
+                <img
+                  alt={"cart"}
+                  src={require("./Icons/Vector.png")}
+                  width="21"
+                  height="21"
+                />
+              )}
             </div>
           </td>
         </tr>
@@ -96,7 +112,7 @@ class Cart extends Component {
       <div id="cart">
         <h1>test</h1>
         <section>
-          <div className="container" style={{ "marginTop": "5vh" }}>
+          <div className="container" style={{ marginTop: "5vh" }}>
             <span className="highlights glacial-indifference">Shopping </span>
             <span className="highlights kollektif-bold">Cart</span>
             <table className="table">
@@ -136,16 +152,17 @@ class Cart extends Component {
                 <div>TOTAL</div>
                 <div>{convertToRupiah(this.state.total_price)}</div>
               </div>
-              
-              {this.state.barang.length === 0 ? <div/>:<div className="row continue justify-content-between">
-                {/* <div className="btn btn-outline-primary">CONTINUE SHOPPING</div> */}
-                <Link to="/checkout">
-                  
-                  <div className="btn btn-primary">CHECKOUT</div>
-                
-              </Link>
-                
-              </div>}
+
+              {this.state.barang.length === 0 ? (
+                <div />
+              ) : (
+                <div className="row continue justify-content-between">
+                  {/* <div className="btn btn-outline-primary">CONTINUE SHOPPING</div> */}
+                  <Link to="/checkout">
+                    <div className="btn btn-primary">CHECKOUT</div>
+                  </Link>
+                </div>
+              )}
             </div>
           </div>
         </section>
