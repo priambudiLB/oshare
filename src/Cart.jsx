@@ -72,7 +72,7 @@ class Cart extends Component {
       itemId
     ) => {
       return (
-        <tr>
+        <tr key={itemId}>
           <th scope="row">
             <ItemCheckout
               itemQuantity={itemQuantity}
