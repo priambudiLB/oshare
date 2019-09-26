@@ -10,7 +10,7 @@ class Technology extends Component {
   render() {
     return (
       <div className="container tech" id="high" >
-        <h1>Coming Soon</h1>
+        <h1>Coming Really Soon</h1>
       </div>
     );
   }
