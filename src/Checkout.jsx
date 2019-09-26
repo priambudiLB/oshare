@@ -44,7 +44,7 @@ class Checkout extends Component {
   }
 
   async getCart() {
-    let t = await fetch(`//${getBaseUrl}/checkout`, {
+    let t = await fetch(`${getBaseUrl}/checkout`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -100,7 +100,7 @@ class Checkout extends Component {
       ongkir,
       jasa_pengiriman
     });
-    return fetch(`//${getBaseUrl}/checkout/finalize`, {
+    return fetch(`${getBaseUrl}/checkout/finalize`, {
       headers,
       body,
       method: "POST"

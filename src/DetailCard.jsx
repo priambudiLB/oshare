@@ -40,7 +40,7 @@ class DetailCard extends Component {
     let body = JSON.stringify({ product_id, size, quantity });
     console.log(headers);
     console.log(body);
-    return fetch(`//${getBaseUrl}/cart/add`, {
+    return fetch(`${getBaseUrl}/cart/add`, {
       headers,
       body,
       method: "POST"

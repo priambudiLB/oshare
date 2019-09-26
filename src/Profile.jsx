@@ -86,7 +86,7 @@ class Profile extends Component {
   }
 
   async getProfile() {
-    let t = await fetch(`//${getBaseUrl}/api/auth/detail`, {
+    let t = await fetch(`${getBaseUrl}/api/auth/detail`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

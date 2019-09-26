@@ -23,7 +23,7 @@ class Cart extends Component {
     let body = JSON.stringify({ product_id, size });
     console.log(headers);
     console.log(body);
-    return fetch(`//${getBaseUrl}/cart/delete`, {
+    return fetch(`${getBaseUrl}/cart/delete`, {
       headers,
       body,
       method: "POST"
@@ -46,7 +46,7 @@ class Cart extends Component {
   }
 
   async getCart() {
-    let t = await fetch(`//${getBaseUrl}/checkout`, {
+    let t = await fetch(`${getBaseUrl}/checkout`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

@@ -21,7 +21,7 @@ class Login extends Component {
     this.setState({ isLoading: true })
     let headers = { "Content-Type": "application/json" };
     let body = JSON.stringify({ email, password });
-    return fetch(`//${getBaseUrl}/api/auth/login`, {
+    return fetch(`${getBaseUrl}/api/auth/login`, {
       headers,
       body,
       method: "POST"

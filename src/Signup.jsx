@@ -38,7 +38,7 @@ class Signup extends Component {
     let headers = { "Content-Type": "application/json" };
     let body = JSON.stringify({ full_name, email, gender, phone_number, date_of_birth, password });
     console.log(body);
-    return fetch(`//${getBaseUrl}/api/auth/register`, {
+    return fetch(`${getBaseUrl}/api/auth/register`, {
       headers,
       body,
       method: "POST"

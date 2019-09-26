@@ -54,7 +54,7 @@ class ConfirmPayment extends Component {
     body2.append("amount", amount);
     body2.append("payment_to", payment_to);
     axios
-      .post(`//${getBaseUrl}/checkout/confirmation`, body2, {
+      .post(`${getBaseUrl}/checkout/confirmation`, body2, {
         headers: {
           "content-type": "multipart/form-data",
           Authorization: "Token " + localStorage.getItem("token")
@@ -72,7 +72,7 @@ class ConfirmPayment extends Component {
   }
 
   async getBank() {
-    let t = await fetch(`http://${getBaseUrl}/api/auth/bank`, {
+    let t = await fetch(`${getBaseUrl}/api/auth/bank`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

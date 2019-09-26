@@ -21,7 +21,7 @@ import Technology from "./Technology";
 
 function signOut() {
   let headers = { "Content-Type": "application/json", "Authorization":  "Token "+localStorage.getItem("token")};
-  return fetch(`//${getBaseUrl}/api/auth/logout`, {
+  return fetch(`${getBaseUrl}/api/auth/logout`, {
     headers,
     
     method: "POST"
@@ -36,7 +36,6 @@ function Navbar() {
     { name: "TECHNOLOGY", link: "tech" },
     { name: "MEN", link: "men" },
     { name: "WOMEN", link: "women" },
-    // { name: "WISHLIST", link: "wishlist" }
   ];
   return (
     <nav className="navbar navbar-custom fixed-top navbar-expand-lg">

@@ -15,7 +15,7 @@ class Women extends Component {
 
   async getData() {
     let t = await fetch(
-      `//${getBaseUrl}/product/woman`,
+      `${getBaseUrl}/product/woman`,
       {
         method: "GET",
         headers: {
