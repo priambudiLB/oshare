@@ -55,6 +55,7 @@ class Cart extends Component {
     });
     let t2 = await t.json();
     console.log(t2);
+    alert(`${t2[0].total} ${t2[0].items[0].subtotal}`)
     if (t2.detail === "Invalid token.") {
       window.location.assign("/login");
     } else if (!(t2 === undefined || t2.length === 0)) {
@@ -110,9 +111,8 @@ class Cart extends Component {
     };
     return (
       <div id="cart">
-        <h1>test</h1>
         <section>
-          <div className="container" style={{ marginTop: "5vh" }}>
+          <div className="container" style={{ marginTop: "15vh" }}>
             <span className="highlights glacial-indifference">Shopping </span>
             <span className="highlights kollektif-bold">Cart</span>
             <table className="table">
