@@ -39,6 +39,7 @@ class Test extends Component {
     return (
       <div id="cart" style={{marginTop: "15vh"}}>
         <p>{JSON.stringify(this.state.all)}</p>
+        <p>{localStorage.getItem("token")}</p>
       </div>
     );
   }
