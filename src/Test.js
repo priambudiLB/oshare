@@ -9,7 +9,8 @@ class Test extends Component {
       barang: [],
       total_price: 0,
       deleting: false,
-      all: []
+      all: [],
+      god: [],
     };
   }
 
@@ -26,11 +27,12 @@ class Test extends Component {
       }
     });
     let t2 = await t.json();
+    console.log(t);
     console.log(t2);
     if (t2.detail === "Invalid token.") {
       window.location.assign("/login");
     } else if (!(t2 === undefined || t2.length === 0)) {
-      this.setState({ all: t2, barang: t2[0].items, total_price: t2[0].total });
+      this.setState({ god: t, all: t2, barang: t2[0].items, total_price: t2[0].total });
     }
   }
 
@@ -40,6 +42,10 @@ class Test extends Component {
       <div id="cart" style={{marginTop: "15vh"}}>
         <p>{JSON.stringify(this.state.all)}</p>
         <p>{localStorage.getItem("token")}</p>
+        <p>{JSON.stringify(this.state.god.url)}</p>
+        <p>{JSON.stringify(this.state.god.type)}</p>
+        <p>{JSON.stringify(this.state.god.status)}</p>
+        <p>{JSON.stringify(this.state.god.statusText)}</p>
       </div>
     );
   }
