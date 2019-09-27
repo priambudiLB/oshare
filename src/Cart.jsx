@@ -10,7 +10,8 @@ class Cart extends Component {
     this.state = {
       barang: [],
       total_price: 0,
-      deleting: false
+      deleting: false,
+      all: []
     };
   }
 
@@ -55,11 +56,10 @@ class Cart extends Component {
     });
     let t2 = await t.json();
     console.log(t2);
-    alert(`${t2[0].total} ${t2[0].items[0].subtotal}`)
     if (t2.detail === "Invalid token.") {
       window.location.assign("/login");
     } else if (!(t2 === undefined || t2.length === 0)) {
-      this.setState({ barang: t2[0].items, total_price: t2[0].total });
+      this.setState({ all: t2, barang: t2[0].items, total_price: t2[0].total });
     }
   }
 

@@ -18,6 +18,7 @@ import ConfirmPayment from "./ConfirmPayment";
 import OrderDetails from "./OrderDetails";
 import { getBaseUrl } from "./Utils";
 import Technology from "./Technology";
+import Test from "./Test";
 
 function signOut() {
   let headers = { "Content-Type": "application/json", "Authorization":  "Token "+localStorage.getItem("token")};
@@ -246,6 +247,7 @@ function App() {
           <Route path="/profile" component={Profile} />
           <Route path="/confirm/:id" component={ConfirmPayment} />
           <Route path="/orders" component={OrderDetails} />
+          <Route path="/123" component={Test} />
         </Switch>
       </Router>
       <Footer />
