@@ -127,7 +127,7 @@ class Profile extends Component {
     });
     console.log(body);
     console.log(this.state)
-    return fetch(`//${getBaseUrl}/api/auth/address`, {
+    return fetch(`${getBaseUrl}/api/auth/address`, {
       headers,
       body,
       method: "POST"
