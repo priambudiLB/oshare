@@ -47,7 +47,21 @@ class Cart extends Component {
   }
 
   async getCart() {
-    let t = await fetch(`${getBaseUrl}/checkout`, {
+    // let t = await fetch(`${getBaseUrl}/checkout`, {
+    //   method: "GET",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     Authorization: "Token " + localStorage.getItem("token")
+    //   }
+    // });
+    // let t2 = await t.json();
+    // console.log(t2);
+    // if (t2.detail === "Invalid token.") {
+    //   window.location.assign("/login");
+    // } else {
+    //   this.setState({ all: t2, barang: t2[0].items, total_price: t2[0].total });
+    // }
+    let t = await fetch(`${getBaseUrl}/checkout/all`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -58,7 +72,7 @@ class Cart extends Component {
     console.log(t2);
     if (t2.detail === "Invalid token.") {
       window.location.assign("/login");
-    } else if (!(t2 === undefined || t2.length === 0)) {
+    } else {
       this.setState({ all: t2, barang: t2[0].items, total_price: t2[0].total });
     }
   }

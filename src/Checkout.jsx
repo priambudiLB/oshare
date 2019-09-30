@@ -44,7 +44,23 @@ class Checkout extends Component {
   }
 
   async getCart() {
-    let t = await fetch(`${getBaseUrl}/checkout`, {
+    // let t = await fetch(`${getBaseUrl}/checkout`, {
+    //   method: "GET",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     Authorization: "Token " + localStorage.getItem("token")
+    //   }
+    // });
+    // let t2 = await t.json();
+    // if (!(t2 === undefined || t2.length === 0)) {
+      // this.setState({
+      //   barang: t2[0].items,
+      //   total_price: t2[0].total,
+      //   addressBE: t2[0].user.default_address,
+      //   totalWeight: this.countWeight(t2[0].items)
+      // });
+    // }
+    let t = await fetch(`${getBaseUrl}/checkout/all`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -52,7 +68,10 @@ class Checkout extends Component {
       }
     });
     let t2 = await t.json();
-    if (!(t2 === undefined || t2.length === 0)) {
+    console.log(t2);
+    if (t2.detail === "Invalid token.") {
+      window.location.assign("/login");
+    } else {
       this.setState({
         barang: t2[0].items,
         total_price: t2[0].total,
