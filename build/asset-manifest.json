@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/static/css/main.cfdb607c.chunk.css",
-    "main.js": "/static/js/main.f3bad03e.chunk.js",
-    "main.js.map": "/static/js/main.f3bad03e.chunk.js.map",
+    "main.js": "/static/js/main.be5092d3.chunk.js",
+    "main.js.map": "/static/js/main.be5092d3.chunk.js.map",
     "runtime~main.js": "/static/js/runtime~main.a8a9905a.js",
     "runtime~main.js.map": "/static/js/runtime~main.a8a9905a.js.map",
     "static/js/2.5c1df2ef.chunk.js": "/static/js/2.5c1df2ef.chunk.js",
     "static/js/2.5c1df2ef.chunk.js.map": "/static/js/2.5c1df2ef.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.7d757476c17ee4947e624db9631b8f80.js": "/precache-manifest.7d757476c17ee4947e624db9631b8f80.js",
+    "precache-manifest.9718050b29d32bf9fddc1b2fe9c29d78.js": "/precache-manifest.9718050b29d32bf9fddc1b2fe9c29d78.js",
     "service-worker.js": "/service-worker.js",
     "static/css/main.cfdb607c.chunk.css.map": "/static/css/main.cfdb607c.chunk.css.map",
     "static/media/App.css": "/static/media/Oshare-Black-1.59df8844.png"
