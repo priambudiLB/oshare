@@ -76,7 +76,11 @@ function Navbar() {
             );
           })}
           {localStorage.getItem("token") != null ? (
-            <li className="nav-item">
+            <li
+              className="nav-item"
+              data-toggle="collapse"
+              data-target="#navbarSupportedContent"
+            >
               <Link to="/cart">
                 <div className="nav-link">
                   <ShoppingBag />

@@ -89,6 +89,7 @@ class Checkout extends Component {
     }
     return total;
   }
+
   handleChecked1() {
     this.setState({
       radio: "1",
@@ -124,6 +125,7 @@ class Checkout extends Component {
       ongkir,
       jasa_pengiriman
     });
+    console.log(body)
     return fetch(`${getBaseUrl}/checkout/finalize`, {
       headers,
       body,
@@ -148,12 +150,12 @@ class Checkout extends Component {
     if (this.state.radio === "1") {
       this.checkout(
         "True",
-        "",
-        "",
-        "",
-        this.state.cityValue.split(",")[1],
-        this.state.provinceValue.split(",")[1],
-        "",
+        this.state.address.street_name,
+        this.state.address.kelurahan,
+        this.state.address.kecamatan,
+        this.state.address.kota,
+        this.state.address.provinsi,
+        this.state.address.postal_code,
         this.state.deliveryFee,
         this.state.method
       );
