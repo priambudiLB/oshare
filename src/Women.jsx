@@ -10,7 +10,8 @@ class Women extends Component {
   };
 
   componentDidMount(){
-    this.getData()
+    this.getData();
+    window.scrollTo(0, 0);
   }
 
   async getData() {
@@ -33,7 +34,7 @@ class Women extends Component {
         <div className="container" id="container-1">
           <span className="highlights kollektif">Women</span>
           <div className="section-1">
-          <div class="d-flex justify-content-start flex-wrap flex-row bd-highlight mb-3">
+          <div className="d-flex justify-content-start flex-wrap flex-row bd-highlight mb-3">
           {this.state.isLoaded ? (
                 this.state.barang.length === 0 ? (
                   <span className="glacial-indifference">
@@ -42,7 +43,7 @@ class Women extends Component {
                 ) : (
                   this.state.barang.map((item, index) => {
                     return (
-                      <div class="p-2" key={index}>
+                      <div className="p-2" key={index}>
                         <ItemCard
                           cardTitle={item.title}
                           imageUrl={
@@ -61,9 +62,9 @@ class Women extends Component {
                   })
                 )
               ) : (
-                <div class="clearfix">
-                  <div class="spinner-border float-right" role="status">
-                    <span class="sr-only">Loading...</span>
+                <div className="clearfix">
+                  <div className="spinner-border float-right" role="status">
+                    <span className="sr-only">Loading...</span>
                   </div>
                 </div>
               )}

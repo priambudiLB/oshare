@@ -27,6 +27,7 @@ class Checkout extends Component {
       loading: false,
       provinceLoad: false,
       cityLoad: false,
+      optionsLoad: false
     };
     this.handleChangeProvince = this.handleChangeProvince.bind(this);
     this.handleChangeCity = this.handleChangeCity.bind(this);
@@ -53,12 +54,12 @@ class Checkout extends Component {
     // });
     // let t2 = await t.json();
     // if (!(t2 === undefined || t2.length === 0)) {
-      // this.setState({
-      //   barang: t2[0].items,
-      //   total_price: t2[0].total,
-      //   addressBE: t2[0].user.default_address,
-      //   totalWeight: this.countWeight(t2[0].items)
-      // });
+    // this.setState({
+    //   barang: t2[0].items,
+    //   total_price: t2[0].total,
+    //   addressBE: t2[0].user.default_address,
+    //   totalWeight: this.countWeight(t2[0].items)
+    // });
     // }
     let t = await fetch(`${getBaseUrl}/checkout/all`, {
       method: "GET",
@@ -81,7 +82,7 @@ class Checkout extends Component {
     }
   }
 
-  countWeight(list){
+  countWeight(list) {
     let total = 0;
     for (let i = 0; i < list.length; i++) {
       total += list[i].quantity;
@@ -89,7 +90,11 @@ class Checkout extends Component {
     return total;
   }
   handleChecked1() {
-    this.setState({ radio: "1", address: this.state.addressBE });
+    this.setState({
+      radio: "1",
+      address: this.state.addressBE,
+      optionsLoad: true
+    });
     this.getCost(this.state.addressBE.cityid);
   }
 
@@ -150,7 +155,7 @@ class Checkout extends Component {
         this.state.provinceValue.split(",")[1],
         "",
         this.state.deliveryFee,
-        this.state.method,
+        this.state.method
       );
     } else {
       this.checkout(
@@ -162,7 +167,7 @@ class Checkout extends Component {
         this.state.provinceValue.split(",")[1],
         this.state.postal,
         this.state.deliveryFee,
-        this.state.method,
+        this.state.method
       );
     }
   }
@@ -173,7 +178,10 @@ class Checkout extends Component {
 
   handleChecked3(event) {
     this.setState({
-      method: event.target.value.split(",")[0]+' '+event.target.value.split(",")[2],
+      method:
+        event.target.value.split(",")[0] +
+        " " +
+        event.target.value.split(",")[2],
       deliveryFee: parseInt(event.target.value.split(",")[1])
     });
   }
@@ -221,7 +229,7 @@ class Checkout extends Component {
   }
 
   async getProvinces() {
-    this.setState({ provinceLoad: true})
+    this.setState({ provinceLoad: true });
     let t = await fetch(
       "https://cors-anywhere.herokuapp.com/https://api.rajaongkir.com/starter/province",
       {
@@ -293,13 +301,13 @@ class Checkout extends Component {
                 this.state.barang.map((item, index) => {
                   return (
                     <div key={index}>
-                    <ItemCheckout
-                      itemName={item.product.title}
-                      itemSize={item.product.size}
-                      itemPrice={parseInt(item.subtotal)}
-                      itemImage={item.product.images[0].image}
-                      itemQuantity={item.quantity}
-                    />
+                      <ItemCheckout
+                        itemName={item.product.title}
+                        itemSize={item.product.size}
+                        itemPrice={parseInt(item.subtotal)}
+                        itemImage={item.product.images[0].image}
+                        itemQuantity={item.quantity}
+                      />
                     </div>
                   );
                 })
@@ -316,23 +324,27 @@ class Checkout extends Component {
             </div>
             <div className="col-sm-8">
               <form>
-              {this.state.addressBE === null ? <div/>:<div className="form-row">
-                  <div className="form-check">
-                    <input
-                      onClick={this.handleChecked1}
-                      className="form-check-input"
-                      type="radio"
-                      name="gridRadios"
-                      id="gridRadios1"
-                      value="option1"
-                      onChange={this.handleChecked1}
-                    ></input>
-                    <label className="form-check-label" htmlFor="gridRadios1">
-                      Use my default address
-                    </label>
+                {this.state.addressBE === null ? (
+                  <div />
+                ) : (
+                  <div className="form-row">
+                    <div className="form-check">
+                      <input
+                        onClick={this.handleChecked1}
+                        className="form-check-input"
+                        type="radio"
+                        name="gridRadios"
+                        id="gridRadios1"
+                        value="option1"
+                        onChange={this.handleChecked1}
+                      ></input>
+                      <label className="form-check-label" htmlFor="gridRadios1">
+                        Use my default address
+                      </label>
+                    </div>
                   </div>
-                </div>}
-                
+                )}
+
                 <div className="form-row">
                   <div className="form-check">
                     <input
@@ -374,7 +386,11 @@ class Checkout extends Component {
                         required
                         disabled={this.state.provinceLoad}
                       >
-                        <option>{this.state.provinceLoad ? "Getting provinces...": "Choose..."}</option>
+                        <option>
+                          {this.state.provinceLoad
+                            ? "Getting provinces..."
+                            : "Choose..."}
+                        </option>
                         {this.state.province.map((item, index) => {
                           return (
                             <option
@@ -406,9 +422,18 @@ class Checkout extends Component {
                         onChange={this.handleChangeCity}
                         className="form-control"
                         id="inputCity"
-                        disabled={!(this.state.provinceValue !== "" && this.state.cityLoad)}
+                        disabled={
+                          !(
+                            this.state.provinceValue !== "" &&
+                            this.state.cityLoad
+                          )
+                        }
                       >
-                        <option>{this.state.provinceValue !== "" ? "Getting cities...": "Choose..."}</option>
+                        <option>
+                          {this.state.provinceValue !== ""
+                            ? "Getting cities..."
+                            : "Choose..."}
+                        </option>
                         {this.state.city.map((item, index) => {
                           return (
                             <option
@@ -512,9 +537,11 @@ class Checkout extends Component {
                       />
                     ) : (
                       <input
-                        type="text"
+                        type="number"
                         className="form-control"
                         id="inputCity"
+                        min="1"
+                        max="999999"
                         onChange={this.handleChangePostalCode}
                         required
                         placeholder={"Type..."}
@@ -534,7 +561,11 @@ class Checkout extends Component {
                               id={"gridRadio" + index}
                               // checked={this.state.method === item.description}
                               value={
-                                item.description + "," + item.cost[0].value + "," + item.cost[0].etd
+                                item.description +
+                                "," +
+                                item.cost[0].value +
+                                "," +
+                                item.cost[0].etd
                               }
                             ></input>
                             <label
@@ -569,6 +600,15 @@ class Checkout extends Component {
                           087779729477.
                         </label>
                       </div>
+                    ) : this.state.optionsLoad ? (
+                      <div className="clearfix">
+                        <div
+                          className="spinner-border float-right"
+                          role="status"
+                        >
+                          <span className="sr-only">Loading...</span>
+                        </div>
+                      </div>
                     ) : (
                       <div />
                     )}
@@ -578,7 +618,15 @@ class Checkout extends Component {
                   className="btn btn-primary"
                   onClick={() => this.handleCheckout()}
                 >
-                  {this.state.isLoading ? <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> : "CHECKOUT"}
+                  {this.state.isLoading ? (
+                    <span
+                      class="spinner-border spinner-border-sm"
+                      role="status"
+                      aria-hidden="true"
+                    ></span>
+                  ) : (
+                    "CHECKOUT"
+                  )}
                 </div>
               </form>
             </div>

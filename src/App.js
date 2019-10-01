@@ -21,22 +21,25 @@ import Technology from "./Technology";
 import Test from "./Test";
 
 function signOut() {
-  let headers = { "Content-Type": "application/json", "Authorization":  "Token "+localStorage.getItem("token")};
+  let headers = {
+    "Content-Type": "application/json",
+    Authorization: "Token " + localStorage.getItem("token")
+  };
   return fetch(`${getBaseUrl}/api/auth/logout`, {
     headers,
-    
+
     method: "POST"
   }).then(() => {
     localStorage.removeItem("token");
-      window.location.assign("/");
-  })
+    window.location.assign("/");
+  });
 }
 
 function Navbar() {
   let item = [
     { name: "TECHNOLOGY", link: "tech" },
     { name: "MEN", link: "men" },
-    { name: "WOMEN", link: "women" },
+    { name: "WOMEN", link: "women" }
   ];
   return (
     <nav className="navbar navbar-custom fixed-top navbar-expand-lg">
@@ -60,7 +63,12 @@ function Navbar() {
         <ul className="navbar-nav mr-auto">
           {item.map((item, index) => {
             return (
-              <li className="nav-item" key={index}>
+              <li
+                data-toggle="collapse"
+                data-target="#navbarSupportedContent"
+                className="nav-item"
+                key={index}
+              >
                 <Link to={`/${item.link}`}>
                   <div className="nav-link">{item.name}</div>
                 </Link>
@@ -69,12 +77,12 @@ function Navbar() {
           })}
           {localStorage.getItem("token") != null ? (
             <li className="nav-item">
-            <Link to="/cart">
-              <div className="nav-link">
-                <ShoppingBag />
-              </div>
-            </Link>
-          </li>
+              <Link to="/cart">
+                <div className="nav-link">
+                  <ShoppingBag />
+                </div>
+              </Link>
+            </li>
           ) : (
             <div />
           )}
@@ -172,57 +180,59 @@ function Footer() {
 
       <div className="text-center footer-link">
         <div className="container">
-        <div className="row justify-content-center">
-          <a href="/">
-            <span className="kollektif-bold text-white" id="links">
-              Company Profile
-            </span>
-          </a>
-          <a href="/">
-            <span className="kollektif-bold text-white" id="links">
-              FAQ
-            </span>
-          </a>
-          <a href="/">
-            <span className="kollektif-bold text-white" id="links">
-              How to Order
-            </span>
-          </a>
-        </div>
-        <div className="row justify-content-center py-3">
-          <a href="/">
-            <span className="kollektif-bold text-white" id="links">
-              Terms & Condition
-            </span>
-          </a>
-        </div>
+          <div className="row justify-content-center">
+            <a href="/">
+              <span className="kollektif-bold text-white" id="links">
+                Company Profile
+              </span>
+            </a>
+            <a href="/">
+              <span className="kollektif-bold text-white" id="links">
+                FAQ
+              </span>
+            </a>
+            <a href="/">
+              <span className="kollektif-bold text-white" id="links">
+                How to Order
+              </span>
+            </a>
+          </div>
+          <div className="row justify-content-center py-3">
+            <a href="/">
+              <span className="kollektif-bold text-white" id="links">
+                Terms & Condition
+              </span>
+            </a>
+          </div>
         </div>
       </div>
 
       <div className="footer-support">
         <div className="container">
-        <div className="row justify-content-center">
-          <p>
-            <span className="glacial-indifference text-white">Supported </span>
-            <span className="kollektif-bold text-white">By</span>
-          </p>
-        </div>
-        <div className="row justify-content-center py-3">
-          <a href="https://diib.ui.ac.id/">
-            <img
-            style={{width:'150px', marginLeft: '20px'}}
-              src="https://files.sirclocdn.xyz/blankawear/files/logo%20diib.png"
-              alt="logo diib"
-            />
-          </a>
-          <a href="https://play.google.com/store/apps/details?id=com.socourt.beehive2&hl=en_US">
-            <img
-            style={{width:'150px', marginLeft: '20px'}}
-              src="https://samcis.com/wp-content/uploads/2019/02/BEEHIVE-logo-1-1.png"
-              alt="logo beehive"
-            />
-          </a>
-        </div>
+          <div className="row justify-content-center">
+            <p>
+              <span className="glacial-indifference text-white">
+                Supported{" "}
+              </span>
+              <span className="kollektif-bold text-white">By</span>
+            </p>
+          </div>
+          <div className="row justify-content-center py-3">
+            <a href="https://diib.ui.ac.id/">
+              <img
+                style={{ width: "150px", marginLeft: "20px" }}
+                src="https://files.sirclocdn.xyz/blankawear/files/logo%20diib.png"
+                alt="logo diib"
+              />
+            </a>
+            <a href="https://play.google.com/store/apps/details?id=com.socourt.beehive2&hl=en_US">
+              <img
+                style={{ width: "150px", marginLeft: "20px" }}
+                src="https://samcis.com/wp-content/uploads/2019/02/BEEHIVE-logo-1-1.png"
+                alt="logo beehive"
+              />
+            </a>
+          </div>
         </div>
       </div>
     </footer>

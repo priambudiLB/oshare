@@ -15,6 +15,7 @@ class LandingPage extends Component {
 
   componentDidMount() {
     this.getData();
+    window.scrollTo(0, 0);
   }
 
   async getData() {

@@ -24,6 +24,14 @@ class DetailCard extends Component {
     // console.log(this.props)
   }
   addToCart(product_id, size, quantity) {
+    if(this.state.maxValue < quantity){
+      alert(`Over Quantity! Max: ${this.state.maxValue}`)
+      return true;
+    }
+    if(quantity === '0'){
+      alert(`No Quantity! Min: 1`)
+      return true;
+    }
     if(this.state.isLoading){
       return true
     }
