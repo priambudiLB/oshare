@@ -144,8 +144,14 @@ class Cart extends Component {
                 </tr>
               </thead>
               <tbody>
-                {this.state.barang == null ? (
-                  <div />
+                {this.state.barang.length === 0 ? (
+                  <tr>
+                    <th scope="row">
+                      <span className="glacial-indifference">
+                        You don't have any item
+                      </span>
+                    </th>
+                  </tr>
                 ) : (
                   this.state.barang.map(item => {
                     return tableItem(

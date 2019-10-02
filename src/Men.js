@@ -48,6 +48,7 @@ class Men extends Component {
                               ? "https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwjmlMvNrNDkAhWXfCsKHW4pCU8QjRx6BAgBEAQ&url=http%3A%2F%2Fgizi.unida.gontor.ac.id%2F&psig=AOvVaw2KJnu0WuMDRFF0G994bnXM&ust=1568551704739678"
                               : item.images[0].image
                           }
+                          images={item.images}
                           harga={item.price}
                           deskripsi={item.description}
                           catalogs={item.catalogs}

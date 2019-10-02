@@ -1,8 +1,5 @@
 import React, { Component } from "react";
 import "./App.css";
-// import Instagram from "./Icons/Instagram";
-// import WhatsApp from "./Icons/WhatsApp";
-// import axios from 'axios';
 import ItemCard from "./ItemCard";
 import "./alice-carousel.css";
 import AliceCarousel from "react-alice-carousel";
@@ -38,7 +35,7 @@ class LandingPage extends Component {
           autoPlayInterval={5000}
           mouseDragEnabled
           responsive={{
-            1: { items: 1 },
+            1: { items: 1 }
           }}
         >
           {this.state.barang.map((item, index) => {
@@ -55,10 +52,12 @@ class LandingPage extends Component {
                       ? "https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwjmlMvNrNDkAhWXfCsKHW4pCU8QjRx6BAgBEAQ&url=http%3A%2F%2Fgizi.unida.gontor.ac.id%2F&psig=AOvVaw2KJnu0WuMDRFF0G994bnXM&ust=1568551704739678"
                       : item.images[0].image
                   }
+                  images={item.images}
                   harga={item.price}
                   deskripsi={item.description}
                   catalogs={item.catalogs}
                   id={item.id}
+                  size={item.catalogs.length === 0 ? 0 : item.catalogs[0].size}
                 />
               </div>
             );
@@ -69,13 +68,6 @@ class LandingPage extends Component {
     return (
       <div>
         <div id="hero" />
-        {/* <div id="home" className="home">
-          <div className="container text-vcenter">
-            <Instagram />
-            <br />
-            <WhatsApp />
-          </div>
-        </div> */}
         <div className="section">
           <div className="container content">
             <div className="text-center">

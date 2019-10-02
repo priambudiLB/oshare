@@ -19,7 +19,8 @@ class ItemCard extends Component {
                 harga: this.props.harga,
                 deskripsi: this.props.deskripsi,
                 catalogs: this.props.catalogs,
-                id: this.props.id
+                id: this.props.id,
+                images: this.props.images
               },
             }}
           >

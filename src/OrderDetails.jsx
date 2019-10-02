@@ -34,7 +34,7 @@ class OrderDetails extends Component {
       <div className="container" id="order">
           <div className="col text-center">
               <h1 className="highlights kollektif">Orders</h1>
-              <p>Click to submit Payment Details</p>
+              <p>Click an order below to submit Payment Details</p>
           </div>
           
           <div className="row">

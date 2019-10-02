@@ -11,39 +11,38 @@ class DetailCard extends Component {
     super(props);
     this.state = {
       sizeValue: "",
-      quantityValue: '',
+      quantityValue: "",
       maxValue: 0,
-      isLoading: false,
+      isLoading: false
     };
     this.handleSizeValue = this.handleSizeValue.bind(this);
     this.handleQuantityValue = this.handleQuantityValue.bind(this);
   }
 
-  componentDidMount(){
-    // this.addToCart(this.props.id, '39', '1')
-    // console.log(this.props)
+  componentDidMount() {
+    console.log(this.props.image)
   }
   addToCart(product_id, size, quantity) {
-    if(this.state.maxValue < quantity){
-      alert(`Over Quantity! Max: ${this.state.maxValue}`)
+    if (this.state.maxValue < quantity) {
+      alert(`Over Quantity! Max: ${this.state.maxValue}`);
       return true;
     }
-    if(quantity === '0'){
-      alert(`No Quantity! Min: 1`)
+    if (quantity === "0") {
+      alert(`No Quantity! Min: 1`);
       return true;
     }
-    if(this.state.isLoading){
-      return true
+    if (this.state.isLoading) {
+      return true;
     }
-    if(localStorage.getItem("token") === null){
+    if (localStorage.getItem("token") === null) {
       window.location.assign("/login");
-      return true
+      return true;
     }
-    this.setState({isLoading: true})
+    this.setState({ isLoading: true });
     console.log("addtocart" + product_id);
-    let headers = { 
-      "Content-Type": "application/json", 
-      "Authorization":  "Token "+localStorage.getItem("token")
+    let headers = {
+      "Content-Type": "application/json",
+      Authorization: "Token " + localStorage.getItem("token")
     };
     let body = JSON.stringify({ product_id, size, quantity });
     console.log(headers);
@@ -57,14 +56,14 @@ class DetailCard extends Component {
         return res.json().then(data => {
           this.setState({ token: data.token }, () => {
             // localStorage.setItem("token", data.token);
-            this.setState({isLoading: false})
+            this.setState({ isLoading: false });
             window.location.assign("/cart");
           });
 
           return { status: res.status, data };
         });
-      } else if(res.status === 401){
-        window.location.assign("/login")
+      } else if (res.status === 401) {
+        window.location.assign("/login");
       } else {
         console.log("Server Error!");
         throw res;
@@ -89,21 +88,24 @@ class DetailCard extends Component {
   }
 
   handleSizeValue(event) {
-    this.setState({ sizeValue: event.target.value, maxValue: this.getMaxValueFromSize(event.target.value) });
+    this.setState({
+      sizeValue: event.target.value,
+      maxValue: this.getMaxValueFromSize(event.target.value)
+    });
   }
 
   handleQuantityValue(event) {
-    this.setState({ quantityValue: event.target.value});
+    this.setState({ quantityValue: event.target.value });
   }
 
-  getMaxValueFromSize(size){
-      let temp = 0;
+  getMaxValueFromSize(size) {
+    let temp = 0;
     this.props.catalogs.forEach(element => {
-          if(element.size === parseInt(size)){
-              temp = element.quantity
-          }
-      });
-      return temp
+      if (element.size === parseInt(size)) {
+        temp = element.quantity;
+      }
+    });
+    return temp;
   }
   render() {
     return (
@@ -120,13 +122,76 @@ class DetailCard extends Component {
           <div className="row" id="row-2">
             <div className="col-xl-2" />
             <div className="col-xl-4">
-              <div className="container" id="container-img">
+              {/* <div className="container" id="container-img">
                 <img
                   className="card-img-top"
                   id="detail-images"
                   src={this.props.image}
                   alt="detail-item"
                 />
+              </div> */}
+              <div
+                id="carouselExampleIndicators"
+                class="carousel slide"
+                data-ride="carousel"
+              >
+                <ol class="carousel-indicators">
+                {this.props.image.map((item, index)=>{
+                  return(
+                    <li
+                    data-target="#carouselExampleIndicators"
+                    data-slide-to={`${index}`}
+                  ></li>
+                  )
+                })}
+                </ol>
+                <div class="carousel-inner">
+                {this.props.image.slice(1, this.props.image.length).map((item, index)=>{
+                  return(
+                    <div class="carousel-item">
+                    <img
+                      className="card-img-top"
+                      id="detail-images"
+                      src={item.image}
+                      alt="detail-item"
+                    />
+                  </div>
+                  )
+                })}
+                <div class="carousel-item active">
+                    <img
+                      className="card-img-top"
+                      id="detail-images"
+                      src={this.props.image[0].image}
+                      alt="detail-item"
+                    />
+                  </div>
+                  
+                </div>
+                <a
+                  class="carousel-control-prev"
+                  href="#carouselExampleIndicators"
+                  role="button"
+                  data-slide="prev"
+                >
+                  <span
+                    class="carousel-control-prev-icon"
+                    aria-hidden="true"
+                  ></span>
+                  <span class="sr-only">Previous</span>
+                </a>
+                <a
+                  class="carousel-control-next"
+                  href="#carouselExampleIndicators"
+                  role="button"
+                  data-slide="next"
+                >
+                  <span
+                    class="carousel-control-next-icon"
+                    aria-hidden="true"
+                  ></span>
+                  <span class="sr-only">Next</span>
+                </a>
               </div>
             </div>
             <div className="col-xl-6">
@@ -156,7 +221,7 @@ class DetailCard extends Component {
                           value={this.state.sizeValue}
                           onChange={this.handleSizeValue}
                         >
-                        <option/>
+                          <option />
                           {this.props.catalogs.map((item, index) => {
                             return <option key={index}>{item.size}</option>;
                           })}
@@ -178,15 +243,27 @@ class DetailCard extends Component {
                       </div>
                       <div className="form-group">
                         <div
-                          onClick={()=>this.addToCart(this.props.id, this.state.sizeValue, this.state.quantityValue)}
+                          onClick={() =>
+                            this.addToCart(
+                              this.props.id,
+                              this.state.sizeValue,
+                              this.state.quantityValue
+                            )
+                          }
                           className="btn btn-dark btn-sm btn-lg btn-block"
                         >
-                          {this.state.isLoading ? <span className="kollektif" id="thin-word">
-                            Loading...
-                          </span> : <span><span className="kollektif" id="thin-word">
-                            ADD TO{" "}
-                          </span>
-                          <span className="kollektif">CART</span></span>}
+                          {this.state.isLoading ? (
+                            <span className="kollektif" id="thin-word">
+                              Loading...
+                            </span>
+                          ) : (
+                            <span>
+                              <span className="kollektif" id="thin-word">
+                                ADD TO{" "}
+                              </span>
+                              <span className="kollektif">CART</span>
+                            </span>
+                          )}
                         </div>
                       </div>
                     </form>

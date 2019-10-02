@@ -19,6 +19,8 @@ import OrderDetails from "./OrderDetails";
 import { getBaseUrl } from "./Utils";
 import Technology from "./Technology";
 import Test from "./Test";
+import FAQ from "./FAQ";
+import TechnologyDetail from "./TechnologyDetail";
 
 function signOut() {
   let headers = {
@@ -37,7 +39,7 @@ function signOut() {
 
 function Navbar() {
   let item = [
-    { name: "TECHNOLOGY", link: "tech" },
+    { name: "TECHNOLOGY", link: "technology" },
     { name: "MEN", link: "men" },
     { name: "WOMEN", link: "women" }
   ];
@@ -185,24 +187,24 @@ function Footer() {
       <div className="text-center footer-link">
         <div className="container">
           <div className="row justify-content-center">
-            <a href="/">
+            <a href="/company">
               <span className="kollektif-bold text-white" id="links">
                 Company Profile
               </span>
             </a>
-            <a href="/">
+            <a href="/faq">
               <span className="kollektif-bold text-white" id="links">
                 FAQ
               </span>
             </a>
-            <a href="/">
+            <a href="/how-to-order">
               <span className="kollektif-bold text-white" id="links">
                 How to Order
               </span>
             </a>
           </div>
           <div className="row justify-content-center py-3">
-            <a href="/">
+            <a href="/taq">
               <span className="kollektif-bold text-white" id="links">
                 Terms & Condition
               </span>
@@ -257,11 +259,13 @@ function App() {
           <Route path="/checkout" component={Checkout} />
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
-          <Route path="/tech" component={Technology} />
+          <Route exact path="/technology" component={Technology} />
+          <Route path="/technology/detail/:slug" component={TechnologyDetail} />
           <Route path="/profile" component={Profile} />
           <Route path="/confirm/:id" component={ConfirmPayment} />
           <Route path="/orders" component={OrderDetails} />
           <Route path="/123" component={Test} />
+          <Route path="/faq" component={FAQ} />
         </Switch>
       </Router>
       <Footer />
