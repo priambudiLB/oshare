@@ -25,7 +25,7 @@ class TechnologyDetail extends Component {
     return (
       <div className="container container-1" id="high" >
         <h1>{this.state.title}</h1>
-        {<img src={this.props.location.state.imageUrl} class="img-fluid" alt="main technology"></img>}
+        {<img src={this.props.location.state.imageUrl} className="img-fluid" alt="main technology"></img>}
         {/* id={this.props.location.state.id}  */}
         {this.paragraphs(this.props.location.state.isi)}
       </div>

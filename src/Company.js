@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import "./App.css";
 import { getBaseUrl } from "./Utils";
 
-class FAQ extends Component {
+class Company extends Component {
   state = {
-    faq: [],
+    company: [],
   };
 
   componentDidMount() {
@@ -12,7 +12,7 @@ class FAQ extends Component {
   }
 
   async getData() {
-    let t = await fetch(`${getBaseUrl}/api/auth/qa`, {
+    let t = await fetch(`${getBaseUrl}/api/auth/companyprofile`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json"
@@ -20,19 +20,18 @@ class FAQ extends Component {
     });
     let t2 = await t.json();
     console.log(t2)
-    this.setState({ faq: t2 });
+    this.setState({ company: t2 });
   }
 
   render() {
     return (
       <div className="container container-1" id="high" >
-        <h1>Frequently Asked Questions</h1>
-        {this.state.faq.map((item, index)=>{
+        <h1>Company Profile</h1>
+        {this.state.company.map((item, index)=>{
           return(
             <div className="question" key={index}>
-              <h4 className="kollektif">{item.question}</h4>
-              <span className="glacial-indifference">{item.answer}</span>
-            </div>
+          <p align="justify" className="glacial-indifference">{item.penjelasan}</p>
+        </div>
           )
         })}
       </div>
@@ -40,4 +39,4 @@ class FAQ extends Component {
   }
 }
 
-export default FAQ;
+export default Company;

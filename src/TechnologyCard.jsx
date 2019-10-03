@@ -17,10 +17,10 @@ class TechnologyCard extends Component {
           }
         }}
       >
-        <div class="card" id="card-tech">
-          <img src={this.props.imageUrl} class="card-img-top" alt="..." />
-          <div class="card-body">
-            <p class="tech-text">
+        <div className="card" id="card-tech">
+          <img src={this.props.imageUrl} className="card-img-top" alt="..." />
+          <div className="card-body">
+            <p className="tech-text">
               {this.props.cardTitle}
             </p>
           </div>

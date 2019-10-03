@@ -60,6 +60,8 @@ class Cart extends Component {
       window.location.assign("/login");
     } else if (t2.length !== 0) {
       this.setState({ all: t2, barang: t2[0].items, total_price: t2[0].total });
+      console.log(this.state.all)
+      console.log(this.state.all.filter(x=>x.status === "Belum melakukan pembayaran").length===0)
     } 
   }
 
@@ -130,7 +132,7 @@ class Cart extends Component {
                 </tr>
               </thead>
               <tbody>
-                {this.state.barang.length === 0 ? (
+                {this.state.barang.length === 0 || this.state.all.filter(x=>x.status === "Belum melakukan pembayaran").length===0 ? (
                   <tr>
                     <th scope="row">
                       <span className="glacial-indifference">
@@ -156,7 +158,7 @@ class Cart extends Component {
             <div className="container info">
               <div className="row justify-content-between">
                 <div>TOTAL</div>
-                <div>{convertToRupiah(this.state.total_price)}</div>
+                <div>{convertToRupiah(this.state.barang.length === 0 || this.state.all.filter(x=>x.status === "Belum melakukan pembayaran").length===0 ? '0':this.state.total_price)}</div>
               </div>
 
               {this.state.barang.length === 0 ? (

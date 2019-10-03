@@ -20,6 +20,8 @@ import { getBaseUrl } from "./Utils";
 import Technology from "./Technology";
 import Test from "./Test";
 import FAQ from "./FAQ";
+import TNC from "./TNC";
+import Company from "./Company";
 import TechnologyDetail from "./TechnologyDetail";
 
 function signOut() {
@@ -95,7 +97,8 @@ function Navbar() {
           {localStorage.getItem("token") != null ? (
             <div />
           ) : (
-            <li className="nav-item">
+            <li className="nav-item" data-toggle="collapse"
+                data-target="#navbarSupportedContent">
               <Link to="/login">
                 <div className="nav-link">LOGIN</div>
               </Link>
@@ -104,7 +107,8 @@ function Navbar() {
           {localStorage.getItem("token") != null ? (
             <div />
           ) : (
-            <li className="nav-item">
+            <li className="nav-item" data-toggle="collapse"
+                data-target="#navbarSupportedContent">
               <Link to="/signup">
                 <div className="nav-link">SIGN UP</div>
               </Link>
@@ -204,7 +208,7 @@ function Footer() {
             </a>
           </div>
           <div className="row justify-content-center py-3">
-            <a href="/taq">
+            <a href='/tnc'>
               <span className="kollektif-bold text-white" id="links">
                 Terms & Condition
               </span>
@@ -266,6 +270,8 @@ function App() {
           <Route path="/orders" component={OrderDetails} />
           <Route path="/123" component={Test} />
           <Route path="/faq" component={FAQ} />
+          <Route path="/company" component={Company} />
+          <Route path="/tnc" component={TNC} />
         </Switch>
       </Router>
       <Footer />

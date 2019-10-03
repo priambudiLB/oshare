@@ -1,19 +1,19 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "3272415d00832d7bf85ea9da429b3113",
+    "revision": "a4aebb2e2863da3a26e00d528b522ef3",
     "url": "/index.html"
   },
   {
-    "revision": "0a8cc107990d82d76aac",
-    "url": "/static/css/main.1ea1967a.chunk.css"
+    "revision": "838786f5ac530549c7b7",
+    "url": "/static/css/main.23154fae.chunk.css"
   },
   {
     "revision": "ffe3482b4249630ebd53",
     "url": "/static/js/2.6e870b11.chunk.js"
   },
   {
-    "revision": "0a8cc107990d82d76aac",
-    "url": "/static/js/main.205bcbf2.chunk.js"
+    "revision": "838786f5ac530549c7b7",
+    "url": "/static/js/main.d6333225.chunk.js"
   },
   {
     "revision": "42ac5946195a7306e2a5",
@@ -34,9 +34,5 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "4d49be6e42d18464b230d87d1fab175a",
     "url": "/static/media/Kollektif.4d49be6e.ttf"
-  },
-  {
-    "revision": "59df8844491f9d043243b8df2bcfa17c",
-    "url": "/static/media/Oshare-Black-1.59df8844.png"
   }
 ]);

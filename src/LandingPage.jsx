@@ -7,11 +7,16 @@ import { getBaseUrl } from "./Utils";
 
 class LandingPage extends Component {
   state = {
-    barang: []
+    barang: [],
+    youtube: [],
+    poster: [],
+    first: "",
   };
 
   componentDidMount() {
     this.getData();
+    this.getYoutube();
+    this.getPoster();
     window.scrollTo(0, 0);
   }
 
@@ -24,6 +29,30 @@ class LandingPage extends Component {
     });
     let t2 = await t.json();
     this.setState({ barang: t2 });
+  }
+
+  async getYoutube() {
+    let t = await fetch(`${getBaseUrl}/api/auth/youtube`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+    let t2 = await t.json();
+    // console.log(t2[0].url)
+    this.setState({ youtube: t2[0].url });
+  }
+
+  async getPoster() {
+    let t = await fetch(`${getBaseUrl}/api/auth/poster`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+    let t2 = await t.json();
+    console.log(t2)
+    this.setState({ poster: t2, first: t2[0].gambar });
   }
 
   render() {
@@ -67,34 +96,68 @@ class LandingPage extends Component {
     };
     return (
       <div>
-        <div id="hero" >
-        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-  <ol class="carousel-indicators">
-    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-  </ol>
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img class="d-block w-100" src="Images/Oshare-Black-1.png" alt="First slide"/>
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="Images/Oshare-Black-1.png" alt="First slide"/>
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="Images/Oshare-Black-1.png" alt="First slide"/>
-    </div>
-  </div>
-  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div>
-        
+        <div id="hero">
+          <div
+            id="carouselExampleIndicators"
+            className="carousel slide"
+            data-ride="carousel"
+          >
+            <ol class="carousel-indicators">
+            {this.state.poster.map((item, index)=>{
+              return(
+                <li
+                data-target="#carouselExampleIndicators"
+                data-slide-to={index}
+              />
+              )
+            })}
+            
+            </ol>
+            <div className="carousel-inner">
+              <div class="carousel-item active">
+                <img
+                  class="d-block w-100"
+                  src={this.state.first}
+                  alt="First slide"
+                />
+              </div>
+              {this.state.poster.slice(1).map((item, index)=>{
+                return(
+                  <div class="carousel-item" key={index}>
+                    <img
+                      class="d-block w-100"
+                      src={item.gambar}
+                      alt="First slide"
+                    />
+                  </div>
+                )
+              })}
+            </div>
+            <a
+              class="carousel-control-prev"
+              href="#carouselExampleIndicators"
+              role="button"
+              data-slide="prev"
+            >
+              <span
+                class="carousel-control-prev-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a
+              class="carousel-control-next"
+              href="#carouselExampleIndicators"
+              role="button"
+              data-slide="next"
+            >
+              <span
+                class="carousel-control-next-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
         </div>
         <div className="section">
           <div className="container content">
@@ -106,17 +169,17 @@ class LandingPage extends Component {
             <Gallery />
           </div>
         </div>
-        {/* <div className="content videoWrapper">
+        <div className="content videoWrapper">
           <iframe
             title="Business Model Oshare"
             width="560"
             height="315"
-            src="https://www.youtube.com/embed/36Zy9N2BbOg"
+            src={this.state.youtube}
             frameBorder="0"
             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
           />
-        </div> */}
+        </div>
         <div className="section">
           <div className="container content">
             <div className="text-center">

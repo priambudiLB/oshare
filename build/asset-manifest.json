@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/static/css/main.1ea1967a.chunk.css",
-    "main.js": "/static/js/main.205bcbf2.chunk.js",
-    "main.js.map": "/static/js/main.205bcbf2.chunk.js.map",
+    "main.css": "/static/css/main.23154fae.chunk.css",
+    "main.js": "/static/js/main.d6333225.chunk.js",
+    "main.js.map": "/static/js/main.d6333225.chunk.js.map",
     "runtime~main.js": "/static/js/runtime~main.a8a9905a.js",
     "runtime~main.js.map": "/static/js/runtime~main.a8a9905a.js.map",
     "static/js/2.6e870b11.chunk.js": "/static/js/2.6e870b11.chunk.js",
     "static/js/2.6e870b11.chunk.js.map": "/static/js/2.6e870b11.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.c2ef19242537c501dd28f71bb5f0a116.js": "/precache-manifest.c2ef19242537c501dd28f71bb5f0a116.js",
+    "precache-manifest.206e9ceb939599193230d4ea0d7eec58.js": "/precache-manifest.206e9ceb939599193230d4ea0d7eec58.js",
     "service-worker.js": "/service-worker.js",
-    "static/css/main.1ea1967a.chunk.css.map": "/static/css/main.1ea1967a.chunk.css.map",
-    "static/media/App.css": "/static/media/Oshare-Black-1.59df8844.png"
+    "static/css/main.23154fae.chunk.css.map": "/static/css/main.23154fae.chunk.css.map",
+    "static/media/App.css": "/static/media/Kollektif.4d49be6e.ttf"
   }
 }

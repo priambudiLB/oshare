@@ -146,12 +146,12 @@ class Signup extends Component {
                         <form action="" method="post" id="signup-form">
                             <h3 className="kollektif">Register</h3>
                             <div className="form-group">
-                              <label className="col-form-label-sm" for="name">Fullname</label>
+                              <label className="col-form-label-sm" htmlFor="name">Fullname</label>
                               <input value={this.state.name}
-                      onChange={this.handleChangeName} type="text" class="form-control form-control-sm" placeholder="Full name"></input>
+                      onChange={this.handleChangeName} type="text" className="form-control form-control-sm" placeholder="Full name"></input>
                             </div>
                             <div className="form-group">
-                              <label className="col-form-label-sm" for="date">Date of Birth</label>
+                              <label className="col-form-label-sm" htmlFor="date">Date of Birth</label>
                               <div className="form-row">
                                 <div className="col">
                                   <input type="number" value={this.state.day}
@@ -163,38 +163,38 @@ class Signup extends Component {
                                 </div>
                                 <div className="col">
                                 <input type="number" value={this.state.year}
-                      onChange={this.handleChangeYear} className="form-control form-control-sm" placeholder="YYYY" min="1900" maxlength = "4"></input>
+                      onChange={this.handleChangeYear} className="form-control form-control-sm" placeholder="YYYY" min="1900" maxLength = "4"></input>
                                 </div>
                             </div>
                             </div>
                             <div className="form-group">
-                              <label className="col-form-label-sm mr-sm-2" for="gender">Gender</label>
+                              <label className="col-form-label-sm mr-sm-2" htmlFor="gender">Gender</label>
                               <select value={this.state.gendeer}
                       onChange={this.handleChangeGender} className="custom-select mr-sm-2 form-control-sm">
-                                <option selected>Choose...</option>
+                                <option defaultValue>Choose...</option>
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
                               </select>
                             </div>
                             <div className="form-group">
-                              <label className="col-form-label-sm" for="name">Phone Number</label>
+                              <label className="col-form-label-sm" htmlFor="name">Phone Number</label>
                               <input value={this.state.phone}
-                      onChange={this.handleChangePhone} type="text" class="form-control form-control-sm" placeholder="Phone number"></input>
+                      onChange={this.handleChangePhone} type="text" className="form-control form-control-sm" placeholder="Phone number"></input>
                             </div>
                             <div className="form-group">
-                              <label className="col-form-label-sm" for="email">Email address</label>
+                              <label className="col-form-label-sm" htmlFor="email">Email address</label>
                               <input type="email" value={this.state.email}
                       onChange={this.handleChangeEmail} className="form-control form-control-sm" placeholder="Enter email"></input>
                               
                             </div>
                             <div className="form-group">
-                              <label className="col-form-label-sm" for="password">Password</label>
+                              <label className="col-form-label-sm" htmlFor="password">Password</label>
                               <input value={this.state.password}
                       onChange={this.handleChangePassword} type="password" className="form-control form-control-sm" placeholder="Password"></input>
                               
                             </div>
                             <div className="form-group">
-                              <label className="col-form-label-sm" for="password">Confirm Password</label>
+                              <label className="col-form-label-sm" htmlFor="password">Confirm Password</label>
                               <input type="password" className="form-control form-control-sm" placeholder="Confirm Password" value={this.state.confirmPassword}
                       onChange={this.handleChangeConfirmPassword}></input>
                               
