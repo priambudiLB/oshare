@@ -43,8 +43,8 @@ class OrderDetails extends Component {
                 <thead>
                     <tr className="kollektif">
                     <th scope="col">Invoice</th>
-                    <th scope="col">Date Issue</th>
-                    <th scope="col">Payment Deadline</th>
+                    <th scope="col">Date Issued</th>
+                    {/* <th scope="col">Payment Deadline</th> */}
                     <th scope="col">Total</th>
                     <th scope="col">Status</th>
                     </tr>
@@ -56,7 +56,7 @@ class OrderDetails extends Component {
                     <tr key={index} onClick={()=>window.location.assign(`/confirm/${res.id}`)}>
                     <td>{res.no_resi}</td>
                     <td>{res.order_date}</td>
-                    <td>{res.order_date}</td>
+                    {/* <td>{res.order_date}</td> */}
                     <td>{convertToRupiah(res.total)}</td>
                     <td>{res.status}</td>
                     </tr>

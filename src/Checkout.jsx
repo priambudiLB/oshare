@@ -27,7 +27,9 @@ class Checkout extends Component {
       loading: false,
       provinceLoad: false,
       cityLoad: false,
-      optionsLoad: false
+      optionsLoad: false,
+      coupon: '',
+      couponValue: '',
     };
     this.handleChangeProvince = this.handleChangeProvince.bind(this);
     this.handleChangeCity = this.handleChangeCity.bind(this);
@@ -35,13 +37,49 @@ class Checkout extends Component {
     this.handleChangeKelurahan = this.handleChangeKelurahan.bind(this);
     this.handleChangeStreet = this.handleChangeStreet.bind(this);
     this.handleChangePostalCode = this.handleChangePostalCode.bind(this);
+    this.handleChangeCoupon = this.handleChangeCoupon.bind(this);
     this.handleChecked1 = this.handleChecked1.bind(this);
     this.handleChecked2 = this.handleChecked2.bind(this);
     this.handleChecked3 = this.handleChecked3.bind(this);
+    this.handleCoupon = this.handleCoupon.bind(this);
   }
   async componentDidMount() {
     this.getCart();
     this.getProvinces();
+  }
+
+  handleCoupon(){
+    this.checkCoupon(this.state.couponValue)
+  }
+
+  checkCoupon(code) {
+    let headers = {
+      "Content-Type": "application/json",
+      Authorization: "Token " + localStorage.getItem("token")
+    };
+    let body = JSON.stringify({
+      code
+    });
+    console.log(body)
+    return fetch(`${getBaseUrl}/checkout/coupon`, {
+      headers,
+      body,
+      method: "POST"
+    }).then(res => {
+      if (res.status < 300) {
+        return res.json().then(data => {
+          this.setState({ token: data.token }, () => {
+            window.location.assign("/checkout");
+            console.log(res.status, data)
+          });
+
+          return { status: res.status, data };
+        });
+      } else {
+        console.log("Server Error!");
+        throw res;
+      }
+    });
   }
 
   async getCart() {
@@ -75,6 +113,7 @@ class Checkout extends Component {
     } else {
       this.setState({
         barang: t2[0].items,
+        coupon: t2[0].coupon,
         total_price: t2[0].total,
         addressBE: t2[0].user.default_address,
         totalWeight: this.countWeight(t2[0].items)
@@ -135,6 +174,7 @@ class Checkout extends Component {
         return res.json().then(data => {
           this.setState({ token: data.token }, () => {
             window.location.assign("/orders");
+            console.log(res.status, data)
           });
 
           return { status: res.status, data };
@@ -209,6 +249,10 @@ class Checkout extends Component {
   }
   handleChangePostalCode(event) {
     this.setState({ postal: event.target.value });
+  }
+  handleChangeCoupon(event) {
+    this.setState({ couponValue: event.target.value });
+    console.log(event.target.value)
   }
 
   clearContents(element) {
@@ -361,6 +405,47 @@ class Checkout extends Component {
                     <label className="form-check-label" htmlFor="gridRadios2">
                       Use new address
                     </label>
+                  </div>
+                </div>
+                <div className="form-row">
+                  <div className="form-group col-md-6">
+                    <label className="kollektif-bold label" htmlFor="inputCity">
+                      COUPON
+                    </label>
+                    {this.state.coupon !== null ? (
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="inputCity"
+                        disabled
+                        // value={this.state.address.postal_code}
+                      />
+                    ) : (
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="inputCity"
+                        onChange={this.handleChangeCoupon}
+                        required
+                        placeholder={"Type..."}
+                      />
+                    )}
+                  </div>
+                  <div className="form-group col-md-6">
+                  <div
+                  className="btn btn-primary"
+                  onClick={() => this.handleCoupon()}
+                >
+                  {this.state.isLoading ? (
+                    <span
+                      class="spinner-border spinner-border-sm"
+                      role="status"
+                      aria-hidden="true"
+                    ></span>
+                  ) : (
+                    "APPLY COUPON"
+                  )}
+                </div>
                   </div>
                 </div>
                 <div className="form-row">
