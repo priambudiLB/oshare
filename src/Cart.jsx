@@ -72,9 +72,9 @@ class Cart extends Component {
     console.log(t2);
     if (t2.detail === "Invalid token.") {
       window.location.assign("/login");
-    } else {
+    } else if (t2.length !== 0) {
       this.setState({ all: t2, barang: t2[0].items, total_price: t2[0].total });
-    }
+    } 
   }
 
   render() {
