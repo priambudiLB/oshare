@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class WhatsApp extends Component {
   render() {
     return (
-      <a href="https://google.com">
+      <a href="https://wa.me/6287779729477?text=Halo,%20saya%20ingin%20bertanya%20mengenai%20OSHARE">
       <svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="whatsapp" role="img"
            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"
            className="svg-inline--fa fa-whatsapp fa-w-14 fa-7x">

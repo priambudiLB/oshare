@@ -52,13 +52,13 @@ class Checkout extends Component {
     this.checkCoupon(this.state.couponValue)
   }
 
-  checkCoupon(code) {
+  checkCoupon(coupon_code) {
     let headers = {
       "Content-Type": "application/json",
       Authorization: "Token " + localStorage.getItem("token")
     };
     let body = JSON.stringify({
-      code
+      coupon_code
     });
     console.log(body)
     return fetch(`${getBaseUrl}/checkout/coupon`, {

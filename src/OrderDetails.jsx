@@ -42,7 +42,7 @@ class OrderDetails extends Component {
             <table class="table table-hover">
                 <thead>
                     <tr className="kollektif">
-                    <th scope="col">Invoice</th>
+                    <th scope="col">JNE Airwaybill</th>
                     <th scope="col">Date Issued</th>
                     {/* <th scope="col">Payment Deadline</th> */}
                     <th scope="col">Total</th>
