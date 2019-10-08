@@ -201,7 +201,7 @@ function Footer() {
                 FAQ
               </span>
             </a>
-            <a href="/how-to-order">
+            <a href="/faq">
               <span className="kollektif-bold text-white" id="links">
                 How to Order
               </span>
