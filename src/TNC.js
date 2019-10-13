@@ -20,8 +20,8 @@ class TNC extends Component {
     });
     let t2 = await t.json();
     console.log(t2[0].url)
-    window.open(`${t2[0].url}`, '_bllank');
-    window.location.assign('/')
+    // window.open(`${t2[0].url}`, '_bllank');
+    window.location.assign(`${t2[0].url}`, '_bllank')
     this.setState({tnc: t2[0].url})
   }
 
