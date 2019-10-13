@@ -23,6 +23,7 @@ import FAQ from "./FAQ";
 import TNC from "./TNC";
 import Company from "./Company";
 import TechnologyDetail from "./TechnologyDetail";
+import HowToOrder from "./HowToOrder";
 
 function signOut() {
   let headers = {
@@ -201,7 +202,7 @@ function Footer() {
                 FAQ
               </span>
             </a>
-            <a href="/faq">
+            <a href="/how-to-order">
               <span className="kollektif-bold text-white" id="links">
                 How to Order
               </span>
@@ -270,6 +271,7 @@ function App() {
           <Route path="/orders" component={OrderDetails} />
           <Route path="/123" component={Test} />
           <Route path="/faq" component={FAQ} />
+          <Route path="/how-to-order" component={HowToOrder} />
           <Route path="/company" component={Company} />
           <Route path="/tnc" component={TNC} />
         </Switch>

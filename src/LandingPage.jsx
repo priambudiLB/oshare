@@ -11,12 +11,14 @@ class LandingPage extends Component {
     youtube: [],
     poster: [],
     first: "",
+    highlights: []
   };
 
   componentDidMount() {
     this.getData();
     this.getYoutube();
     this.getPoster();
+    this.getOurHighlights();
     window.scrollTo(0, 0);
   }
 
@@ -55,6 +57,18 @@ class LandingPage extends Component {
     this.setState({ poster: t2, first: t2[0].gambar });
   }
 
+  async getOurHighlights() {
+    let t = await fetch(`${getBaseUrl}/api/auth/ourhighlights`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+    let t2 = await t.json();
+    console.log(t2)
+    this.setState({ highlights: t2 });
+  }
+
   render() {
     const Gallery = () => {
       const handleOnDragStart = e => e.preventDefault();
@@ -64,7 +78,8 @@ class LandingPage extends Component {
           autoPlayInterval={5000}
           mouseDragEnabled
           responsive={{
-            1: { items: 1 }
+            0: { items: 1 },
+            512: { items: 3 },
           }}
         >
           {this.state.barang.map((item, index) => {
@@ -88,6 +103,33 @@ class LandingPage extends Component {
                   id={item.id}
                   size={item.catalogs.length === 0 ? 0 : item.catalogs[0].size}
                 />
+              </div>
+            );
+          })}
+        </AliceCarousel>
+      );
+    };
+
+    const OtherInformation = () => {
+      const handleOnDragStart = e => e.preventDefault();
+      return (
+        <AliceCarousel
+          autoPlay
+          autoPlayInterval={5000}
+          mouseDragEnabled
+          responsive={{
+            0: { items: 1 },
+            512: { items: 3 },
+          }}
+        >
+          {this.state.highlights.map((item, index) => {
+            return (
+              <div
+                className="yours-custom-class carousel-card"
+                onDragStart={handleOnDragStart}
+                key={index}
+              >
+              <img style={{ "width":'50%' }} src={item.gambar} class="img-fluid" alt="Responsive"/>
               </div>
             );
           })}
@@ -187,6 +229,7 @@ class LandingPage extends Component {
               <span className="highlights kollektif-bold">Information</span>
               <hr />
             </div>
+            <OtherInformation />
           </div>
         </div>
       </div>
