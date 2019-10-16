@@ -192,28 +192,36 @@ function Footer() {
       <div className="text-center footer-link">
         <div className="container">
           <div className="row justify-content-center">
-            <a href="/company">
-              <span className="kollektif-bold text-white" id="links">
+            
+              <span id="links">
+              <a className="kollektif-bold text-white" href="/company">
                 Company Profile
+                </a>
               </span>
-            </a>
-            <a href="/faq">
-              <span className="kollektif-bold text-white" id="links">
+            
+            
+              <span id="links">
+              <a className="kollektif-bold text-white" href="/faq">
                 FAQ
+                </a>
               </span>
-            </a>
-            <a href="/how-to-order">
-              <span className="kollektif-bold text-white" id="links">
+            
+            
+              <span id="links">
+              <a href="/how-to-order" className="kollektif-bold text-white">
                 How to Order
+
+                </a>
               </span>
-            </a>
+            
           </div>
           <div className="row justify-content-center py-3">
-            <a href='/tnc'>
-              <span className="kollektif-bold text-white" id="links">
+            
+              <span id="links">
+              <a className="kollektif-bold text-white" href='/tnc'>
                 Terms & Condition
+                </a>
               </span>
-            </a>
           </div>
         </div>
       </div>

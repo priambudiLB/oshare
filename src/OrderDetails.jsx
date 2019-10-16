@@ -8,10 +8,12 @@ class OrderDetails extends Component {
     super(props);
     this.state = {
       order: [],
+      bankAccounts: [],
     };
   }
   componentDidMount(){
     this.getOrder()
+    this.getBank()
   }
   async getOrder() {
     let t = await fetch(`${getBaseUrl}/checkout/all`, {
@@ -29,12 +31,36 @@ class OrderDetails extends Component {
       this.setState({order: t2})
     }
   }
+
+  async getBank() {
+    let t = await fetch(`${getBaseUrl}/api/auth/bank`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Token " + localStorage.getItem("token")
+      }
+    });
+    let t2 = await t.json();
+    console.log(t2);
+    if (t2.detail === "Invalid token.") {
+      window.location.assign("/login");
+    } else if (!(t2 === undefined || t2.length === 0)) {
+      this.setState({ bankAccounts: t2 });
+    }
+  }
+
   render() {
     return (
       <div className="container" id="order">
           <div className="col text-center">
               <h1 className="highlights kollektif">Orders</h1>
-              <p>Click an order below to submit Payment Details</p>
+              <p>Click an order below to submit Payment Details. Available Bank Accounts:</p>
+              {this.state.bankAccounts.map((item, index)=>{
+                  return(
+                    <div>{`${item.bank} / ${item.nomor_rekening} / ${item.pemilik_nomor_rekening}`}</div>
+                  )
+                })}
+                <p/>
           </div>
           
           <div className="row">

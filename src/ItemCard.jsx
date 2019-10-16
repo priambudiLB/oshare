@@ -27,7 +27,7 @@ class ItemCard extends Component {
             <div className="card" id="card-1">
                 <div id="card-2">
                     <center><h5 className="card-title">{this.props.cardTitle}</h5></center>
-                    <center><img className="card-img-top" id="card-images" src={this.props.imageUrl} alt="katalog" /></center>
+                    <center><img className="card-img-top" id="card-images" src={this.props.imageUrl} alt="item oshare" /></center>
                     <div className="card-body">
                         <p className="card-text">{convertToRupiah(this.props.harga)}</p>
                       
